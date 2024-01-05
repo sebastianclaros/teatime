@@ -1,5 +1,22 @@
-<template>
-    <h2>{titulo}</h2>
+<template>    
+    <div lwc:if={showTitle}>
+        <h2>{titulo}</h2>
+    </div>
+    <div lwc:else>
+        <h2>NO CONFIGURAMOS TITULO</h2>
+    </div>
+
+    <ol>
+        <template for:each={indexedItems} for:item="color">
+            <li key={color.key}>* {color.value}</li>
+        </template>
+    </ol>
+
+<template if:true={autoRecord}>
+    <p>Name: {autoRecord.Name.value}</p>
+    <p>Marca: {autoRecord.Marca__c.value}</p>
+
+</template>   
     <p>
         Hola Mundo, mi record id es {recordId}
     </p>
