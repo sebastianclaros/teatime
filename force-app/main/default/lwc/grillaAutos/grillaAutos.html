@@ -1,7 +1,19 @@
-<template>
-    Autos
-    <template for:each={autos} for:item="auto">
-        {auto.Name}
-        {auto.Marca__c}        
+<template >
+    <template lwc:if={isLoading}>
+        <div style="color:red; font-size:3rem;">
+            cargando...
+        </div>
+    </template>
+    <template lwc:elseif={isError}>
+        Se produjo un error
+    </template>
+    <template lwc:else>
+        Autos
+        <template for:each={autos} for:item="auto">
+            <div key={auto.Name}>
+                {auto.Name}
+                {auto.Marca__c}
+            </div>        
+        </template>
     </template>
 </template>
