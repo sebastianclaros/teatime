@@ -1,6 +1,5 @@
 import { LightningElement, track, api, wire } from 'lwc';
-import { getRecord } from 'lightning/uiRecordApi';
-import NAME_FIELD from "@salesforce/schema/Auto__c.Name";
+import sumaMethod from '@salesforce/apex/holaMundoController.suma';
 
 
 export default class HolaMundo extends LightningElement {
@@ -9,14 +8,22 @@ export default class HolaMundo extends LightningElement {
     @track errorMessage = 'mostrar error';
     @track autoRecord;
 
-    @wire (getRecord, { recordId: '$recordId', fields: [NAME_FIELD, 'Auto__c.Marca__c']  } )
-    recordCallback( { error, data} ) {
-        if ( error ) {
-            console.error(error);
-        }
-        if ( data ) {
-            this.autoRecord = data.fields;
-        } 
+    numeroA = 3;
+    numeroB = 2;
+    @track resultado;
+
+    inputHandler(event) {
+        this.numeroA = event.target.value;
+    }
+
+    inputHandlerB(event) {
+        this.numeroB = event.target.value;
+    }
+
+    @wire (sumaMethod, { numeroA: '$numeroA',  numeroB: '$numeroB'   } )
+    sumaCallback( {data, error} ) {
+        console.log(data);
+        this.resultado = data;
     };
 
     items = [
