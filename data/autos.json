@@ -1,0 +1,22 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Auto__c",
+                "referenceId": "SuranGris2022"
+            },
+            "Name": "Suran Gris 2022",
+            "Marca__c": "VW",
+            "Modelo__c": "Suran"
+        },
+        {
+            "attributes": {
+                "type": "Auto__c",
+                "referenceId": "FordFiesta2020"
+            },
+            "Name": "Ford Fiesta 2020",
+            "Marca__c": "Ford",
+            "Modelo__c": "Fiesta"
+        }
+    ]
+}

@@ -10,10 +10,12 @@
     <template lwc:else>
         Autos
         <template for:each={autos} for:item="auto">
-            <div key={auto.Name}>
+            <div key={auto.key}>
                 {auto.Name}
                 {auto.Marca__c}
             </div>        
         </template>
+
+        <button onclick={save}>Save</button>
     </template>
 </template>

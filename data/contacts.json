@@ -1,0 +1,23 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Contact",
+                "referenceId": "Contact1Ref"
+            },
+            "FirstName": "Juan",
+            "LastName": "Gomez",
+            "Phone": "11-555-0143",
+            "Email": "juan@goodmail.com"
+        },       {
+            "attributes": {
+                "type": "Contact",
+                "referenceId": "Contact1Ref"
+            },
+            "FirstName": "Pedro",
+            "LastName": "Ramires",
+            "Phone": "11-555-0223",
+            "Email": "peter@goodmail.com"
+        }
+     ]
+}

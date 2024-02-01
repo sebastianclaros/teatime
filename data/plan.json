@@ -1,0 +1,12 @@
+[
+    {
+        "sobject": "Autos__c",
+        "saveRefs": true,
+        "files": ["autos.json"]
+    },
+    {
+        "sobject": "Contact",
+        "resolveRefs": false,
+        "files": ["contacts.json"]
+    }
+]
