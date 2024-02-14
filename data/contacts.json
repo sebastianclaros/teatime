@@ -12,7 +12,7 @@
         },       {
             "attributes": {
                 "type": "Contact",
-                "referenceId": "Contact1Ref"
+                "referenceId": "Contact2Ref"
             },
             "FirstName": "Pedro",
             "LastName": "Ramires",
