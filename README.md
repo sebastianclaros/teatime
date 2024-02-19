@@ -14,6 +14,7 @@ Cada uno que quiera desarrollar algo debera hacer un clone del repo, crear una [
 
 
 ### Crear una DevHub
+
 Primero de todo les pedimos que cada uno tenga su DevHub, si aun no tienen uno pueden:
 
 1. Crear una cuenta developer que no expira nunca. [Formulario](https://developer.salesforce.com/signup)
