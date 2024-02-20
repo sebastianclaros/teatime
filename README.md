@@ -58,7 +58,7 @@ cd teatime
 Vayan al directorio de teatime, y ahi con la linea de comandos va a ser crear la scracth desde nuestro DevHub
 
 ````
-sf org create scratch -d -f config/project-scratch-def.json -a prueba
+sf org create scratch -set-default --definition-file=config/project-scratch-def.json --duration-days=7 --alias=prueba
 ````
 
 Ahora subimos el codigo
@@ -70,13 +70,13 @@ sf project deploy start
 Asignamos Permisos
 
 ````
-sf org assign permset -n vendedor
+sf org assign permset --nanme=vendedor
 ````
 
 Subimos datos 
 
 ````
-sf data tree import -p data/plan.json
+sf data tree import --plan=data/plan.json
 ````
 
 Abrimos la instancia de desarrollo
