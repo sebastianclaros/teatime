@@ -1,7 +1,7 @@
+
 SELECT Id,
         Action,
-        CreatedBy.Name,
-        CreatedDate,
         Display,
         Section 
-     FROM SetupAuditTrail 
+FROM SetupAuditTrail 
+WHERE CreatedDate = Today
