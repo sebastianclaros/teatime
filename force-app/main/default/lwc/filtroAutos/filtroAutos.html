@@ -1,4 +1,9 @@
 <template>
-    Marca:
-    <lightning-input></lightning-input> 
+    <lightning-combobox 
+        onchange={handleChangeMarca} 
+        options={marcas} 
+        placeholder="Selecciona una marca a filtrar"
+        label="Marcas" 
+        name="Marca">
+    </lightning-combobox> 
 </template>
