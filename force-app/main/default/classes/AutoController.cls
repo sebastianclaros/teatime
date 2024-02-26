@@ -17,4 +17,28 @@ public with sharing class AutoController {
         return Database.query(query);
     }
 
+    @AuraEnabled(cacheable=true)
+    public static List<PicklistEntry> getMarcas() {
+        Schema.DescribeFieldResult fieldDescribe = Auto__c.Marca__c.getDescribe();
+        List<PicklistEntry> marcas = new List<PicklistEntry>();
+        for ( Schema.PicklistEntry entry :fieldDescribe.getPicklistValues() ) {
+            marcas.add( new PicklistEntry(entry) );
+        }
+        return marcas;
+    }
+
+    class PicklistEntry {
+        @AuraEnabled public String value;
+        @AuraEnabled public String label;
+
+        public PicklistEntry( Schema.PicklistEntry entry ){
+            this.value = entry.value;
+            this.label = entry.label;
+        }
+
+        public PicklistEntry( String value, String label ){
+            this.value = value;
+            this.label = label;
+        }
+    }
 }
