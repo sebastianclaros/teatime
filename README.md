@@ -73,18 +73,22 @@ Asignamos Permisos
 sf org assign permset --name=vendedor
 ````
 
-Subimos datos 
+Subimos datos
 
 ````
 sf data tree import --plan=data/plan.json
 ````
 
-Abrimos la instancia de desarrollo
+Abrimos la instancia de desarrollo 
 
 ````
 sf open
 ````
+Si hay error al abrir la org, hay que hacer login con user y pass. Para eso, resetear password de la scratch org con el comando
 
+````
+ sf org generate password --target-org <username-or-alias>
+````
 
 ### Instalar Visual Studio
 
