@@ -11,7 +11,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Auto__c.Marca__c</field>
-        <field>Auto__c.Modelo__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
