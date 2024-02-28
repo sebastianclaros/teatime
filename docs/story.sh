@@ -27,14 +27,14 @@ done
 ## Crea el archivo
 modulo=$(dirname "$1")
 filename=$(basename "$1")
-context="{\"rol\":\"secretaria\",\"modulo\":\"$modulo\",\"titulo\":\"$filename\",\"command\":\"$0 ${@}\"}";
-echo $context | yarn doc new story $1 
+context="{\"rol\":\"vendedor\",\"modulo\":\"$modulo\",\"titulo\":\"$filename\",\"command\":\"$0 ${@}\"}";
+echo $context | yarn doc:create new story $1 
 
 ## Agrega los objetos
-yarn doc object ${objects[@]} --m=$1 $refresh
+yarn doc:create object ${objects[@]} --m=$1 $refresh
 
 ## Agrega las clases
-# yarn doc class ${classes[@]} --m=$1 $refresh
+yarn doc:create class ${classes[@]} --m=$1 $refresh
 
 
 

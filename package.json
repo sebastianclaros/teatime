@@ -23,13 +23,14 @@
     "@docusaurus/core": "^3.0.1",
     "@docusaurus/preset-classic": "^3.0.1",
     "@docusaurus/theme-mermaid": "^3.0.1",
-    "docusaurus-plugin-drawio": "^0.4.0",
     "@lwc/eslint-plugin-lwc": "^1.1.2",
     "@prettier/plugin-xml": "^2.0.1",
     "@salesforce/eslint-config-lwc": "^3.2.3",
     "@salesforce/eslint-plugin-aura": "^2.0.0",
     "@salesforce/eslint-plugin-lightning": "^1.0.0",
     "@salesforce/sfdx-lwc-jest": "^1.1.0",
+    "docusaurus-plugin-drawio": "^0.4.0",
+    "dotenv": "^16.3.1",
     "eslint": "^8.11.0",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-jest": "^26.1.2",
@@ -45,5 +46,9 @@
     "**/{aura,lwc}/**": [
       "eslint"
     ]
+  },
+  "dependencies": {
+    "handlebars": "^4.7.8",
+    "jsforce": "^1.11.1"
   }
 }
