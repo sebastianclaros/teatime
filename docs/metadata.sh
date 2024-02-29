@@ -5,16 +5,31 @@
 ## GENERADOR DE OBJECTS
 
 ## Si viene refresh baja la metadata
+configuracion_objects=("Auto__c");
+configuracion_classes=("AutoController");
+
+ventas_objects=("Auto__c" "Contact");
+ventas_classes=("AutoController");
+
+declare -A objects
+declare -A classes
+for objectName in "${configuracion_objects[@]}" "${ventas_objects[@]}"; do objects["$objectName"]=1; done
+for className in "${configuracion_classes[@]}" "${ventas_classes[@]}"; do classes["$className"]=1; done
+objects2=${!objects[@]}
+classes2=${!classes[@]}
+
 if [ $1 = "refresh" ]; then
-    yarn doc:create object Constancia__c Contact Programa__c Materia__c ProgramaEvaluacion__c TipoEvaluacion__c TipoEvaluacionOpcion__c CicloLectivo__c Division__c Boletin__c Asistencia__c Evaluacion__c --m=intro --o
+    yarn doc:create object ${objects2[@]} --m=intro --o
+    yarn doc:create class ${classes2[@]} --m=intro --o
 else 
-    yarn doc:create object Constancia__c Contact Programa__c Materia__c ProgramaEvaluacion__c TipoEvaluacion__c TipoEvaluacionOpcion__c CicloLectivo__c Division__c Boletin__c Asistencia__c Evaluacion__c --m=intro --i
+    yarn doc:create object ${objects2[@]} --m=intro --i
+    yarn doc:create class ${classes2[@]} --m=intro --i
 fi
 
-
 ### Configuracion
-yarn doc:create object Auto __c --m=configuracion/intro --i
-yarn doc:create class AutoController --m=ventas/intro --i
+yarn doc:create object ${configuracion_objects[@]} --m=configuracion/intro --i
+yarn doc:create class ${configuracion_classes[@]}  --m=configuracion/intro --i
 
 ### Ventas
-yarn doc:create object Auto __c Contact --m=ventas/intro --i
+yarn doc:create object ${ventas_objects[@]} --m=ventas/intro --i
+yarn doc:create class ${ventas_classes[@]}  --m=ventas/intro --i

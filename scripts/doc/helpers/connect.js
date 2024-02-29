@@ -2,36 +2,55 @@ require("dotenv").config();
 const jsforce = require("jsforce");
 const DEBUG = process.env.DEBUG || false;
 
-const conn = new jsforce.Connection({
-  loginUrl: "https://test.salesforce.com"
-});
+let conn;
 
 async function connect() {
   const username = process.env.SF_USERNAME;
   const password = process.env.SF_PASSWORD;
+  const accessToken = process.env.SF_AUTHTOKEN;
+  const instanceUrl = process.env.SF_INSTANCEURL;
 
-  if (username === undefined || password === undefined) {
+  if (!(username && password) && !(accessToken && instanceUrl)) {
     console.error(
-      "Por favor configure SF_USERNAME y SF_PASSWORD como variables de entorno"
+      "Para bajar la metadata la herramienta se loguea a Salesforce."
     );
-    console.warn("1. Puede clonar el archivo .env.sample ");
-    console.warn("2. Configurar las variables de entorno ");
-    console.warn(
-      "3. Ejecutar el comnado con anteponiendo las variables SF_USERNAME=xx SF_PASSWORD=xx npm run"
+    console.error(
+      "Puede correr el comando de config o modificar manualmente el .env"
     );
-    process.exit(-1);
+    console.error("npm run doc:config");
+    throw new Error("Falta configurar ejecute: npm run doc:config");
   }
 
-  try {
-    const userInfo = await conn.login(username, password);
-    if (DEBUG) {
-      console.log("accessToken", conn.accessToken);
+  if (accessToken && instanceUrl) {
+    try {
+      conn = new jsforce.Connection({ instanceUrl, accessToken });
+      if (DEBUG) {
+        console.log(conn);
+      }
+    } catch (e) {
+      if (DEBUG) {
+        console.log(e);
+      }
+      throw `Por favor verifique accessToken y instanceUrl ${accessToken} ${instanceUrl}`;
     }
-  } catch (e) {
-    if (DEBUG) {
-      console.log(e);
+  }
+
+  if (username && password) {
+    try {
+      conn = new jsforce.Connection({
+        loginUrl: process.env.SF_LOGINURL || "https://test.salesforce.com"
+      });
+      const userInfo = await conn.login(username, password);
+
+      if (DEBUG) {
+        console.log("accessToken", conn.accessToken);
+      }
+    } catch (e) {
+      if (DEBUG) {
+        console.log(e);
+      }
+      throw `Por favor verifique usuario y password ${username} ${password}`;
     }
-    throw `Por favor verifique usuario y password ${username} ${password}`;
   }
 }
 

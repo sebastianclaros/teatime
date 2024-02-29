@@ -14,7 +14,6 @@ const {
   DEFAULT_INTRO
 } = require("./util");
 const DEFAULT_FILENAME = DOCS_FOLDER + "/.classes.json";
-const fs = require("fs");
 
 async function getClasses(clases) {
   try {
@@ -76,16 +75,27 @@ function help() {
   console.log("npm run doc class AccountController.cls CaseController.cls");
 }
 
+function classLink() {
+  const name = this.Name;
+  return `[${name}](/diccionarios/classes/${name})`;
+}
+
+function classLinkGraph() {
+  const name = this.Name;
+  return `./diccionarios/classes/${name}`;
+}
+
 function linkToType() {
   const fullType = this.replace("<", "~").replace(">", "~");
   const types = fullType.split("~");
   for (const t in types) {
     if (dictionaryClasses.includes(t)) {
-      fullType.replace(t, `[{t}](/diccionarios/classes/{t})`);
+      fullType.replace(t, `[{t}](./diccionarios/classes/{t})`);
     }
   }
   return fullType;
 }
+
 function filterByPublic() {
   return this.modifiers.includes("public") || this.modifiers.includes("global");
 }
@@ -185,7 +195,13 @@ async function execute({ items, opciones }) {
   templateEngine.read("class");
   for (const context of contexts) {
     templateEngine.render(context, {
-      helpers: { verFecha, modifiers, linkToType, filterByPublic }
+      helpers: {
+        verFecha,
+        modifiers,
+        linkToType,
+        classLinkGraph,
+        filterByPublic
+      }
     });
     templateEngine.save(context.Name, DICTIONARY_FOLDER + "/classes");
   }
@@ -226,7 +242,14 @@ async function execute({ items, opciones }) {
 
   const classContext = { classes: contexts, namespaces };
   templateEngine.render(classContext, {
-    helpers: { verFecha, modifiers, linkToType, filterByPublic }
+    helpers: {
+      verFecha,
+      modifiers,
+      linkToType,
+      filterByPublic,
+      classLinkGraph,
+      classLink
+    }
   });
   const intro = opciones.m ? opciones.m : DEFAULT_INTRO;
   templateEngine.save(intro, WORKING_FOLDER);

@@ -10,8 +10,7 @@ const {
   WORKING_FOLDER,
   DEFAULT_INTRO
 } = require("./util");
-const DEFAULT_FILENAME = DOCS_FOLDER + ".object.json";
-const fs = require("fs");
+const DEFAULT_FILENAME = DOCS_FOLDER + "/.object.json";
 
 async function getObjects(objetos) {
   try {

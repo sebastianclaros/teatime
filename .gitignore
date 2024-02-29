@@ -4,6 +4,8 @@
 
 # Documentacion
 .docusaurus
+.classes.json
+.object.json
 
 # Salesforce cache
 .sf/
