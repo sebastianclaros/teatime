@@ -49,9 +49,9 @@ function help() {
   console.log(
     "Por ejemplo si se quiere documentar los servicios de un proceso se puede correr:"
   );
-  console.log("> npm run doc new servicios");
+  console.log("> yarn doc:create new servicios");
   console.log("Si quiere correr el modo interactivo solo ejecute:");
-  console.log("> npm run doc");
+  console.log("> yarn doc:create");
 }
 
 async function readPipedInput() {

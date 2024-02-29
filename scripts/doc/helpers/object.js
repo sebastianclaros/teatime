@@ -125,8 +125,8 @@ function help() {
   console.log(
     "\nPuede llamarse para un objeto o varios, de la siguiente forma:"
   );
-  console.log("npm run doc object Account");
-  console.log("npm run doc object Account Case Contact --=index.md");
+  console.log("yarn doc:create object Account");
+  console.log("yarn doc:create object Account Case Contact --=index.md");
 }
 
 async function getContext(items, opciones) {

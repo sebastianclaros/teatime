@@ -5,7 +5,7 @@
   "description": "Salesforce App",
   "scripts": {
     "lint": "eslint **/{aura,lwc}/**",
-    "test": "npm run test:unit",
+    "test": "yarn test:unit",
     "test:unit": "sfdx-lwc-jest",
     "test:unit:watch": "sfdx-lwc-jest --watch",
     "test:unit:debug": "sfdx-lwc-jest --debug",
@@ -37,7 +37,13 @@
     "husky": "^7.0.4",
     "lint-staged": "^12.3.7",
     "prettier": "^2.6.0",
-    "prettier-plugin-apex": "^1.10.0"
+    "prettier-plugin-apex": "^1.10.0",
+    "handlebars": "^4.7.8",
+    "jsforce": "^1.11.1",
+    "prism-react-renderer": "^2.3.0",
+    "prompts": "^2.4.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "lint-staged": {
     "**/*.{cls,cmp,component,css,html,js,json,page,trigger,xml,yaml,yml}": [
@@ -46,9 +52,5 @@
     "**/{aura,lwc}/**": [
       "eslint"
     ]
-  },
-  "dependencies": {
-    "handlebars": "^4.7.8",
-    "jsforce": "^1.11.1"
   }
 }

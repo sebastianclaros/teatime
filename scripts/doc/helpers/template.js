@@ -97,7 +97,7 @@ module.exports = (source, extension) => {
       if (fs.existsSync(destination)) {
         accion = "combino";
         const existingContent = fs.readFileSync(destination, "utf8");
-        content = merge(content, existingContent);
+        content = merge(content, existingContent, false);
       }
 
       fs.writeFileSync(destination, content);

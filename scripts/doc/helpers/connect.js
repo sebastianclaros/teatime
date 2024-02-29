@@ -17,8 +17,8 @@ async function connect() {
     console.error(
       "Puede correr el comando de config o modificar manualmente el .env"
     );
-    console.error("npm run doc:config");
-    throw new Error("Falta configurar ejecute: npm run doc:config");
+    console.error("yarn doc:config");
+    throw new Error("Falta configurar ejecute: yarn doc:config");
   }
 
   if (accessToken && instanceUrl) {

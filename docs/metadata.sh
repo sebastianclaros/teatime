@@ -18,12 +18,14 @@ for className in "${configuracion_classes[@]}" "${ventas_classes[@]}"; do classe
 objects2=${!objects[@]}
 classes2=${!classes[@]}
 
-if [ $1 = "refresh" ]; then
-    yarn doc:create object ${objects2[@]} --m=intro --o
-    yarn doc:create class ${classes2[@]} --m=intro --o
-else 
+if [ -z "$1" ]; then  
     yarn doc:create object ${objects2[@]} --m=intro --i
     yarn doc:create class ${classes2[@]} --m=intro --i
+else 
+    if [ $1 = "refresh" ]; then
+        yarn doc:create object ${objects2[@]} --m=intro --o
+        yarn doc:create class ${classes2[@]} --m=intro --o
+    fi
 fi
 
 ### Configuracion

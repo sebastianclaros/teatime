@@ -57,14 +57,13 @@ function createMatchObject(matches) {
   return matchObject;
 }
 
-function merge(newContent, existingContent) {
+function merge(newContent, existingContent, cleanNotExistingTags) {
   let mergeContent = existingContent;
   const regexp = /<!--[ ]*(start|end)[ ]*([^>]*)-->/gi;
   const newMatches = createMatchObject(newContent.matchAll(regexp));
   const existingMatches = createMatchObject(existingContent.matchAll(regexp));
   const newKeys = Object.keys(newMatches);
   const existingKeys = Object.keys(existingMatches);
-
   for (const key of newKeys) {
     // Por cada coincidencia reemplaza el texto existente por el texto nuevo
     if (existingKeys.includes(key)) {
@@ -74,14 +73,16 @@ function merge(newContent, existingContent) {
       );
     } else {
       // Si no esta lo appendea (ideal seria que quede en el lugar)
-      mergeContent += newMatches[key].text;
+      mergeContent += "\n" + newMatches[key].text;
     }
   }
 
   // Borra los viejos
-  for (const key of existingKeys) {
-    if (!newKeys.includes(key)) {
-      mergeContent = mergeContent.replace(existingMatches[key].text, "");
+  if (cleanNotExistingTags) {
+    for (const key of existingKeys) {
+      if (!newKeys.includes(key)) {
+        mergeContent = mergeContent.replace(existingMatches[key].text, "");
+      }
     }
   }
 

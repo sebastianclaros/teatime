@@ -71,13 +71,13 @@ function help() {
   console.log(
     "\nPuede llamarse para un objeto o varios, de la siguiente forma:"
   );
-  console.log("npm run doc class AccountController.cls");
-  console.log("npm run doc class AccountController.cls CaseController.cls");
+  console.log("yarn doc:create class AccountController.cls");
+  console.log("yarn doc:create class AccountController.cls CaseController.cls");
 }
 
 function classLink() {
   const name = this.Name;
-  return `[${name}](/diccionarios/classes/${name})`;
+  return `./diccionarios/classes/${name}`;
 }
 
 function classLinkGraph() {
@@ -227,7 +227,6 @@ async function execute({ items, opciones }) {
         namespaces[context.namespace].push(context.Name);
       }
     }
-    console.log(namespaces);
     contexts = contexts.concat(innerClasses);
   }
 

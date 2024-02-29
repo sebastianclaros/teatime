@@ -37,7 +37,7 @@ function help() {
   );
   console.log("Puede ejecutar los siguentes comandos:");
   Object.keys(helpers).forEach((comando) => {
-    console.log(`npm run doc ${comando}`);
+    console.log(`yarn doc:create ${comando}`);
   });
 }
 

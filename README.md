@@ -115,5 +115,7 @@ Usamos la libreria de Docusaurus, y agregamos una carpeta en scripts/docs para a
 Para correr la documentacion localmente:
 
 ```
-npm run doc
+yarn doc:start
 ```
+
+Para ver la documentacion online: 
