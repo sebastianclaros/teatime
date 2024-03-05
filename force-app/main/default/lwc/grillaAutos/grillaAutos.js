@@ -35,12 +35,10 @@ export default class GrillaAutos extends LightningElement {
     }
   }
 
-  // Standard lifecycle hooks used to subscribe and unsubsubscribe to the message channel
   connectedCallback() {
     this.subscribeToMessageChannel();
   }
 
-  // Encapsulate logic for Lightning message service subscribe and unsubsubscribe
   subscribeToMessageChannel() {
     if (!this.subscription) {
       this.subscription = subscribe(

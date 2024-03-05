@@ -13,8 +13,17 @@
     {
       "file": "force-app/main/default/lwc/filtroAutos/filtroAutos.js",
       "description": "Importamos de messageService la funcion de publish y wireAdapter MessageContext, los cuales usaremos para publicar el evento.\nA su vez importamos tambien el channel FiltroAutos__c, que es el que creamos en el step anterior. Notar que el nombre es el masterlabel mas un sufijo __c como los objetos.",
-      "line": 9,
-      "title": "Importamos"
+      "title": "Importamos",
+      "selection": {
+        "start": {
+          "line": 9,
+          "character": 1
+        },
+        "end": {
+          "line": 11,
+          "character": 1
+        }
+      }
     },
     {
       "file": "force-app/main/default/lwc/filtroAutos/filtroAutos.js",
@@ -25,8 +34,17 @@
     {
       "file": "force-app/main/default/lwc/filtroAutos/filtroAutos.js",
       "description": "El metodo handleChangeMarca sera llamado en el onchange del combo, y es el responsable de publicar el evento. Para ello usamos publish, con los 3 argumentos, uno el messageContext que se cargo con el wireAdapter que imporamos en el step 3, el channel que creamos e importamos y por ultimo el payload que es finalmente el mensaje que queremos enviar a los consumidores",
-      "line": 26,
-      "title": "Agregramos el handler"
+      "title": "Agregramos el handler",
+      "selection": {
+        "start": {
+          "line": 24,
+          "character": 1
+        },
+        "end": {
+          "line": 28,
+          "character": 4
+        }
+      }
     },
     {
       "file": "force-app/main/default/lwc/filtroAutos/filtroAutos.html",
@@ -37,40 +55,57 @@
     {
       "file": "force-app/main/default/lwc/grillaAutos/grillaAutos.js",
       "description": "Al igual que en el componente anterior importamos el channel, el wire y ahora los metodos subscribe y unsubscribe.",
-      "line": 6,
-      "title": "Importamos"
+      "title": "Importamos",
+      "selection": {
+        "start": {
+          "line": 5,
+          "character": 1
+        },
+        "end": {
+          "line": 11,
+          "character": 69
+        }
+      }
     },
     {
       "file": "force-app/main/default/lwc/grillaAutos/grillaAutos.js",
       "description": "La propiedad subscription va a guardar la referencia que devuelve el subscribe. Esto es para que podamos desubscribirnos cuando el componente se desconecta del DOM. Es decir el metodo unsubscribe recibe esta referencia.",
-      "line": 21,
+      "line": 19,
       "title": "Creamos la propiedad subscription"
     },
     {
       "file": "force-app/main/default/lwc/grillaAutos/grillaAutos.js",
       "description": "Creamos el contexto (idem al otro componente)",
-      "line": 23,
+      "line": 21,
       "title": "Creamos el Contexto"
     },
     {
       "file": "force-app/main/default/lwc/grillaAutos/grillaAutos.js",
       "description": "Nos vamos a subscribir al channel cuando el componente se conecta al DOM, no antes, por eso usamos el connectedCallback. ",
-      "line": 37,
-      "title": "Nos subscribimos al channel"
+      "title": "Nos subscribimos al channel",
+      "selection": {
+        "start": {
+          "line": 38,
+          "character": 1
+        },
+        "end": {
+          "line": 51,
+          "character": 4
+        }
+      }
     },
     {
       "file": "force-app/main/default/lwc/grillaAutos/grillaAutos.js",
       "description": "El metodo que se subscribe, es semejante al que publica, con la salvedad que en el anterior el 3er argumento tiene el payload, y este tiene el callback que recibe ese payload",
-      "line": 44,
-      "title": "Observar el callback"
+      "title": "Observar el callback",
+      "line": 47
     },
     {
       "file": "force-app/main/default/lwc/grillaAutos/grillaAutos.js",
       "description": "Al desconectarse el componente del DOM, vamos tambien a desuscribirnos del channel",
-      "line": 60,
       "title": "Nos desubscribimos del channel cuandl se desconecta del dom"
     }
   ],
   "description": "Este tour explica paso a paso como comunicar dos componentes que no estan en la misma jerarquia",
-  "ref": "7ea95c7f063bcb5afbf6b672b77c594c1b194554"
+  "ref": "882201054a7daa041a9057045890ea68a2a7ef06"
 }
