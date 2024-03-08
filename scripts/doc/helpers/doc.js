@@ -5,6 +5,7 @@ const prompts = require("prompts");
 const helpers = {
   object: require("./object"),
   class: require("./class"),
+  lwc: require("./lwc"),
   new: require("./new")
 };
 

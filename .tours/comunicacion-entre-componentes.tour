@@ -3,8 +3,14 @@
   "title": "Comunicacion-Entre-Componentes",
   "steps": [
     {
-      "title": "Crear el MessageChannel",
-      "description": "Creamos la carpeta y el archivo filtroAuto"
+      "title": "Crear la carpeta para messageChannel",
+      "description": "Creamos la carpeta messageChannels en el force-app/main/default"
+    },
+    {
+      "file": "force-app/main/default/messageChannels/FiltroAutos.messageChannel-meta.xml",
+      "description": "Creamos la carpeta y el archivo filtroAuto",
+      "line": 1,
+      "title": "Crear archivo MessageChannel"
     },
     {
       "title": "Publicar el Evento",
@@ -51,6 +57,10 @@
       "description": "Llamamos al handler en el onchange del combo",
       "line": 6,
       "title": "Llamamos al handler desde el html"
+    },
+    {
+      "title": "Abrimos el componente que se va a subscribir",
+      "description": "en este caso el grillaAutos va a escuchar el evento, y en base a lo que el filtro mande va a cambiar el resultado de la busqueda"
     },
     {
       "file": "force-app/main/default/lwc/grillaAutos/grillaAutos.js",

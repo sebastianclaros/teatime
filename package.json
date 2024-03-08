@@ -16,7 +16,7 @@
     "doc:create": "node scripts/doc/doc.js",
     "doc:start": "docusaurus start",
     "doc:build": "docusaurus build",
-    "config": "node scripts/doc/config.js",
+    "doc:config": "node scripts/doc/config.js",
     "precommit": "lint-staged"
   },
   "devDependencies": {

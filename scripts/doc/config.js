@@ -38,7 +38,8 @@ async function createEnvFile() {
         type: "text",
         name: "token",
         require: true,
-        message: "Ingrese el Access Token ? "
+        message:
+          "Ingrese el Access Token ? Si no lo sabe ejecute: sf org display user "
       },
       {
         type: "text",
