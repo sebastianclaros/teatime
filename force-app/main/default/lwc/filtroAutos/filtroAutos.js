@@ -1,28 +1,28 @@
 import { LightningElement, track, wire } from "lwc";
-import getMarcas from "@salesforce/apex/AutoController.getMarcas";
+import getFamilias from "@salesforce/apex/AutoController.getFamilias";
 /* Alternativa usando wire standard
 import { getObjectInfo, getPicklistValues } from "lightning/uiObjectInfoApi";
-import AUTO_OBJECT from "@salesforce/schema/Auto__c";
-import MARCA_FIELD from '@salesforce/schema/Auto__c.Marca__c';
+import AUTO_OBJECT from "@salesforce/schema/Product2";
+import Familia_FIELD from '@salesforce/schema/Product2.Family';
 */
 
 import { publish, MessageContext } from "lightning/messageService";
 import filtroAutos from "@salesforce/messageChannel/FiltroAutos__c";
 
 export default class FiltroAutos extends LightningElement {
-  @track marcas;
+  @track familias;
 
   @wire(MessageContext) messageContext;
 
-  @wire(getMarcas) autoCallback({ data }) {
+  @wire(getFamilias) autoCallback({ data }) {
     if (data) {
-      this.marcas = data;
+      this.familias = data;
     }
     console.log(JSON.stringify(data));
   }
 
-  handleChangeMarca(e) {
-    const payload = { marca: e.detail.value };
+  handleChangeFamilia(e) {
+    const payload = { Familia: e.detail.value };
 
     publish(this.messageContext, filtroAutos, payload);
   }
@@ -38,11 +38,11 @@ export default class FiltroAutos extends LightningElement {
     }
   
 
-    @wire(getPicklistValues, { recordTypeId: "$recordTypeId", fieldApiName: MARCA_FIELD })
+    @wire(getPicklistValues, { recordTypeId: "$recordTypeId", fieldApiName: Familia_FIELD })
     picklistResults({ error, data }) {
     console.log( error, data);
       if (data) {
-        this.marcas = data.values;
+        this.Familias = data.values;
 
       } else if (error) {
       }
