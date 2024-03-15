@@ -1,7 +1,7 @@
 require("dotenv").config();
 const jsforce = require("jsforce");
 const DEBUG = process.env.DEBUG || false;
-const API_VERSION = "46.0";
+const API_VERSION = "60.0";
 
 let conn;
 
@@ -37,10 +37,9 @@ async function connect() {
         console.log(conn);
       }
     } catch (e) {
-      if (INVALID_SESSION_ID)
-        if (DEBUG) {
-          console.log(e);
-        }
+      if (DEBUG) {
+        console.log(e);
+      }
       throw `Por favor verifique accessToken y instanceUrl ${accessToken} ${instanceUrl}`;
     }
   }
@@ -74,14 +73,23 @@ async function getOmni(fullNames) {}
 async function getIP(fullNames) {}
 
 async function getDependencies(listOfIds, filterTypes) {
-  const up =
-    await conn.query(`SELECT RefMetadataComponentId, MetadataComponentId, MetadataComponentName, MetadataComponentType
-    FROM MetadataComponentDependency Where RefMetadataComponentId IN :listOfIds`);
-
-  const down =
-    await conn.query(`SELECT MetadataComponentId, RefMetadataComponentId, RefMetadataComponentName, RefMetadataComponentType  
-    FRom MetadataComponentDependency Where  MetadataComponentId = :listOfIds`);
-
+  const ids = "('" + listOfIds.join("' , '") + "')";
+  const up = await conn.tooling
+    .sobject("MetadataComponentDependency")
+    .find({ RefMetadataComponentId: listOfIds }, [
+      "RefMetadataComponentId",
+      "MetadataComponentId",
+      "MetadataComponentName",
+      "MetadataComponentType"
+    ]);
+  const down = await conn.tooling
+    .sobject("MetadataComponentDependency")
+    .find({ MetadataComponentId: listOfIds }, [
+      "MetadataComponentId",
+      "RefMetadataComponentId",
+      "RefMetadataComponentName",
+      "RefMetadataComponentType"
+    ]);
   let dependencies = {};
   for (const record in up) {
     const entry = {
@@ -107,8 +115,14 @@ async function getDependencies(listOfIds, filterTypes) {
     }
     item.parents.push(entry);
   }
+  console.log(up, down, dependencies);
+  return dependencies;
 }
-
+function expiredSession() {
+  console.warn(
+    "El token de la sesion expiro, puede actualizarlo manualmente corriendo sf org display y copiar el Access Token en el .env "
+  );
+}
 async function getLwc(fullNames) {
   /**
 Archivos, JS => JSDoc
@@ -144,19 +158,25 @@ Archivos, JS => JSDoc
         resources[lwcId].push(resource);
       }
     }
+    // Saca las dependencias
+    let dependencies = getDependencies(listOfIds);
 
     const metadata = bundle.map((item) => {
       const lwc = {
         Name: MasterLabel,
         resources: resources[item.Id],
+        dependencies: dependencies[item.Id],
         ...item.Metadata
       };
     });
-
+    console.log(metadata);
     return metadata;
   } catch (e) {
-    console.log(e);
+    if (e.name == "INVALID_SESSION_ID") {
+      expiredSession();
+    }
     if (DEBUG) {
+      console.log(e);
     }
     throw `Error buscando metadata de las clases ${fullNames}`;
   }
@@ -220,6 +240,7 @@ module.exports = {
   connect,
   check,
   customObjects,
+  getDependencies,
   getClasses,
   getLwc,
   getOmni,

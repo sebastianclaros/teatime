@@ -17,6 +17,7 @@ async function getLwc(lwc) {
   try {
     await sf.connect();
     const lwcRecords = await sf.getLwc(lwc);
+    console.log(lwcRecords);
     return lwcRecords;
   } catch (e) {
     console.error(e);
