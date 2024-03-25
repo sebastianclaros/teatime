@@ -1,6 +1,5 @@
 import { LightningElement, wire, track } from "lwc";
-import getAutos from "@salesforce/apex/AutoController.getAutos";
-import saveAuto from "@salesforce/apex/AutoController.saveAuto2";
+import getProductos from "@salesforce/apex/ProductosController.getProductos";
 
 import {
   subscribe,
@@ -8,29 +7,29 @@ import {
   APPLICATION_SCOPE,
   MessageContext
 } from "lightning/messageService";
-import filtroAutos from "@salesforce/messageChannel/FiltroAutos__c";
+import channelProductosFiltro from "@salesforce/messageChannel/ProductosFiltro__c";
 
-export default class GrillaAutos extends LightningElement {
-  @track autos = [];
-  marca;
-  random = "";
+export default class ProductosGrilla extends LightningElement {
+  @track productos = [];
+  catalogo;
+  categoria;
   isError = false;
   isLoading = true;
   subscription;
 
   @wire(MessageContext) messageContext;
 
-  @wire(getAutos, { marca: "$marca", random: "$random" }) autoCallback({
-    data,
-    error
-  }) {
+  @wire(getProductos, { catalogId: "$catalogo", categoryId: "$categoria" })
+  autoCallback({ data, error }) {
+    console.log(data, error);
     this.isLoading = false;
     if (data) {
-      this.autos = data.map((auto, index) => {
-        return { key: `auto-key-${index}`, ...auto };
+      this.productos = data.map((producto, index) => {
+        return { key: `auto-key-${index}`, ...producto };
       });
     }
     if (error) {
+      console.log(error);
       this.isError = true;
     }
   }
@@ -43,7 +42,7 @@ export default class GrillaAutos extends LightningElement {
     if (!this.subscription) {
       this.subscription = subscribe(
         this.messageContext,
-        filtroAutos,
+        channelProductosFiltro,
         (message) => this.handleMessage(message),
         { scope: APPLICATION_SCOPE }
       );
@@ -52,7 +51,8 @@ export default class GrillaAutos extends LightningElement {
 
   handleMessage(payload) {
     console.log(payload);
-    this.marca = payload.marca;
+    this.catalogo = payload.catalogo;
+    this.categoria = payload.categoria;
   }
 
   disconnectedCallback() {
@@ -62,14 +62,5 @@ export default class GrillaAutos extends LightningElement {
   unsubscribeToMessageChannel() {
     unsubscribe(this.subscription);
     this.subscription = null;
-  }
-
-  async save() {
-    try {
-      await saveAuto({ Name: "Test" + Date.now(), marca: "VW" });
-      this.random = Math.random();
-    } catch (e) {
-      console.log(e);
-    }
   }
 }

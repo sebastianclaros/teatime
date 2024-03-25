@@ -12,7 +12,13 @@ title: Configuracion
 ```mermaid
 erDiagram
 
-Auto__c {
+ProductCatalog {
+}
+ProductCategory {
+}
+Product2 {
+}
+ProductCategoryProduct {
 }
 
 ```
@@ -21,7 +27,10 @@ Auto__c {
 
 | #   | Label | Api Name | Descripcion |
 | --- | ----- | -------- | ----------- |
-| <div class="icons"></div> | [Auto](/diccionarios/objects/Auto__c) | Auto__c ||
+| <div class="icons"></div> | [Catalog](/diccionarios/objects/ProductCatalog) | ProductCatalog ||
+| <div class="icons"></div> | [Category](/diccionarios/objects/ProductCategory) | ProductCategory ||
+| <div class="icons"></div> | [Product](/diccionarios/objects/Product2) | Product2 ||
+| <div class="icons"></div> | [Product Category Product](/diccionarios/objects/ProductCategoryProduct) | ProductCategoryProduct ||
 
 ### Configuracion
 
@@ -43,26 +52,27 @@ Auto__c {
 classDiagram
 
 
-    class AutoController {
-         saveAuto2(String marcaString Name) void $
-         getAutos(String marca) List $
-         getMarcas() List $
-
-    }
-
-    link AutoController "./diccionarios/classes/AutoController" 
-
-
     class PicklistEntry {
          value     
          label     
+     PicklistEntry(SObject record)  
      PicklistEntry(Schema.PicklistEntry entry)  
      PicklistEntry(String valueString label)  
 
     }
 
     link PicklistEntry "./diccionarios/classes/PicklistEntry" 
- namespace _AutoController {
+
+
+    class ProductosController {
+         getProductos(String catalogIdString categoryId) List $
+         getCategorias(String catalogId) List $
+         getCatalogos() List $
+
+    }
+
+    link ProductosController "./diccionarios/classes/ProductosController" 
+ namespace _ProductosController {
     class PicklistEntry 
 }
 ```
@@ -71,8 +81,8 @@ classDiagram
 
 | #   | Name | Api Version | Descripcion |
 | --- | ----- | ----------- | ----------- |
-| <div class="icons"></div> | [AutoController](./diccionarios/classes/AutoController) |59||
 | <div class="icons"></div> | [PicklistEntry](./diccionarios/classes/PicklistEntry) |||
+| <div class="icons"></div> | [ProductosController](./diccionarios/classes/ProductosController) |59||
 
 | #  | Referencia       | #  | Referencia |
 | -- | ---------------- | -- | ---------- |

@@ -11,8 +11,8 @@ title: ProductosController
 
 - Status: Active
 - Api Version: 59
-- Creada: 15 de enero de 24
-- Modificada: 26 de febrero de 24
+- Creada: 25 de marzo de 24
+- Modificada: 25 de marzo de 24
 - Interface 
 
 ## Diagrama
@@ -20,9 +20,9 @@ title: ProductosController
 classDiagram
 
 class ProductosController {
-     saveAuto2(String marcaString Name) void $
-     getAutos(String marca) List $
-     getMarcas() List $
+     getProductos(String catalogIdString categoryId) List $
+     getCategorias(String catalogId) List $
+     getCatalogos() List $
 
 }
 ```
@@ -33,9 +33,9 @@ class ProductosController {
 *Metodos*
 | #   | Nombre | Return | Argumentos |
 | --- | ------ | ------ | ---------- |
-| <div class="icons">$</div> | saveAuto2 | void| <ul><li>String marca</li><li>String Name</li></ul>|
-| <div class="icons">$</div> | getAutos | List| <ul><li>String marca</li></ul>|
-| <div class="icons">$</div> | getMarcas | List| <ul></ul>|
+| <div class="icons">$</div> | getProductos | List| <ul><li>String catalogId</li><li>String categoryId</li></ul>|
+| <div class="icons">$</div> | getCategorias | List| <ul><li>String catalogId</li></ul>|
+| <div class="icons">$</div> | getCatalogos | List| <ul></ul>|
 
 
 | #  | Referencia       | #  | Referencia |

@@ -1,0 +1,22 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "ProductCategory",
+        "referenceId": "VWSuran"
+      },
+      "Name": "Suran",
+      "ParentCategoryId": "@VW",
+      "CatalogId": "@CatalogoAutos"
+    },
+    {
+      "attributes": {
+        "type": "ProductCategory",
+        "referenceId": "FordFiesta"
+      },
+      "Name": "Fiesta",
+      "ParentCategoryId": "@Ford",
+      "CatalogId": "@CatalogoAutos"
+    }
+  ]
+}

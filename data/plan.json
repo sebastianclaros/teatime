@@ -1,12 +1,29 @@
 [
-    {
-        "sobject": "Autos__c",
-        "saveRefs": true,
-        "files": ["autos.json"]
-    },
-    {
-        "sobject": "Contact",
-        "resolveRefs": false,
-        "files": ["contacts.json"]
-    }
+  {
+    "sobject": "ProductCatalog",
+    "saveRefs": true,
+    "files": ["catalogo.json"]
+  },
+  {
+    "sobject": "ProductCategory",
+    "saveRefs": true,
+    "resolveRefs": true,
+    "files": ["categorias.json"]
+  },
+  {
+    "sobject": "ProductCategory",
+    "saveRefs": true,
+    "resolveRefs": true,
+    "files": ["subcategorias.json"]
+  },
+  {
+    "sobject": "Product2",
+    "saveRefs": true,
+    "files": ["productos.json"]
+  },
+  {
+    "sobject": "ProductCategoryProduct",
+    "resolveRefs": true,
+    "files": ["categorias-de-productos.json"]
+  }
 ]

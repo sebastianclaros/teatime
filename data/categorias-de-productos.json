@@ -1,0 +1,20 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "ProductCategoryProduct",
+        "referenceId": "VWSuranVWSuran"
+      },
+      "ProductId": "@SuranGris2022",
+      "ProductCategoryId": "@VWSuran"
+    },
+    {
+      "attributes": {
+        "type": "ProductCategoryProduct",
+        "referenceId": "FordFiestaFordFiesta"
+      },
+      "ProductId": "@FordFiesta2020",
+      "ProductCategoryId": "@FordFiesta"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "ProductCatalog",
+        "referenceId": "CatalogoAutos"
+      },
+      "Name": "Autos"
+    },
+    {
+      "attributes": {
+        "type": "ProductCatalog",
+        "referenceId": "CatalogoMotos"
+      },
+      "Name": "Motos"
+    }
+  ]
+}

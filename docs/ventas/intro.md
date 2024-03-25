@@ -13,26 +13,27 @@ slug: /ventas
 classDiagram
 
 
-    class AutoController {
-         saveAuto2(String marcaString Name) void $
-         getAutos(String marca) List $
-         getMarcas() List $
-
-    }
-
-    link AutoController "./diccionarios/classes/AutoController" 
-
-
     class PicklistEntry {
          value     
          label     
+     PicklistEntry(SObject record)  
      PicklistEntry(Schema.PicklistEntry entry)  
      PicklistEntry(String valueString label)  
 
     }
 
     link PicklistEntry "./diccionarios/classes/PicklistEntry" 
- namespace _AutoController {
+
+
+    class ProductosController {
+         getProductos(String catalogIdString categoryId) List $
+         getCategorias(String catalogId) List $
+         getCatalogos() List $
+
+    }
+
+    link ProductosController "./diccionarios/classes/ProductosController" 
+ namespace _ProductosController {
     class PicklistEntry 
 }
 ```
@@ -41,8 +42,8 @@ classDiagram
 
 | #   | Name | Api Version | Descripcion |
 | --- | ----- | ----------- | ----------- |
-| <div class="icons"></div> | [AutoController](./diccionarios/classes/AutoController) |59||
 | <div class="icons"></div> | [PicklistEntry](./diccionarios/classes/PicklistEntry) |||
+| <div class="icons"></div> | [ProductosController](./diccionarios/classes/ProductosController) |59||
 
 | #  | Referencia       | #  | Referencia |
 | -- | ---------------- | -- | ---------- |
@@ -58,9 +59,9 @@ classDiagram
 ```mermaid
 erDiagram
 
-Auto__c {
-}
 Contact {
+}
+Order {
 }
 
 ```
@@ -69,8 +70,8 @@ Contact {
 
 | #   | Label | Api Name | Descripcion |
 | --- | ----- | -------- | ----------- |
-| <div class="icons"></div> | [Auto](/diccionarios/objects/Auto__c) | Auto__c ||
 | <div class="icons"></div> | [Contact](/diccionarios/objects/Contact) | Contact ||
+| <div class="icons"></div> | [Order](/diccionarios/objects/Order) | Order ||
 
 ### Configuracion
 

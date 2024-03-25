@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <FlexiPage xmlns="http://soap.sforce.com/2006/04/metadata">
     <flexiPageRegions>
         <name>region1</name>
@@ -7,8 +7,8 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>filtroAutos</componentName>
-                <identifier>c_filtroAutos</identifier>
+                <componentName>productosFiltro</componentName>
+                <identifier>c_productosFiltro</identifier>
             </componentInstance>
         </itemInstances>
         <name>region2</name>
@@ -17,8 +17,8 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>grillaAutos</componentName>
-                <identifier>c_grillaAutos</identifier>
+                <componentName>productosGrilla</componentName>
+                <identifier>c_productosGrilla</identifier>
             </componentInstance>
         </itemInstances>
         <name>region3</name>

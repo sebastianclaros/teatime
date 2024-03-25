@@ -9,11 +9,12 @@
     <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
     <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
-    <label>Alquiler de Autos BruCar</label>
+    <label>BruCar</label>
     <navType>Standard</navType>
-    <tabs>Auto__c</tabs>
     <tabs>Ventas</tabs>
     <tabs>standard-Product2</tabs>
+    <tabs>standard-ProductCatalog</tabs>
+    <tabs>standard-ProductCategory</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>Alquiler_de_Autos_BruCar_UtilityBar</utilityBar>
 </CustomApplication>

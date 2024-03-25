@@ -5,11 +5,11 @@
 ## GENERADOR DE OBJECTS
 
 ## Si viene refresh baja la metadata
-configuracion_objects=("Auto__c");
-configuracion_classes=("AutoController");
+configuracion_objects=("Product2" "ProductCatalog" "ProductCategory" "ProductCategoryProduct");
+configuracion_classes=("ProductosController");
 
-ventas_objects=("Auto__c" "Contact");
-ventas_classes=("AutoController");
+ventas_objects=("Order" "Contact");
+ventas_classes=("ProductosController");
 
 declare -A objects
 declare -A classes

@@ -1,0 +1,20 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "ProductCategory",
+        "referenceId": "VW"
+      },
+      "Name": "VW",
+      "CatalogId": "@CatalogoAutos"
+    },
+    {
+      "attributes": {
+        "type": "ProductCategory",
+        "referenceId": "Ford"
+      },
+      "Name": "Ford",
+      "CatalogId": "@CatalogoAutos"
+    }
+  ]
+}

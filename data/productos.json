@@ -1,0 +1,20 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "Product2",
+        "referenceId": "SuranGris2022"
+      },
+      "Name": "Suran Gris 2024",
+      "isActive": true
+    },
+    {
+      "attributes": {
+        "type": "Product2",
+        "referenceId": "FordFiesta2020"
+      },
+      "Name": "Ford Fiesta 2020",
+      "isActive": true
+    }
+  ]
+}

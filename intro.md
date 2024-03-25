@@ -14,14 +14,14 @@ title: Modelo de Clases
 classDiagram
 
 
-    class AutoController {
+    class ProductosController {
          saveAuto2(String marcaString Name) void $
          getAutos(String marca) List $
          getMarcas() List $
 
     }
 
-    link AutoController "./diccionarios/classes/AutoController" 
+    link ProductosController "./diccionarios/classes/ProductosController" 
 
 
     class PicklistEntry {
@@ -33,7 +33,7 @@ classDiagram
     }
 
     link PicklistEntry "./diccionarios/classes/PicklistEntry" 
- namespace _AutoController {
+ namespace _ProductosController {
     class PicklistEntry 
 }
 ```
@@ -42,7 +42,7 @@ classDiagram
 
 | #   | Name | Api Version | Descripcion |
 | --- | ----- | ----------- | ----------- |
-| <div class="icons"></div> | [AutoController](./diccionarios/classes/AutoController) |59||
+| <div class="icons"></div> | [ProductosController](./diccionarios/classes/ProductosController) |59||
 | <div class="icons"></div> | [PicklistEntry](./diccionarios/classes/PicklistEntry) |||
 
 | #  | Referencia       | #  | Referencia |
@@ -60,16 +60,12 @@ classDiagram
 ```mermaid
 erDiagram
 
-Auto__c {
-}
-
 ```
 
 ### Transaccionales
 
 | #   | Label | Api Name | Descripcion |
 | --- | ----- | -------- | ----------- |
-| <div class="icons"></div> | [Auto](/diccionarios/objects/Auto__c) | Auto__c ||
 
 ### Configuracion
 
