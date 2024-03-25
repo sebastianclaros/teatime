@@ -19,7 +19,7 @@ title: Product Category Product
 | #   | Label | Api Name | Tipo | Descripcion |
 | --- | ----- | -------- | ---- | ----------- |
 | <div class="icons"></div> |  | IsPrimaryCategory |  |  <ul></ul> |
-| <div class="icons"></div> |  | ProductCategoryId | MasterDetail |  <ul></ul> |
+| <div class="icons"></div> |  | ProductCategoryId | [Lookup a undefined](/diccionarios/objects/undefined) |  <ul></ul> |
 | <div class="icons"></div> |  | ProductId | [Lookup a undefined](/diccionarios/objects/undefined) |  <ul></ul> |
 
 | #                                                              | Referencia    |

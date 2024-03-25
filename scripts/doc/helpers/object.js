@@ -98,7 +98,7 @@ function typeFormula() {
   if (this.formula) {
     return `Formula(${this.type})`;
   }
-  if (this.type === "Lookup") {
+  if (this.type === "Lookup" || this.type === "MasterDetail") {
     return `[Lookup a ${this.referenceTo}](/diccionarios/objects/${this.referenceTo})`;
   }
 

@@ -18,7 +18,7 @@ title: Category
 
 | #   | Label | Api Name | Tipo | Descripcion |
 | --- | ----- | -------- | ---- | ----------- |
-| <div class="icons"></div> |  | CatalogId | MasterDetail |  <ul></ul> |
+| <div class="icons"></div> |  | CatalogId | [Lookup a undefined](/diccionarios/objects/undefined) |  <ul></ul> |
 | <div class="icons"></div> |  | Description |  |  <ul></ul> |
 | <div class="icons"></div> |  | IsNavigational |  |  <ul></ul> |
 | <div class="icons"></div> |  | Name |  |  <ul></ul> |
