@@ -5,7 +5,7 @@
         <visible>true</visible>
     </applicationVisibilities>
     <classAccesses>
-        <apexClass>AutoController</apexClass>
+        <apexClass>ProductosController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <fieldPermissions>

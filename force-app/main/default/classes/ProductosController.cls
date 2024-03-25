@@ -54,6 +54,21 @@ public with sharing class ProductosController {
     return catalogos;
   }
 
+  class Product {
+    @AuraEnabled
+    public String name;
+    @AuraEnabled
+    public String description;
+    @AuraEnabled
+    public String[] categories;
+    @AuraEnabled
+    public String image;
+    @AuraEnabled
+    public Double price;
+    @AuraEnabled
+    public Boolean inStock;
+  }
+
   class PicklistEntry {
     @AuraEnabled
     public String value;

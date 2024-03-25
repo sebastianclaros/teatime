@@ -67,7 +67,7 @@ sf project deploy start
 Asignamos Permisos
 
 ```
-sf org assign permset --name=vendedor
+sf org assign permset --name=adminCatalogo
 ```
 
 Subimos datos

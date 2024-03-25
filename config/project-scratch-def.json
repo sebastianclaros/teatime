@@ -1,7 +1,8 @@
 {
   "orgName": "Flow company",
   "edition": "Developer",
-  "features": ["EnableSetPasswordInApi"],
+  "features": ["EnableSetPasswordInApi", "ProductCatalogManagementAddOn"],
+  "hasSampleData": false,
   "settings": {
     "lightningExperienceSettings": {
       "enableS1DesktopEnabled": true
