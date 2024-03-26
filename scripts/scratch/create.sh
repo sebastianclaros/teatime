@@ -2,7 +2,7 @@
 # Script crea scracth Org
 
 if [ -z "$1" ]; then  
-    echo "Falta el nombre del alias de org, generalmente el nombre del feature a realizar"
+ull    echo "Falta el nombre del alias de org, generalmente el nombre del feature a realizar"
 else 
     sf org create scratch --set-default --definition-file=config/project-scratch-def.json --duration-days=7 --alias=$1
     sf project deploy start
