@@ -1,0 +1,15 @@
+<template>
+  <template if:false={hasAccount}>
+    <lightning-button
+      variant="base"
+      label="Buscar"
+      title="Buscar una cuenta"
+    ></lightning-button>
+    <lightning-button
+      variant="base"
+      label="Crear"
+      title="Crear una cuenta nueva"
+    ></lightning-button>
+  </template>
+  <template if:true={hasAccount}> {account.Name.value} </template>
+</template>

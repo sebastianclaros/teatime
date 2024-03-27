@@ -1,16 +1,7 @@
 public with sharing class ProductosController {
-  // @AuraEnabled
-  // public static void saveAuto2(String marca, String Name) {
-  //   Product2 auto = new Product2(Marca__c = marca, Name = name);
-  //   Database.upsert(auto);
-  // }
-
   @AuraEnabled(cacheable=true)
-  public static List<Product2> getProductos(
-    String catalogId,
-    String categoryId
-  ) {
-    List<Product2> products = new List<Product2>();
+  public static List<Product> getProducts(String catalogId, String categoryId) {
+    List<Product> products = new List<Product>();
 
     if (String.isNotBlank(catalogId) && String.isNotBlank(categoryId)) {
       for (ProductCategoryProduct productCategory : [
@@ -19,7 +10,7 @@ public with sharing class ProductosController {
         WHERE ProductCategoryId = :categoryId AND CatalogId = :catalogId
         WITH USER_MODE
       ]) {
-        products.add(productCategory.Product);
+        products.add(new Product(productCategory.Product));
       }
     }
     return products;
@@ -55,6 +46,7 @@ public with sharing class ProductosController {
   }
 
   class Product {
+    public String id;
     @AuraEnabled
     public String name;
     @AuraEnabled
@@ -67,6 +59,11 @@ public with sharing class ProductosController {
     public Double price;
     @AuraEnabled
     public Boolean inStock;
+
+    public Product(SObject record) {
+      this.id = (String) record.Id;
+      this.name = (String) record.get('name');
+    }
   }
 
   class PicklistEntry {

@@ -1,0 +1,1 @@
+update new User(id=UserInfo.getUserId(), UserPreferencesUserDebugModePref=true, UserPreferencesApexPagesDeveloperMode=true);

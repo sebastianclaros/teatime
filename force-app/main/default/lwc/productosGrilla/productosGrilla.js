@@ -1,5 +1,5 @@
 import { LightningElement, wire, track } from "lwc";
-import getProductos from "@salesforce/apex/ProductosController.getProductos";
+import getProducts from "@salesforce/apex/ProductosController.getProducts";
 
 import {
   subscribe,
@@ -19,7 +19,7 @@ export default class ProductosGrilla extends LightningElement {
 
   @wire(MessageContext) messageContext;
 
-  @wire(getProductos, { catalogId: "$catalogo", categoryId: "$categoria" })
+  @wire(getProducts, { catalogId: "$catalogo", categoryId: "$categoria" })
   autoCallback({ data, error }) {
     console.log(data, error);
     this.isLoading = false;

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>Cart</masterLabel>
+    <isExposed>true</isExposed>
+    <description
+  >Guarda el Carrito con todos los datos hasta el checkout</description>
+</LightningMessageChannel>
