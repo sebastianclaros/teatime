@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>ProductFilter</masterLabel>
+    <isExposed>true</isExposed>
+    <description
+  >Cuando se selecciona una categoria en el componente productFilter, se va a disparar un evento con la marca seleccionada.Por otro lado grillAutos, se va a subscribir al topico para escuchar ese evento y recibir la marca seleccionada</description>
+</LightningMessageChannel>

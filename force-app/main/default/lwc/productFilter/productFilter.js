@@ -1,9 +1,9 @@
 import { LightningElement, track, wire } from "lwc";
-import getCatalogos from "@salesforce/apex/ProductosController.getCatalogos";
-import getCategorias from "@salesforce/apex/ProductosController.getCategorias";
+import getCatalogos from "@salesforce/apex/ProductController.getCatalogos";
+import getCategorias from "@salesforce/apex/ProductController.getCategorias";
 
 import { publish, MessageContext } from "lightning/messageService";
-import channelProductosFiltro from "@salesforce/messageChannel/ProductosFiltro__c";
+import channelProductFilter from "@salesforce/messageChannel/ProductFilter__c";
 
 export default class ProductFilter extends LightningElement {
   @track catalogos = [];
@@ -36,7 +36,7 @@ export default class ProductFilter extends LightningElement {
       catalogo: this.catalogo,
       categoria: this.categoria
     };
-    publish(this.messageContext, channelProductosFiltro, payload);
+    publish(this.messageContext, channelProductFilter, payload);
   }
 
   handleChangeCategoria(e) {

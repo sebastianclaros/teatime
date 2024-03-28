@@ -1,5 +1,5 @@
 import { LightningElement, wire, track } from "lwc";
-import getProducts from "@salesforce/apex/ProductosController.getProducts";
+import getProducts from "@salesforce/apex/ProductController.getProducts";
 
 import {
   subscribe,
@@ -7,7 +7,7 @@ import {
   APPLICATION_SCOPE,
   MessageContext
 } from "lightning/messageService";
-import channelProductosFiltro from "@salesforce/messageChannel/ProductosFiltro__c";
+import channelProductFilter from "@salesforce/messageChannel/ProductFilter__c";
 
 export default class ProductGrid extends LightningElement {
   @track productos = [];
@@ -42,7 +42,7 @@ export default class ProductGrid extends LightningElement {
     if (!this.subscription) {
       this.subscription = subscribe(
         this.messageContext,
-        channelProductosFiltro,
+        channelProductFilter,
         (message) => this.handleMessage(message),
         { scope: APPLICATION_SCOPE }
       );

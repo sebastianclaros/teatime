@@ -13,8 +13,8 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>productosFiltro</componentName>
-                <identifier>c_productosFiltro</identifier>
+                <componentName>productFilter</componentName>
+                <identifier>c_productFilter</identifier>
             </componentInstance>
         </itemInstances>
         <name>region2</name>
@@ -23,8 +23,8 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>productosGrilla</componentName>
-                <identifier>c_productosGrilla</identifier>
+                <componentName>productGrid</componentName>
+                <identifier>c_productGrid</identifier>
             </componentInstance>
         </itemInstances>
         <name>region3</name>
