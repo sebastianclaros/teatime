@@ -9,7 +9,7 @@ import {
 } from "lightning/messageService";
 import channelProductosFiltro from "@salesforce/messageChannel/ProductosFiltro__c";
 
-export default class ProductosGrilla extends LightningElement {
+export default class ProductGrid extends LightningElement {
   @track productos = [];
   catalogo;
   categoria;

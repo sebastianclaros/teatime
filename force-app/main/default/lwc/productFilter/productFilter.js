@@ -5,7 +5,7 @@ import getCategorias from "@salesforce/apex/ProductosController.getCategorias";
 import { publish, MessageContext } from "lightning/messageService";
 import channelProductosFiltro from "@salesforce/messageChannel/ProductosFiltro__c";
 
-export default class ProductosFiltro extends LightningElement {
+export default class ProductFilter extends LightningElement {
   @track catalogos = [];
   @track categorias = [];
 
