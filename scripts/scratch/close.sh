@@ -35,11 +35,10 @@ if ! git push origin $current_branch; then
     exit 1
 fi
 
-current_branch=$(git branch --show-current)
 
 # Baja lo ultimo de main y hace un merge 
 if ! git checkout main; then
-    echo "Verifique que no tenga cosas sin comitear"
+    echo "No pudo hacer el cambio a main"
     exit 1
 fi
 if ! git pull; then
