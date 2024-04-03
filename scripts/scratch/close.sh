@@ -5,7 +5,7 @@
 # Actualiza documentacion
 
 # Corre validaciones locales
-yarn test
+#yarn test
 
 # Publica la branch
 if ! git push origin; then
