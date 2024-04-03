@@ -108,6 +108,8 @@ Ahora desde la carpeta de teatime abran el VSCode
 code
 ```
 
+## Manejo de Proyecto
+
 ## Documentacion
 
 Usamos la libreria de Docusaurus, y agregamos una carpeta en scripts/docs para automatizar o sincronizar con la metadata.
