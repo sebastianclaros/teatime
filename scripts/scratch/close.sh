@@ -8,29 +8,29 @@
 #yarn test
 current_branch=$(git branch --show-current)
 
-# Publica la branch
-if ! git push origin $current_branch; then
-    echo "Verifique que no tenga cosas sin comitear"
-    exit 1
-fi
-
-
 # Baja lo ultimo de main y hace un merge 
 if ! git checkout main; then
     echo "No pudo hacer el cambio a main"
     exit 1
 fi
 if ! git pull; then
-    echo "Verifique que no tenga cosas sin comitear"
+    echo "No se pudo actualizar main"
     exit 1
 fi
-if ! git  merge --no-ff $current_branch; then
-    echo "Verifique que no tenga cosas sin comitear"
+
+if ! git checkout $current_branch; then
+    echo "No se volver a $current_branch"
+    exit 1
+fi
+
+if ! git  merge main; then
+    echo "No se pudo hacer el merge con main"
     exit 1
 fi
 
 
-# if ! git branch -d $current_branch; then
-#     echo "No se pudo eliminar la branch"
-#     exit 1
-# fi
+# Publica la branch
+if ! git push origin $current_branch; then
+    echo "No se pudo publicar la branch"
+    exit 1
+fi
