@@ -8,8 +8,9 @@ else
     sf project deploy start
     sf org assign permset --name=adminCatalogo
     sf data tree import --plan=data/plan.json
-    sf apex run --file ../apex/debugMode.apex
+    sf apex run --file ./scripts/apex/debugMode.apex
     git checkout main
+    git pull
     git checkout -b $1
     sf open org
 fi
