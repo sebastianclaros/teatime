@@ -110,6 +110,17 @@ code
 
 ## Manejo de Proyecto
 
+## Desarrollar 
+Antes de desarrollar una story tenemos que preparar el entorno. Lo primero es bajar lo que esta en la branch remota y crear una nueva branch desde ahi para hacer el codigo nuevo.
+Despues tenemos que crear una scracth org con el codigo, los datos y la asignacion de permisos, a fin de poder desarrollar y testear nuestro requerimiento
+
+Para simplificar creamos un script que hace todo esto !
+
+```
+./scripts/scratch/create.sh <referencia>
+```
+
+
 ## Documentacion
 
 Usamos la libreria de Docusaurus, y agregamos una carpeta en scripts/docs para automatizar o sincronizar con la metadata.
