@@ -2,8 +2,9 @@
 # Script crea scracth Org
 
 if [ -z "$1" ]; then  
-ull    echo "Falta el nombre del alias de org, generalmente el nombre del feature a realizar"
+    echo "Falta el nombre del alias de org, generalmente el nombre del feature a realizar"
 else 
+    # Crea la branch nueva
     if ! git checkout main; then
         echo "Verifique que no tenga cosas sin comitear, no se puede crear una branch con cambios sin commitear, o bien los debera deshacer"
         exit 1
@@ -16,6 +17,7 @@ else
         echo "Verifique que no tenga cosas sin comitear"
         exit 1
     fi
+    # Crea la scracth org
     sf org create scratch --set-default --definition-file=config/project-scratch-def.json --duration-days=7 --alias=$1
     sf project deploy start
     sf org assign permset --name=adminCatalogo

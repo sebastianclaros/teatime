@@ -120,6 +120,11 @@ Para simplificar creamos un script que hace todo esto !
 ./scripts/scratch/create.sh <referencia>
 ```
 
+Si el desarrollo del requerimiento termino entonces se puede correr 
+
+```
+./scripts/scratch/close.sh 
+```
 
 ## Documentacion
 
