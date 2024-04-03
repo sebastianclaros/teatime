@@ -92,7 +92,7 @@ Si hay error al abrir la org, hay que hacer login con user y pass. Para eso, res
 
 Como herramienta de desarrollo usaremos VS Code.
 
-Si no lo tienen instalado sigan [trailhead](https://trailhead.salesforce.com/es-MX/content/learn/projects/find-and-fix-bugs-with-apex-replay-debugger/apex-replay-debugger-set-up-vscode) o busquen en confluence la guia "Visual Studio Code"
+Si no lo tienen instalado sigan [trailhead](https://trailhead.salesforce.com/es-MX/content/learn/projects/find-and-fix-bugs-with-apex-replay-debugger/apex-replay-debugger-set-up-vscode) o busquen en confluence la guia [Visual Studio Code](https://tecocloud.atlassian.net/wiki/spaces/SCRM/pages/3284173659/Visual+Studio+Code)
 
 Les dejo algunas extensiones utiles:
 
