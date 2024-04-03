@@ -16,11 +16,11 @@ else
         echo "Verifique que no tenga cosas sin comitear"
         exit 1
     fi
-    # sf org create scratch --set-default --definition-file=config/project-scratch-def.json --duration-days=7 --alias=$1
-    # sf project deploy start
-    # sf org assign permset --name=adminCatalogo
-    # sf data tree import --plan=data/plan.json
-    # sf apex run --file ./scripts/apex/debugMode.apex
-    # sf open org
+    sf org create scratch --set-default --definition-file=config/project-scratch-def.json --duration-days=7 --alias=$1
+    sf project deploy start
+    sf org assign permset --name=adminCatalogo
+    sf data tree import --plan=data/plan.json
+    sf apex run --file ./scripts/apex/debugMode.apex
+    sf open org
 fi
 
