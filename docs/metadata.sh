@@ -5,7 +5,7 @@
 ## GENERADOR DE OBJECTS
 
 ## Si viene refresh baja la metadata
-configuracion_objects=("Product2" "ProductCatalog" "ProductCategory" "ProductCategoryProduct");
+configuracion_objects=("Product2" "ProductCatalog" "ProductCategory" "ProductCategoryProduct" "PriceBook2" "PriceBookEntry" );
 configuracion_classes=("ProductController");
 
 ventas_objects=("Order" "Contact");

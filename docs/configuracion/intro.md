@@ -34,6 +34,10 @@ ProductCategory {
 }
 ProductCatalog {
 }
+PriceBookEntry {
+}
+PriceBook2 {
+}
 Product2 {
 }
 ProductCategoryProduct {
@@ -47,6 +51,8 @@ ProductCategoryProduct {
 | --- | ----- | -------- | ----------- |
 | <div class="icons"></div> | [Categoría](/diccionarios/objects/ProductCategory) | ProductCategory ||
 | <div class="icons"></div> | [Catálogo](/diccionarios/objects/ProductCatalog) | ProductCatalog ||
+| <div class="icons"></div> | [Entrada de lista de precios](/diccionarios/objects/PriceBookEntry) | PriceBookEntry ||
+| <div class="icons"></div> | [Lista de precios](/diccionarios/objects/PriceBook2) | PriceBook2 ||
 | <div class="icons"></div> | [Producto](/diccionarios/objects/Product2) | Product2 ||
 | <div class="icons"></div> | [Producto de categoría de producto](/diccionarios/objects/ProductCategoryProduct) | ProductCategoryProduct ||
 
