@@ -1,13 +1,18 @@
+---
+sidebar_position: 1
+title: Aplicacion
+---
 
 ## Diagrama de Componentes
 
 ```mermaid
 flowchart TD
-    filtroAutos -->|marca| grillaAutos
+    productFilter -->|catalog, category| productGrid
 ```
 
-Cuando se selecciona una marca en el componente filtroAutos, se va a disparar un evento con la marca seleccionada.
-Por otro lado grillAutos, se va a subscribir al topico para escuchar ese evento y recibir la marca seleccionada
+* productFilter permite seleccionar el catalogo y la categoria.
+
+
 
 ## Referencias
 * https://medium.com/@sendtosachin27/component-communication-in-lwc-a3ad91abad89

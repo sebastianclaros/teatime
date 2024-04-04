@@ -1,5 +1,6 @@
 ---
-slug: /ventas
+sidebar_position: 0
+title: Intro
 ---
 
 # Ventas
@@ -13,37 +14,19 @@ slug: /ventas
 classDiagram
 
 
-    class PicklistEntry {
-         value     
-         label     
-     PicklistEntry(SObject record)  
-     PicklistEntry(Schema.PicklistEntry entry)  
-     PicklistEntry(String valueString label)  
+    class OrderController {
+         getOrder(String orderId) Order $
 
     }
 
-    link PicklistEntry "./diccionarios/classes/PicklistEntry" 
-
-
-    class ProductosController {
-         getProductos(String catalogIdString categoryId) List $
-         getCategorias(String catalogId) List $
-         getCatalogos() List $
-
-    }
-
-    link ProductosController "./diccionarios/classes/ProductosController" 
- namespace _ProductosController {
-    class PicklistEntry 
-}
+    link OrderController "./diccionarios/classes/OrderController" 
 ```
 
 ### Listado
 
 | #   | Name | Api Version | Descripcion |
 | --- | ----- | ----------- | ----------- |
-| <div class="icons"></div> | [PicklistEntry](./diccionarios/classes/PicklistEntry) |||
-| <div class="icons"></div> | [ProductosController](./diccionarios/classes/ProductosController) |59||
+| <div class="icons"></div> | [OrderController](./diccionarios/classes/OrderController) |59||
 
 | #  | Referencia       | #  | Referencia |
 | -- | ---------------- | -- | ---------- |
@@ -70,8 +53,8 @@ Order {
 
 | #   | Label | Api Name | Descripcion |
 | --- | ----- | -------- | ----------- |
-| <div class="icons"></div> | [Contact](/diccionarios/objects/Contact) | Contact ||
-| <div class="icons"></div> | [Order](/diccionarios/objects/Order) | Order ||
+| <div class="icons"></div> | [Contacto](/diccionarios/objects/Contact) | Contact ||
+| <div class="icons"></div> | [Pedido](/diccionarios/objects/Order) | Order ||
 
 ### Configuracion
 

@@ -8,7 +8,7 @@ title: Order
 
 
 
-- Label: Order
+- Label: Pedido
 - ApiName: Order
 - Sharing Mode: ControlledByParent
 - Visibilidad: 
@@ -43,7 +43,6 @@ title: Order
 | <div class="icons">![Track History](/img/tracker_60.png)</div> |  | PoDate |  |  <ul></ul> |
 | <div class="icons">![Track History](/img/tracker_60.png)</div> |  | PoNumber |  |  <ul></ul> |
 | <div class="icons"></div> |  | Pricebook2Id | [Lookup a undefined](/diccionarios/objects/undefined) |  <ul></ul> |
-| <div class="icons"></div> |  | QuoteId | [Lookup a undefined](/diccionarios/objects/undefined) |  <ul></ul> |
 | <div class="icons">![Track History](/img/tracker_60.png)</div> |  | ShipToContactId | [Lookup a undefined](/diccionarios/objects/undefined) |  <ul></ul> |
 | <div class="icons">![Track History](/img/tracker_60.png)</div> |  | ShippingAddress |  |  <ul></ul> |
 | <div class="icons">![Track History](/img/tracker_60.png)</div> |  | Status | Picklist |  <ul></ul> |

@@ -1,5 +1,6 @@
 ---
-title: Configuracion
+sidebar_position: 0
+title: Intro
 ---
 
 ## Introducción
@@ -29,9 +30,9 @@ Esta orientado a industrias, nosotros lo tenemos como parte de Communication.
 ```mermaid
 erDiagram
 
-ProductCatalog {
-}
 ProductCategory {
+}
+ProductCatalog {
 }
 Product2 {
 }
@@ -44,10 +45,10 @@ ProductCategoryProduct {
 
 | #   | Label | Api Name | Descripcion |
 | --- | ----- | -------- | ----------- |
-| <div class="icons"></div> | [Catalog](/diccionarios/objects/ProductCatalog) | ProductCatalog ||
-| <div class="icons"></div> | [Category](/diccionarios/objects/ProductCategory) | ProductCategory ||
-| <div class="icons"></div> | [Product](/diccionarios/objects/Product2) | Product2 ||
-| <div class="icons"></div> | [Product Category Product](/diccionarios/objects/ProductCategoryProduct) | ProductCategoryProduct ||
+| <div class="icons"></div> | [Categoría](/diccionarios/objects/ProductCategory) | ProductCategory ||
+| <div class="icons"></div> | [Catálogo](/diccionarios/objects/ProductCatalog) | ProductCatalog ||
+| <div class="icons"></div> | [Producto](/diccionarios/objects/Product2) | Product2 ||
+| <div class="icons"></div> | [Producto de categoría de producto](/diccionarios/objects/ProductCategoryProduct) | ProductCategoryProduct ||
 
 ### Configuracion
 
@@ -81,15 +82,31 @@ classDiagram
     link PicklistEntry "./diccionarios/classes/PicklistEntry" 
 
 
-    class ProductosController {
-         getProductos(String catalogIdString categoryId) List $
+    class Product {
+         id     
+         name     
+         description     
+         categories     
+         image     
+         price     
+         inStock     
+     Product(SObject record)  
+
+    }
+
+    link Product "./diccionarios/classes/Product" 
+
+
+    class ProductController {
+         getProducts(String catalogIdString categoryId) List $
          getCategorias(String catalogId) List $
          getCatalogos() List $
 
     }
 
-    link ProductosController "./diccionarios/classes/ProductosController" 
- namespace _ProductosController {
+    link ProductController "./diccionarios/classes/ProductController" 
+ namespace _ProductController {
+    class Product 
     class PicklistEntry 
 }
 ```
@@ -99,7 +116,8 @@ classDiagram
 | #   | Name | Api Version | Descripcion |
 | --- | ----- | ----------- | ----------- |
 | <div class="icons"></div> | [PicklistEntry](./diccionarios/classes/PicklistEntry) |||
-| <div class="icons"></div> | [ProductosController](./diccionarios/classes/ProductosController) |59||
+| <div class="icons"></div> | [Product](./diccionarios/classes/Product) |||
+| <div class="icons"></div> | [ProductController](./diccionarios/classes/ProductController) |59||
 
 | #  | Referencia       | #  | Referencia |
 | -- | ---------------- | -- | ---------- |

@@ -8,7 +8,7 @@ title: Contact
 
 
 
-- Label: Contact
+- Label: Contacto
 - ApiName: Contact
 - Sharing Mode: ControlledByParent
 - Visibilidad: 
@@ -26,7 +26,6 @@ title: Contact
 | <div class="icons"></div> |  | Department |  |  <ul></ul> |
 | <div class="icons"></div> |  | Description |  |  <ul></ul> |
 | <div class="icons"></div> |  | DoNotCall |  |  <ul></ul> |
-| <div class="icons"></div> | Do Not SMS | DoNotSMS__c | Checkbox |  <ul></ul> |
 | <div class="icons"></div> |  | Email |  |  <ul></ul> |
 | <div class="icons"></div> |  | Fax |  |  <ul></ul> |
 | <div class="icons"></div> |  | GenderIdentity | Picklist |  <ul></ul> |
@@ -35,11 +34,9 @@ title: Contact
 | <div class="icons"></div> |  | HomePhone |  |  <ul></ul> |
 | <div class="icons"></div> |  | IndividualId | [Lookup a undefined](/diccionarios/objects/undefined) |  <ul></ul> |
 | <div class="icons"></div> |  | Jigsaw |  |  <ul></ul> |
-| <div class="icons"></div> | Languages | Languages__c | Text(100) |  <ul></ul> |
 | <div class="icons"></div> |  | LastCURequestDate |  |  <ul></ul> |
 | <div class="icons"></div> |  | LastCUUpdateDate |  |  <ul></ul> |
 | <div class="icons"></div> |  | LeadSource | Picklist |  <ul></ul> |
-| <div class="icons"></div> | Level | Level__c | Picklist |  <ul><li>Secondary</li><li>Tertiary</li><li>Primary</li></ul> |
 | <div class="icons"></div> |  | MailingAddress |  |  <ul></ul> |
 | <div class="icons"></div> |  | MobilePhone |  |  <ul></ul> |
 | <div class="icons"></div> |  | Name |  |  <ul></ul> |
@@ -48,7 +45,6 @@ title: Contact
 | <div class="icons"></div> |  | OwnerId | [Lookup a undefined](/diccionarios/objects/undefined) |  <ul></ul> |
 | <div class="icons"></div> |  | Phone |  |  <ul></ul> |
 | <div class="icons"></div> |  | Pronouns | Picklist |  <ul></ul> |
-| <div class="icons"></div> | Quarterly Check | QtrlyCheck__c | Checkbox |  <ul></ul> |
 | <div class="icons"></div> |  | ReportsToId | [Lookup a undefined](/diccionarios/objects/undefined) |  <ul></ul> |
 | <div class="icons"></div> |  | Title |  |  <ul></ul> |
 

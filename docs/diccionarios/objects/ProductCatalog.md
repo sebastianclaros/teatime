@@ -8,7 +8,7 @@ title: Catalog
 
 
 
-- Label: Catalog
+- Label: Catálogo
 - ApiName: ProductCatalog
 - Sharing Mode: Private
 - Visibilidad: 
@@ -18,6 +18,11 @@ title: Catalog
 
 | #   | Label | Api Name | Tipo | Descripcion |
 | --- | ----- | -------- | ---- | ----------- |
+| <div class="icons"></div> |  | CatalogType |  |  <ul></ul> |
+| <div class="icons"></div> |  | Code |  |  <ul></ul> |
+| <div class="icons"></div> |  | Description |  |  <ul></ul> |
+| <div class="icons"></div> |  | EffectiveEndDate |  |  <ul></ul> |
+| <div class="icons"></div> |  | EffectiveStartDate |  |  <ul></ul> |
 | <div class="icons"></div> |  | Name |  |  <ul></ul> |
 | <div class="icons"></div> |  | OwnerId | [Lookup a undefined](/diccionarios/objects/undefined) |  <ul></ul> |
 
