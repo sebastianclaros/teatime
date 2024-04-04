@@ -18,7 +18,10 @@ else
         exit 1
     fi
     # Crea la scracth org
-    sf org create scratch --set-default --definition-file=config/project-scratch-def.json --duration-days=7 --alias=$1
+    if ! sf org create scratch --set-default --definition-file=config/project-scratch-def.json --duration-days=7 --alias=$1; then 
+        echo "No se pudo crear la scracth org"
+        exit 1
+    fi
     sf project deploy start
     sf org assign permset --name=adminCatalogo
     sf data tree import --plan=data/plan.json
