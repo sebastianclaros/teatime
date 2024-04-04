@@ -1,6 +1,5 @@
 #!/bin/bash
 # Script crea scracth Org
-
 if [ -z "$1" ]; then  
     echo "Falta el nombre del alias de org, generalmente el nombre del feature a realizar"
 else 
@@ -19,11 +18,19 @@ else
     fi
     # Crea la scracth org
     if ! sf org create scratch --set-default --definition-file=config/project-scratch-def.json --duration-days=7 --alias=$1; then 
-        echo "No se pudo crear la scracth org"
+        echo "No se pudo crear la scracth org, puede probar de hacer sf org resume, o ver las orgs con sf org list"
         exit 1
     fi
-    sf project deploy start
-    sf org assign permset --name=adminCatalogo
+
+    if ! sf project deploy start; then
+        echo "No se pudo subir el codigo"
+        exit 1
+    fi
+    if !sf org assign permset --name=adminCatalogo; then
+        echo "No se pudo asignar los permisos, intente manualmente"
+        exit 1
+    fi
+
     sf data tree import --plan=data/plan.json
     sf apex run --file ./scripts/apex/debugMode.apex
     sf open org
