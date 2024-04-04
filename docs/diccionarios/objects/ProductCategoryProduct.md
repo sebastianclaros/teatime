@@ -8,7 +8,7 @@ title: Product Category Product
 
 
 
-- Label: Product Category Product
+- Label: Producto de categoría de producto
 - ApiName: ProductCategoryProduct
 - Sharing Mode: ControlledByParent
 - Visibilidad: 
@@ -18,7 +18,6 @@ title: Product Category Product
 
 | #   | Label | Api Name | Tipo | Descripcion |
 | --- | ----- | -------- | ---- | ----------- |
-| <div class="icons"></div> |  | IsPrimaryCategory |  |  <ul></ul> |
 | <div class="icons"></div> |  | ProductCategoryId | [Lookup a undefined](/diccionarios/objects/undefined) |  <ul></ul> |
 | <div class="icons"></div> |  | ProductId | [Lookup a undefined](/diccionarios/objects/undefined) |  <ul></ul> |
 

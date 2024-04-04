@@ -6,7 +6,7 @@
         "referenceId": "VWSuranVWSuran"
       },
       "ProductId": "@SuranGris2022",
-      "ProductCategoryId": "@VWSuran"
+      "ProductCategoryId": "@VW"
     },
     {
       "attributes": {
@@ -14,7 +14,7 @@
         "referenceId": "FordFiestaFordFiesta"
       },
       "ProductId": "@FordFiesta2020",
-      "ProductCategoryId": "@FordFiesta"
+      "ProductCategoryId": "@Ford"
     }
   ]
 }

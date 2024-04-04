@@ -1,0 +1,18 @@
+{
+  "Configuracion": {
+    "Catalogo": {
+      "objects": ["ProductCatalog", "ProductCategory", "ProductCategoryProduct"]
+    },
+    "Precios": {
+      "objects": ["PriceBook2", "PriceBookEntry", "Product2"]
+    },
+    "Promociones": {
+      "classes": [""],
+      "objects": [""]
+    }
+  },
+  "Ventas": {
+    "classes": ["OrderController"],
+    "objects": ["Order", "Account", "OrderItems", "Product2"]
+  }
+}

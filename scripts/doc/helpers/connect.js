@@ -119,9 +119,10 @@ async function getDependencies(listOfIds, filterTypes) {
   return dependencies;
 }
 function expiredSession() {
-  console.warn(
+  console.error(
     "El token de la sesion expiro, puede actualizarlo manualmente corriendo sf org display y copiar el Access Token en el .env "
   );
+  process.exit(-1);
 }
 async function getLwc(fullNames) {
   /**
@@ -172,13 +173,13 @@ Archivos, JS => JSDoc
     console.log(metadata);
     return metadata;
   } catch (e) {
-    if (e.name == "INVALID_SESSION_ID") {
+    if (e.name == "INVALID_SESSION_ID" || e.name == "sf:INVALID_SESSION_ID") {
       expiredSession();
     }
     if (DEBUG) {
       console.log(e);
     }
-    throw `Error buscando metadata de las clases ${fullNames}`;
+    throw `Error buscando metadata de los lwc ${fullNames}. ERR-NAME: ${e.name}`;
   }
 }
 
@@ -203,10 +204,13 @@ async function getClasses(fullNames) {
     }
     return metadata;
   } catch (e) {
+    if (e.name == "INVALID_SESSION_ID" || e.name == "sf:INVALID_SESSION_ID") {
+      expiredSession();
+    }
     if (DEBUG) {
       console.log(e);
     }
-    throw `Error buscando metadata de las clases ${fullNames}`;
+    throw `Error buscando metadata de las clases ${fullNames}. ERR-NAME: ${e.name}`;
   }
 }
 
@@ -229,10 +233,13 @@ async function customObjects(fullNames) {
     }
     return metadata;
   } catch (e) {
+    if (e.name == "INVALID_SESSION_ID" || e.name == "sf:INVALID_SESSION_ID") {
+      expiredSession();
+    }
     if (DEBUG) {
       console.log(e);
     }
-    throw `Error buscando metadata de los objetos ${fullNames}`;
+    throw `Error buscando metadata de los objetos ${fullNames}. ERR-NAME: ${e.name}`;
   }
 }
 

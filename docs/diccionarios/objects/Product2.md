@@ -8,7 +8,7 @@ title: Product
 
 
 
-- Label: Product
+- Label: Producto
 - ApiName: Product2
 - Sharing Mode: ReadWrite
 - Visibilidad: 
@@ -18,19 +18,29 @@ title: Product
 
 | #   | Label | Api Name | Tipo | Descripcion |
 | --- | ----- | -------- | ---- | ----------- |
+| <div class="icons"></div> |  | AvailabilityDate |  |  <ul></ul> |
+| <div class="icons"></div> |  | BasedOnId | [Lookup a undefined](/diccionarios/objects/undefined) |  <ul></ul> |
+| <div class="icons"></div> |  | ConfigureDuringSale |  |  <ul></ul> |
 | <div class="icons"></div> |  | Description |  |  <ul></ul> |
+| <div class="icons"></div> |  | DiscontinuedDate |  |  <ul></ul> |
 | <div class="icons"></div> |  | DisplayUrl |  |  <ul></ul> |
+| <div class="icons"></div> |  | EndOfLifeDate |  |  <ul></ul> |
 | <div class="icons"></div> |  | ExternalDataSourceId | [Lookup a undefined](/diccionarios/objects/undefined) |  <ul></ul> |
 | <div class="icons"></div> |  | ExternalId |  |  <ul></ul> |
 | <div class="icons"></div> |  | Family | Picklist |  <ul></ul> |
+| <div class="icons"></div> |  | HelpText |  |  <ul></ul> |
 | <div class="icons"></div> |  | IsActive |  |  <ul></ul> |
+| <div class="icons"></div> |  | IsAssetizable |  |  <ul></ul> |
+| <div class="icons"></div> |  | IsSerialized |  |  <ul></ul> |
+| <div class="icons"></div> |  | IsSoldOnlyWithOtherProds |  |  <ul></ul> |
 | <div class="icons"></div> |  | Name |  |  <ul></ul> |
-| <div class="icons"></div> |  | ProductClass |  |  <ul></ul> |
 | <div class="icons"></div> |  | ProductCode |  |  <ul></ul> |
 | <div class="icons"></div> |  | QuantityUnitOfMeasure | Picklist |  <ul></ul> |
 | <div class="icons"></div> |  | SellerId | [Lookup a undefined](/diccionarios/objects/undefined) |  <ul></ul> |
 | <div class="icons"></div> |  | SourceProductId | [Lookup a undefined](/diccionarios/objects/undefined) |  <ul></ul> |
+| <div class="icons"></div> |  | SpecificationType |  |  <ul></ul> |
 | <div class="icons"></div> |  | StockKeepingUnit |  |  <ul></ul> |
+| <div class="icons"></div> |  | TransferRecordMode |  |  <ul></ul> |
 | <div class="icons"></div> |  | Type |  |  <ul></ul> |
 
 | #                                                              | Referencia    |
