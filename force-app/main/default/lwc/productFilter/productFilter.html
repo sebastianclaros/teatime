@@ -1,21 +1,26 @@
 <template>
-  <lightning-combobox
-    options={catalogos}
-    placeholder="Selecciona un catalogo"
-    label="Catalogos"
-    onchange={handleChangeCatalogo}
-    name="Catalogo"
-  >
-  </lightning-combobox>
+  <lightning-card title="Product Filter">
 
-  <lightning-combobox
-    options={categorias}
-    placeholder="Selecciona una categoria"
-    label="Categorias"
-    onchange={handleChangeCategoria}
-    name="Categoria"
-  >
-  </lightning-combobox>
+    <div class="slds-p-around_medium lgc-bg">
+      <lightning-input type="text" label="Search" placeholder="Search product here"></lightning-input>
+      <lightning-button variant="brand" label="Search" title="Primary action" onclick={handleClick}
+        class="slds-m-left_x-small"></lightning-button>
+    </div>
 
-  <!-- Rango Precios -->
+    <lightning-combobox options={catalogos} placeholder="Selecciona un catalogo" label="Catalogos"
+      onchange={handleChangeCatalogo} name="Catalogo">
+    </lightning-combobox>
+
+    <lightning-combobox options={categorias} placeholder="Selecciona una categoria" label="Categorias"
+      onchange={handleChangeCategoria} name="Categoria">
+    </lightning-combobox>
+    
+    <div class="slds-m-vertical_medium">
+      <h1 class="slds-text-heading_small">Price</h1>
+      <p class="slds-text-body_regular">Select price between $10000 $135000.</p>
+    </div>
+  <lightning-slider label="Amount" value={val} class="slds-slider__range" type="range" aria-describedby="message-id-81" min="10000" max="135000" step="5"></lightning-slider>
+  </lightning-card>
 </template>
+
+<!-- Rango Precios -->
