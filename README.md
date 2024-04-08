@@ -137,6 +137,4 @@ Para correr la documentacion localmente:
 yarn doc:start
 ```
 
-A ver
-
 Para ver la [documentacion online](https://sebastianclaros.github.io/teatime/)

@@ -7,6 +7,9 @@
 .classes.json
 .object.json
 
+# Archivos draw backup
+.$*.bkp
+
 # Salesforce cache
 .sf/
 .sfdx/
