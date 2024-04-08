@@ -1,26 +1,49 @@
 <template>
   <lightning-card title="Product Filter">
-
-    <div class="slds-p-around_medium lgc-bg">
-      <lightning-input type="text" label="Search" placeholder="Search product here"></lightning-input>
-      <lightning-button variant="brand" label="Search" title="Primary action" onclick={handleClick}
+    <div class="slds-var-m-horizontal_large"> 
+      <div class="slds-p-around_medium lgc-bg">
+        <!-- Busca como Producto o Marca. -->
+        <lightning-input type="search" label="Search" placeholder="Search product here"></lightning-input>
+        <lightning-button variant="brand" label="Search" title="Primary action" onclick={handleClick}
         class="slds-m-left_x-small"></lightning-button>
-    </div>
-
-    <lightning-combobox options={catalogos} placeholder="Selecciona un catalogo" label="Catalogos"
+      </div>
+      <!-- Select Catalogo, tipo de producto (Auto, Moto, etc.) -->
+      <lightning-combobox options={catalogos} placeholder="Selecciona un catalogo" label="Catalogos"
       onchange={handleChangeCatalogo} name="Catalogo">
     </lightning-combobox>
-
+    <!-- Select Categorias, marcas de auto, moto (Ford, VW, etc.) -->
     <lightning-combobox options={categorias} placeholder="Selecciona una categoria" label="Categorias"
-      onchange={handleChangeCategoria} name="Categoria">
-    </lightning-combobox>
-    
-    <div class="slds-m-vertical_medium">
-      <h1 class="slds-text-heading_small">Price</h1>
-      <p class="slds-text-body_regular">Select price between $10000 $135000.</p>
+    onchange={handleChangeCategoria} name="Categoria">
+  </lightning-combobox>
+  <!-- Rango Precios -->
+  <div class="slds-m-vertical_medium">
+    <h1 class="slds-text-heading_small">Price</h1>
+    <p class="slds-text-body_regular">Select price between $10000 $135000.</p>
+  </div>
+  <section>                
+    <div>      
+        <b>Valor Minimo :</b> {minRange}    
     </div>
-  <lightning-slider label="Amount" value={val} class="slds-slider__range" type="range" aria-describedby="message-id-81" min="10000" max="135000" step="5"></lightning-slider>
+    <div>
+        <input type="range" min="1" max="100" value={minRange}
+            class="slider" id="minRange" name="minRange"
+            onchange={handleInput}
+        />
+    </div>
+    <div>      
+        <b>Valor Maximo :</b> {maxRange}
+    </div>
+    <div>
+        <input type="range" min="1" max="100" value={maxRange}
+        class="slider" id="maxRange" name="maxRange"
+        onchange={handleInput}
+        />
+    </div>
+</section>
+<!-- Toggle check Stock -->
+<section>
+    <lightning-input type="toggle" label="In Stock" name="switchStock"></lightning-input>
+</section>
+</div>
   </lightning-card>
 </template>
-
-<!-- Rango Precios -->
