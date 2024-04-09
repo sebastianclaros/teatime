@@ -26,20 +26,20 @@ else
         echo "No se pudo subir el codigo"
         exit 1
     fi
-    if !sf org assign permset --name=adminCatalogo; then
+    if ! sf org assign permset --name=adminCatalogo; then
         echo "No se pudo asignar los permisos, intente manualmente"
         exit 1
     fi
 
-    if !sf data tree import --plan=data/plan.json; then
+    if ! sf data tree import --plan=data/plan.json; then
         echo "No se pudo importar los datos, intente manualmente"
         exit 1
     fi
-    if !sf apex run --file ./scripts/apex/debugMode.apex; then
+    if ! sf apex run --file ./scripts/apex/debugMode.apex; then
         echo "No se pudo asignar el modo debug, intente manualmente en el user setear debug mode "
         exit 1
     fi
-    if !sf open org; then
+    if ! sf open org; then
         exit 1
     fi
 fi
