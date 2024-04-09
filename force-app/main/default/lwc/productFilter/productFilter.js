@@ -13,14 +13,14 @@ export default class ProductFilter extends LightningElement {
 
   @track catalogo;
   @track categoria;
-  @track minRange = 30;
-  @track maxRange = 100;
+  @track minRange = 50000;
+  @track maxRange = 410000;
 
     handleInput(event) {
         this[event.target.name] = event.target.value;
-        if (event.target.name === 'minRange' && this.minRange > this.maxRange) { 
+        if (event.target.name === 'minRange' && Number(this.minRange) >= Number(this.maxRange)) { 
             this.minRange = this.maxRange;   
-        } else if (event.target.name === 'maxRange' && this.minRange > this.maxRange) {
+        } else if (event.target.name === 'maxRange' && Number(this.minRange) >= Number(this.maxRange)) {
             this.maxRange = this.minRange;     
         } 
     }
