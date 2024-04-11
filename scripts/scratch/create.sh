@@ -35,12 +35,18 @@ else
         echo "No se pudo importar los datos, intente manualmente"
         exit 1
     fi
+    
+    if !sf sf org generate password; then
+        echo "No se pudo crear una password para el user"
+    fi
+
     if !sf apex run --file ./scripts/apex/debugMode.apex; then
         echo "No se pudo asignar el modo debug, intente manualmente en el user setear debug mode "
-        exit 1
     fi
+
+
     if !sf open org; then
-        exit 1
+        echo "No se pudo abrir la org, puede hacer sf org display para ver los datos y hacerlo manualmente"
     fi
 fi
 
