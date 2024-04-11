@@ -40,18 +40,18 @@ async function prompt(config) {
 }
 
 function help() {
-  console.log(
+  console.info(
     "Este comando es un boilerplate de documentos basados en los templates de la carpeta scripts/templates/create."
   );
-  console.log(
+  console.info(
     "El objetivo es que antes de crear un componente de documentacion se pueda armar es esqueleto de forma estandar."
   );
-  console.log(
+  console.info(
     "Por ejemplo si se quiere documentar los servicios de un proceso se puede correr:"
   );
-  console.log("> yarn doc:create new servicios");
-  console.log("Si quiere correr el modo interactivo solo ejecute:");
-  console.log("> yarn doc:create");
+  console.info("> yarn doc:create new servicios");
+  console.info("Si quiere correr el modo interactivo solo ejecute:");
+  console.info("> yarn doc:create");
 }
 
 async function readPipedInput() {
