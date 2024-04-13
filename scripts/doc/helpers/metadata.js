@@ -1,98 +1,89 @@
 const templateEngine = require("./template")(".", "md");
 const fs = require("fs");
+const { getMetadataArray } = require("./util");
 const prompts = require("prompts");
-const WORKING_FOLDER = process.env.INIT_CWD || ".";
+
+const helpers = {
+  objects: require("./object"),
+  classes: require("./class"),
+  lwc: require("./lwc")
+};
+
+const newHelper = require("./new");
 
 async function prompt(config) {
-  const templates = templateEngine.getTemplates();
-  const templateInexistente = !templates.includes(config.template);
-  if (templateInexistente) {
-    config.template = undefined;
-  }
-  if (!config.template) {
-    const response = await prompts({
-      type: "select",
-      name: "template",
-      initial: config.template,
-      message: templateInexistente
-        ? "El template no es valido, seleccione uno por favor"
-        : "Seleccione un template",
-      choices: templates.map((template) => {
-        return { title: template, value: template };
-      })
-    });
-    if (!response.template) {
+  const opciones = Object.keys(config.opciones);
+  if (!opciones.includes("r")) {
+    const response = await prompts([
+      {
+        type: "select",
+        name: "refresh",
+        initial: false,
+        message: "Tiene que bajar o actualizar la metadata de Saleforce ?",
+        choices: [
+          { title: "Si (baja y actualiza el cache en docs)", value: true },
+          { title: "No (lee el cache que esta en docs)", value: false }
+        ]
+      },
+      {
+        type: "text",
+        name: "filename",
+        initial: "docs/metadata.json",
+        message: "Nombre del archivo metadata json"
+      }
+    ]);
+    if (!response.refresh) {
       return;
     }
-    config.template = response.template;
-  }
-
-  if (!config.filename) {
-    const response = await prompts({
-      type: "text",
-      name: "filename",
-      initial: config.filename || config.template,
-      message: "Nombre del archivo (sin extension)"
-    });
-
-    config.filename = response.filename;
+    config.opciones.r = response.refresh;
+    config.opciones.f = response.filename;
   }
 }
 
 function help() {
   console.info("Este comando pretende documentar soluciones modularizadas.");
-  console.info("Este comando pretende documentar soluciones modularizadas.");
-  console.info("> yarn doc:create new servicios");
-  console.info("Si quiere correr el modo interactivo solo ejecute:");
-  console.info("> yarn doc:create");
-  console.info("> yarn doc:create update");
+  console.info(
+    "Recibe un json con la estructura jerarquica, ejemplo modulos, submodulos y procesos."
+  );
+  console.info(
+    "El ultimo elemento, en el ejemplo el proceso tiene las clases, objetos, lwc y demas componenetes de documentacion relacionados."
+  );
+  console.info(
+    "El comando genera un markdown indice para cada nodo, de forma tal que el modulo contiene todos los componentes de sus submodulos y estos los de sus procesos."
+  );
+  console.info(
+    "Si se invocar con --r (refresh), baja primero toda la metadata de SF. Si no recibe el archivo .json toma por default docs/metadata.json "
+  );
+  console.info("> yarn doc:create metadata --r --f=<<archivo.json>>");
+  console.info("> yarn doc:create metadata --f=<<archivo.json>>");
 }
 
-async function readPipedInput() {
-  let data = "";
-  for await (const chunk of process.stdin) data += chunk;
+async function execute({ opciones }) {
+  const hasRefresh =
+    Object.keys(opciones).includes("r") &&
+    opciones.r !== "false" &&
+    opciones.r !== false;
+  const components = Object.keys(helpers);
+  const nodes = getMetadataArray(opciones.f, components);
 
-  return data;
-}
-
-// async function readPipedInput() {
-//     const stdin = process.stdin;
-//     let data = '';
-
-//     stdin.setEncoding('utf8');
-
-//     stdin.on('data', function (chunk) {
-//       data += chunk;
-//     });
-
-//     stdin.on('end', function () {
-//       return  data;
-//     });
-// }
-
-async function execute({ template, filename, context }) {
-  if (!template || !filename) {
-    return;
-  }
-  const formulas = {
-    today: Date.now(),
-    filename: filename
-  };
-  let view;
-
-  if (context) {
-    const contextFile = WORKING_FOLDER + "/" + context;
-    if (fs.existsSync(contextFile)) {
-      const content = fs.readFileSync(contextFile, "utf8");
-      view = JSON.parse(content);
+  for (const node of nodes) {
+    const isRoot = node.path === ".";
+    const filename = `${node.path}/intro.md`;
+    newHelper.execute({ template: "index", filename, context: node });
+    for (const component of components) {
+      const items = node[component];
+      if (items?.length > 0) {
+        const helper = helpers[component];
+        const opciones = { m: filename };
+        if (isRoot && hasRefresh) {
+          opciones.o = true;
+        } else {
+          opciones.i = true;
+        }
+        helper.execute(items, opciones);
+      }
     }
-  } else {
-    const content = await readPipedInput();
-    view = JSON.parse(content);
   }
-  templateEngine.read(template);
-  templateEngine.render(view ? Object.assign(view, formulas) : formulas);
-  templateEngine.save(filename, WORKING_FOLDER);
 }
 
 module.exports = {
@@ -100,3 +91,25 @@ module.exports = {
   help,
   execute
 };
+
+/**
+ * example json
+
+[
+    {
+    "name": "modulo",
+    "description": "descripcion del modulo",
+    "directory": "path", // si no viene es el name
+    "childs": [ 
+        { 
+        "name": "",
+        "description": "descripcion del item",
+        "folder": "folder-name-only", 
+        "objects": [ "", ""], 
+        "classes": [ "", ""],
+        "lwc": [ "", ""]
+        }
+    ]
+    }
+]
+ */
