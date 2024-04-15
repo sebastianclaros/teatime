@@ -56,4 +56,3 @@ else
         echo "No se pudo abrir la org, puede hacer sf org display para ver los datos y hacerlo manualmente"
     fi
 fi
-
