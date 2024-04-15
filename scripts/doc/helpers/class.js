@@ -8,6 +8,7 @@ const {
   sortByName,
   getNamesByExtension,
   verFecha,
+  splitFilename,
   DICTIONARY_FOLDER,
   DOCS_FOLDER,
   WORKING_FOLDER,
@@ -253,7 +254,8 @@ async function execute({ items, opciones }) {
     }
   });
   const intro = opciones.m ? opciones.m : DEFAULT_INTRO;
-  templateEngine.save(intro, WORKING_FOLDER);
+  const { folder, filename } = splitFilename(intro, WORKING_FOLDER);
+  templateEngine.save(filename, folder);
 }
 
 module.exports = {

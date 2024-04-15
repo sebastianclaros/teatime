@@ -1,6 +1,6 @@
 const templateEngine = require("./template")(".", "md");
 const fs = require("fs");
-const { getMetadataArray } = require("./util");
+const { getMetadataArray, DOCS_FOLDER } = require("./util");
 const prompts = require("prompts");
 
 const helpers = {
@@ -68,19 +68,21 @@ async function execute({ opciones }) {
 
   for (const node of nodes) {
     const isRoot = node.path === ".";
-    const filename = `${node.path}/intro.md`;
-    newHelper.execute({ template: "index", filename, context: node });
+    const filename = node.path
+      ? `${node.path}/intro.md`
+      : `${DOCS_FOLDER}/intro.md`;
+    newHelper.execute({ template: "intro", filename, context: node });
     for (const component of components) {
       const items = node[component];
       if (items?.length > 0) {
         const helper = helpers[component];
         const opciones = { m: filename };
         if (isRoot && hasRefresh) {
-          opciones.o = true;
+          opciones.o = "";
         } else {
-          opciones.i = true;
+          opciones.i = "";
         }
-        helper.execute(items, opciones);
+        helper.execute({ items, opciones });
       }
     }
   }

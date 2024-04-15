@@ -1,7 +1,7 @@
 const templateEngine = require("./template")(".", "md");
 const fs = require("fs");
 const prompts = require("prompts");
-const WORKING_FOLDER = process.env.INIT_CWD || ".";
+const { splitFilename, WORKING_FOLDER } = require("./util");
 
 async function prompt(config) {
   const templates = templateEngine.getTemplates();
@@ -80,9 +80,11 @@ async function execute({ template, filename, context }) {
   if (!template || !filename) {
     return;
   }
+
+  const file = splitFilename(filename, WORKING_FOLDER);
   const formulas = {
     today: Date.now(),
-    filename: filename
+    filename: file.filename
   };
   let view;
 
@@ -98,7 +100,7 @@ async function execute({ template, filename, context }) {
   }
   templateEngine.read(template);
   templateEngine.render(view ? Object.assign(view, formulas) : formulas);
-  templateEngine.save(filename, WORKING_FOLDER);
+  templateEngine.save(file.filename, file.folder, { create: true });
 }
 
 module.exports = {

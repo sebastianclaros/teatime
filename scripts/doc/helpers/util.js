@@ -126,9 +126,9 @@ function getMetadataArray(fileName, props) {
 
   const metadata = getMetadata(fileName);
   if (Array.isArray(metadata)) {
-    return getItemsFromTree({ folder: ".", childs: metadata }, "");
+    return getItemsFromTree({ folder: DOCS_FOLDER, childs: metadata });
   } else {
-    return getItemsFromTree(metadata, ".");
+    return getItemsFromTree(metadata, "");
   }
 }
 
@@ -144,7 +144,7 @@ function getMetadata(fileName = DEFAULT_METADATAFILENAME) {
   try {
     return JSON.parse(content);
   } catch {
-    throw new Error("Archivo invalido: el  ${fileName} debe ser un json");
+    throw new Error(`Archivo invalido: el  ${fileName} debe ser un json`);
   }
 }
 
@@ -161,9 +161,20 @@ function getContextCache(fileName) {
     return JSON.parse(content);
   } catch {
     throw new Error(
-      "Archivo invalido: el  ${fileName} debe ser un json generado por el flag -o"
+      `Archivo invalido: el  ${fileName} debe ser un json generado por el flag -o`
     );
   }
+}
+
+function splitFilename(fullname, defaultFolder) {
+  let filename = fullname;
+  let folder = defaultFolder;
+  const separatorIndex = fullname.lastIndexOf("/");
+  if (separatorIndex !== -1) {
+    folder = fullname.substring(0, separatorIndex);
+    filename = fullname.substring(separatorIndex + 1);
+  }
+  return { filename, folder };
 }
 
 module.exports = {
@@ -171,6 +182,7 @@ module.exports = {
   DOCS_FOLDER,
   WORKING_FOLDER,
   DEFAULT_INTRO,
+  splitFilename,
   getMetadataArray,
   getNamesByExtension,
   sortByLabel,
