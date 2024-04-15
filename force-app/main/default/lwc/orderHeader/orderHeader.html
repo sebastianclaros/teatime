@@ -1,7 +1,5 @@
 <template>
-  <template if:true={hasOrder}>
-    Numero de Pedido: {order.OrderNumber}
-  </template>
+  <c-order-summary></c-order-summary>
   <c-order-account></c-order-account>
   <lightning-button variant="base" label="Confirmar Compra"></lightning-button>
   <lightning-button variant="base" label="Guardar"></lightning-button>
