@@ -52,7 +52,7 @@ else
         exit 1
     fi
     
-    sf sf org generate password
+    sf org generate password
     if [ $? -ne 0 ]; then
         echo "No se pudo crear una password para el user"
     fi
