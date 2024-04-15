@@ -93,6 +93,8 @@ async function execute({ template, filename, context }) {
     if (fs.existsSync(contextFile)) {
       const content = fs.readFileSync(contextFile, "utf8");
       view = JSON.parse(content);
+    } else if (typeof context == "object") {
+      view = context;
     }
   } else {
     const content = await readPipedInput();

@@ -113,7 +113,9 @@ function getMetadataArray(fileName, props) {
       const folder = node.folder || node.name;
       node.path = parentPath ? `${parentPath}/${folder}` : folder;
       if (node.childs) {
+        // Borra el childs, pero le deja hasChilds en true para saber si es una hoja del arbol
         let { childs, ...itemToAdd } = node;
+        itemToAdd.hasChilds = true;
         const childItems = getItemsFromTree(childs, node.path);
         items.push(mergeObject(itemToAdd, childItems));
         items.push(...childItems);

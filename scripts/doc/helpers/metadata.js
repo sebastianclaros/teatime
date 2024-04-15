@@ -68,9 +68,9 @@ async function execute({ opciones }) {
 
   for (const node of nodes) {
     const isRoot = node.path === ".";
-    const filename = node.path
+    const filename = node.hasChilds
       ? `${node.path}/intro.md`
-      : `${DOCS_FOLDER}/intro.md`;
+      : `${node.path}/${node.name}.md`;
     newHelper.execute({ template: "intro", filename, context: node });
     for (const component of components) {
       const items = node[component];
