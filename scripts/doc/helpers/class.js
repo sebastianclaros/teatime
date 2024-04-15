@@ -8,6 +8,7 @@ const {
   sortByName,
   getNamesByExtension,
   verFecha,
+  splitFilename,
   DICTIONARY_FOLDER,
   DOCS_FOLDER,
   WORKING_FOLDER,
@@ -58,21 +59,23 @@ async function getContext(items, opciones) {
 }
 
 function help() {
-  console.log(
+  console.info(
     "Este comando se conecta a la metadata de las clases de Salesforce (fuentes) y en base a los templates genera:"
   );
-  console.log(
+  console.info(
     "1. Por cada clase usa el template class.md para crear un diccionario de datos de la clase en la carpeta " +
       DICTIONARY_FOLDER
   );
-  console.log(
+  console.info(
     "2. Crea un indice en la working folder usando el template classes.md"
   );
-  console.log(
+  console.info(
     "\nPuede llamarse para un objeto o varios, de la siguiente forma:"
   );
-  console.log("yarn doc:create class AccountController.cls");
-  console.log("yarn doc:create class AccountController.cls CaseController.cls");
+  console.info("yarn doc:create class AccountController.cls");
+  console.info(
+    "yarn doc:create class AccountController.cls CaseController.cls"
+  );
 }
 
 function classLink() {
@@ -251,7 +254,8 @@ async function execute({ items, opciones }) {
     }
   });
   const intro = opciones.m ? opciones.m : DEFAULT_INTRO;
-  templateEngine.save(intro, WORKING_FOLDER);
+  const { folder, filename } = splitFilename(intro, WORKING_FOLDER);
+  templateEngine.save(filename, folder);
 }
 
 module.exports = {

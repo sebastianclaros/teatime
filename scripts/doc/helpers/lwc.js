@@ -6,6 +6,7 @@ const {
   getLwcCache,
   setLwcCache,
   sortByName,
+  splitFilename,
   DICTIONARY_FOLDER,
   DOCS_FOLDER,
   WORKING_FOLDER,
@@ -20,6 +21,7 @@ async function getLwc(lwc) {
     console.log(lwcRecords);
     return lwcRecords;
   } catch (e) {
+    splitFilename;
     console.error(e);
   }
 }
@@ -50,21 +52,21 @@ async function getContext(items, opciones) {
 }
 
 function help() {
-  console.log(
+  console.info(
     "Este comando se conecta a la metadata de los LWC de Salesforce y en base a los templates genera:"
   );
-  console.log(
+  console.info(
     "1. Por cada lwc usa el template lwc.md para crear un diccionario de datos del componente en la carpeta " +
       DICTIONARY_FOLDER
   );
-  console.log(
+  console.info(
     "2. Crea un indice en la working folder usando el template lwcs.md"
   );
-  console.log(
+  console.info(
     "\nPuede llamarse para un objeto o varios, de la siguiente forma:"
   );
-  console.log("yarn doc:create lwc <<componentName>>");
-  console.log("yarn doc:create lwc <<componentName1>> <<componentName2>>");
+  console.info("yarn doc:create lwc <<componentName>>");
+  console.info("yarn doc:create lwc <<componentName1>> <<componentName2>>");
 }
 
 async function execute({ items, opciones }) {
@@ -98,7 +100,8 @@ async function execute({ items, opciones }) {
     helpers: {}
   });
   const intro = opciones.m ? opciones.m : DEFAULT_INTRO;
-  templateEngine.save(intro, WORKING_FOLDER);
+  const { folder, filename } = splitFilename(intro, WORKING_FOLDER);
+  templateEngine.save(filename, folder);
 }
 
 module.exports = {

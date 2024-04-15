@@ -1,5 +1,12 @@
 #!/bin/bash
 # Script crea scracth Org
+
+if [ -z "$2" ]; then
+    dias=7
+else 
+    dias="$2"
+fi
+
 if [ -z "$1" ]; then  
     echo "Falta el nombre del alias de org, generalmente el nombre del feature a realizar"
 else 
@@ -17,7 +24,7 @@ else
         exit 1
     fi
     # Crea la scracth org
-    if ! sf org create scratch --set-default --definition-file=config/project-scratch-def.json --duration-days=7 --alias=$1; then 
+    if ! sf org create scratch --set-default --definition-file=config/project-scratch-def.json --duration-days=$dias --alias=$1; then 
         echo "No se pudo crear la scracth org, puede probar de hacer sf org resume, o ver las orgs con sf org list --clean (recuerde que no se úede tener mas de 3 activas)"
         exit 1
     fi
@@ -35,12 +42,17 @@ else
         echo "No se pudo importar los datos, intente manualmente"
         exit 1
     fi
+    
+    if !sf sf org generate password; then
+        echo "No se pudo crear una password para el user"
+    fi
+
     if !sf apex run --file ./scripts/apex/debugMode.apex; then
         echo "No se pudo asignar el modo debug, intente manualmente en el user setear debug mode "
-        exit 1
     fi
+
+
     if !sf open org; then
-        exit 1
+        echo "No se pudo abrir la org, puede hacer sf org display para ver los datos y hacerlo manualmente"
     fi
 fi
-

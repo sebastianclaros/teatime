@@ -1,7 +1,7 @@
 const templateEngine = require("./template")(".", "md");
 const fs = require("fs");
 const prompts = require("prompts");
-const WORKING_FOLDER = process.env.INIT_CWD || ".";
+const { splitFilename, WORKING_FOLDER } = require("./util");
 
 async function prompt(config) {
   const templates = templateEngine.getTemplates();
@@ -40,18 +40,18 @@ async function prompt(config) {
 }
 
 function help() {
-  console.log(
+  console.info(
     "Este comando es un boilerplate de documentos basados en los templates de la carpeta scripts/templates/create."
   );
-  console.log(
+  console.info(
     "El objetivo es que antes de crear un componente de documentacion se pueda armar es esqueleto de forma estandar."
   );
-  console.log(
+  console.info(
     "Por ejemplo si se quiere documentar los servicios de un proceso se puede correr:"
   );
-  console.log("> yarn doc:create new servicios");
-  console.log("Si quiere correr el modo interactivo solo ejecute:");
-  console.log("> yarn doc:create");
+  console.info("> yarn doc:create new servicios");
+  console.info("Si quiere correr el modo interactivo solo ejecute:");
+  console.info("> yarn doc:create");
 }
 
 async function readPipedInput() {
@@ -80,9 +80,11 @@ async function execute({ template, filename, context }) {
   if (!template || !filename) {
     return;
   }
+
+  const file = splitFilename(filename, WORKING_FOLDER);
   const formulas = {
     today: Date.now(),
-    filename: filename
+    filename: file.filename
   };
   let view;
 
@@ -91,6 +93,8 @@ async function execute({ template, filename, context }) {
     if (fs.existsSync(contextFile)) {
       const content = fs.readFileSync(contextFile, "utf8");
       view = JSON.parse(content);
+    } else if (typeof context == "object") {
+      view = context;
     }
   } else {
     const content = await readPipedInput();
@@ -98,7 +102,7 @@ async function execute({ template, filename, context }) {
   }
   templateEngine.read(template);
   templateEngine.render(view ? Object.assign(view, formulas) : formulas);
-  templateEngine.save(filename, WORKING_FOLDER);
+  templateEngine.save(file.filename, file.folder, { create: true });
 }
 
 module.exports = {
