@@ -1,5 +1,12 @@
 #!/bin/bash
 # Script crea scracth Org
+
+if [ -z "$2" ]; then
+    dias=7
+else 
+    dias="$2"
+fi
+
 if [ -z "$1" ]; then  
     echo "Falta el nombre del alias de org, generalmente el nombre del feature a realizar"
 else 
@@ -17,7 +24,7 @@ else
         exit 1
     fi
     # Crea la scracth org
-    if ! sf org create scratch --set-default --definition-file=config/project-scratch-def.json --duration-days=7 --alias=$1; then 
+    if ! sf org create scratch --set-default --definition-file=config/project-scratch-def.json --duration-days=$dias --alias=$1; then 
         echo "No se pudo crear la scracth org, puede probar de hacer sf org resume, o ver las orgs con sf org list --clean (recuerde que no se úede tener mas de 3 activas)"
         exit 1
     fi
