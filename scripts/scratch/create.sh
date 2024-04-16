@@ -62,7 +62,7 @@ else
         echo "No se pudo asignar el modo debug, intente manualmente en el user setear debug mode "
     fi
 
-    sf open org
+    sf open org -r
     if [ $? -ne 0 ]; then
         echo "No se pudo abrir la org, puede hacer sf org display para ver los datos y hacerlo manualmente"
     fi
