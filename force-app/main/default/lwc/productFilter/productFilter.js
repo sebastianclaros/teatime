@@ -37,7 +37,8 @@ export default class ProductFilter extends LightningElement {
 
   @wire(getCatalogos) catalogosCallback({ data }) {
     if (data) {
-      this.catalogos = data;
+      const noneItem = { value: "", label: "None" };
+      this.catalogos = [noneItem, ...data];
     }
     console.log(JSON.stringify(data));
   }

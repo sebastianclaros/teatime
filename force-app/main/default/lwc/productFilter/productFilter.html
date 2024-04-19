@@ -27,25 +27,26 @@
 						<b>Precio Desde:</b>
 					</div>
 					<div>
-						<input type="range" min="50000" max="410000" step="10000" value={minRange}
+						<lightning-slider type="range" min="50000" max="410000" step="10000" value={minRange}
 						class="slider" id="minRange" name="minRange"
 						onchange={handleInput}
-					/>  <span>${minRange}</span>
+					></lightning-slider><span>${minRange}</span>
 					</div>
 					<div>
 						<b>Precio Hasta:</b>
 					</div>
 					<div>
-						<input type="range" min="50000" max="410000" step="10000" value={maxRange}
+						<lightning-slider type="range" min="50000" max="410000" step="10000" value={maxRange}
 						class="slider" id="maxRange" name="maxRange" 
 						onchange={handleInput}
-						/> <span>${maxRange}</span>  
+						></lightning-slider><span>${maxRange}</span>  
 					</div>
 			</div>
 			
 			<!-- Toggle check Stock -->
 			<div class="slds-p-around_medium lgc-bg slds-align_absolute-center" >
 				<lightning-input type="toggle" label="In Stock" name="switchStock"></lightning-input>
+				<lightning-input type="toggle" label="Out of stock" name="switchStock"></lightning-input>
 			</div>
 		</div>
 	</lightning-card>
