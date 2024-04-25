@@ -15,6 +15,22 @@
       },
       "Name": "Ford",
       "CatalogId": "@CatalogoAutos"
+    },
+    {
+      "attributes": {
+        "type": "ProductCategory",
+        "referenceId": "BMW"
+      },
+      "Name": "BMW",
+      "CatalogId": "@CatalogoMotos"
+    },
+    {
+      "attributes": {
+        "type": "ProductCategory",
+        "referenceId": "HARLEY"
+      },
+      "Name": "HARLEY",
+      "CatalogId": "@CatalogoMotos"
     }
   ]
 }

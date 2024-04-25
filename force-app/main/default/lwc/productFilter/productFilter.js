@@ -1,4 +1,4 @@
-import { LightningElement, track, wire } from "lwc";
+import { LightningElement, track, wire, api} from "lwc";
 import getCatalogos from "@salesforce/apex/ProductController.getCatalogos";
 import getCategorias from "@salesforce/apex/ProductController.getCategorias";
 
@@ -6,6 +6,8 @@ import { publish, MessageContext } from "lightning/messageService";
 import channelProductFilter from "@salesforce/messageChannel/ProductFilter__c";
 
 export default class ProductFilter extends LightningElement {
+
+  @api title = 'Product Filter';
   @track catalogos = [];
   @track categorias = [];
 

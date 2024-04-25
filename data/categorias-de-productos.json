@@ -15,6 +15,22 @@
       },
       "ProductId": "@FordFiesta2020",
       "ProductCategoryId": "@Ford"
+    },
+    {
+      "attributes": {
+        "type": "ProductCategoryProduct",
+        "referenceId": "BMWCustomBMWCustom"
+      },
+      "ProductId": "@BMWCustom2024",
+      "ProductCategoryId": "@BMW"
+    },
+    {
+      "attributes": {
+        "type": "ProductCategoryProduct",
+        "referenceId": "HD2024HD2024"
+      },
+      "ProductId": "@HARLEYDAVIDSON2024",
+      "ProductCategoryId": "@HARLEY"
     }
   ]
 }
