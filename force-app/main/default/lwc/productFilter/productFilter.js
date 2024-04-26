@@ -1,4 +1,4 @@
-import { LightningElement, track, wire } from "lwc";
+import { LightningElement, track, wire, api} from "lwc";
 import getCatalogos from "@salesforce/apex/ProductController.getCatalogos";
 import getCategorias from "@salesforce/apex/ProductController.getCategorias";
 
@@ -6,6 +6,8 @@ import { publish, MessageContext } from "lightning/messageService";
 import channelProductFilter from "@salesforce/messageChannel/ProductFilter__c";
 
 export default class ProductFilter extends LightningElement {
+
+  @api title = 'Product Filter';
   @track catalogos = [];
   @track categorias = [];
 
@@ -13,6 +15,17 @@ export default class ProductFilter extends LightningElement {
 
   @track catalogo;
   @track categoria;
+  @track minRange = 50000;
+  @track maxRange = 410000;
+
+    handleInput(event) {
+        this[event.target.name] = event.target.value;
+        if (event.target.name === 'minRange' && Number(this.minRange) >= Number(this.maxRange)) { 
+            this.minRange = this.maxRange;   
+        } else if (event.target.name === 'maxRange' && Number(this.minRange) >= Number(this.maxRange)) {
+            this.maxRange = this.minRange;     
+        } 
+    }
 
   @wire(getCategorias, { catalogId: "$catalogo" }) categoriasCallback({
     data
@@ -26,7 +39,8 @@ export default class ProductFilter extends LightningElement {
 
   @wire(getCatalogos) catalogosCallback({ data }) {
     if (data) {
-      this.catalogos = data;
+      const noneItem = { value: "", label: "None" };
+      this.catalogos = [noneItem, ...data];
     }
     console.log(JSON.stringify(data));
   }

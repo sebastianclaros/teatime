@@ -44,6 +44,9 @@ ehthumbs.db
 [Dd]esktop.ini
 $RECYCLE.BIN/
 
+# Configuracion de VSCode (que cada uno ponga lo suyo)
+.vscode/
+
 # Local environment variables
 .env
 

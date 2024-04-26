@@ -15,6 +15,22 @@
       },
       "Name": "Ford Fiesta 2020",
       "isActive": true
+    },
+    {
+      "attributes": {
+        "type": "Product2",
+        "referenceId": "BMWCustom2024"
+      },
+      "Name": "BMW Custom 2024",
+      "isActive": true
+    },
+    {
+      "attributes": {
+        "type": "Product2",
+        "referenceId": "HARLEYDAVIDSON2024"
+      },
+      "Name": "HARLEY DAVIDSON 2024",
+      "isActive": true
     }
   ]
 }
