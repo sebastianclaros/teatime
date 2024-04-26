@@ -42,7 +42,7 @@ ehthumbs.db
 $RECYCLE.BIN/
 
 # Configuracion de VSCode (que cada uno ponga lo suyo)
-.vscode
+.vscode/
 
 # Local environment variables
 .env
