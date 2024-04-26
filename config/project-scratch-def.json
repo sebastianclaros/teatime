@@ -3,6 +3,7 @@
   "edition": "Developer",
   "features": ["EnableSetPasswordInApi", "ProductCatalogManagementAddOn"],
   "hasSampleData": false,
+  "language": "en_US",
   "settings": {
     "lightningExperienceSettings": {
       "enableS1DesktopEnabled": true
