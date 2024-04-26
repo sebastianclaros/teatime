@@ -33,11 +33,21 @@ Saleforce CLI es la herramienta de linea de comando que nos permite subir codigo
 
 Cualquier cosa consultar la [guia de instalacion](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_install_cli.htm)
 
-### Setear el DevHub como default
+### Conenctarse al DevHub
 
-Ahora que tienen el cli y el devhub en hagan lo siguiente
+Ahora que tienen el cli y el devhub, tenemos que autenticarnos a fin de el cli puedan conectarse al devhun y crear scratch orgs. 
 
+Con el siguiente comando nos autenticamos y a su vez lo seteamos a este devhub como default (-d). Si no lo ponemos default, ya sea porque tenemos otros DevHubs, al crear una scratch tendriamos que decirle desde que devhub la tiene que crear.
+
+```
 sf org login web -d -a myhuborg
+```
+
+si no funciona el login web, esto puede pasar en algunos windows, pueden usar el flujo de device
+
+```
+sf org login device -d -a myhuborg
+```
 
 ### Hacer el clone del repo
 
@@ -77,11 +87,18 @@ Subimos datos
 sf data tree import --plan=data/plan.json
 ```
 
-Abrimos la instancia de desarrollo
+Abrimos la organizacion de desarrollo en el browser
 
 ```
-sf open
+sf open org
 ```
+
+sino lo abre (pasa en algunos windows) se puede ejecutar asi, copian la url y la pegan en el browser
+
+```
+sf open org -r
+```
+
 
 Si hay error al abrir la org, hay que hacer login con user y pass. Para eso, resetear password de la scratch org con el comando
 
@@ -136,7 +153,5 @@ Para correr la documentacion localmente:
 ```
 yarn doc:start
 ```
-
-A ver
 
 Para ver la [documentacion online](https://sebastianclaros.github.io/teatime/)

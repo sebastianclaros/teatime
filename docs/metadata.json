@@ -1,18 +1,27 @@
-{
-  "Configuracion": {
-    "Catalogo": {
-      "objects": ["ProductCatalog", "ProductCategory", "ProductCategoryProduct"]
-    },
-    "Precios": {
-      "objects": ["PriceBook2", "PriceBookEntry", "Product2"]
-    },
-    "Promociones": {
-      "classes": [""],
-      "objects": [""]
-    }
+[
+  {
+    "name": "configuracion",
+    "childs": [
+      {
+        "name": "catalogo",
+        "objects": [
+          "ProductCatalog",
+          "ProductCategory",
+          "ProductCategoryProduct"
+        ]
+      },
+      {
+        "name": "precios",
+        "objects": ["PriceBook2", "PriceBookEntry", "Product2"]
+      },
+      {
+        "name": "promociones"
+      }
+    ]
   },
-  "Ventas": {
+  {
+    "name": "ventas",
     "classes": ["OrderController"],
     "objects": ["Order", "Account", "OrderItems", "Product2"]
   }
-}
+]

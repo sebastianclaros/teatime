@@ -6,6 +6,7 @@ const helpers = {
   object: require("./object"),
   class: require("./class"),
   lwc: require("./lwc"),
+  metadata: require("./metadata"),
   new: require("./new")
 };
 
@@ -33,12 +34,12 @@ async function prompt(config) {
 }
 
 function help() {
-  console.log(
+  console.info(
     "Este comando es un automatizador de documentacion basada en templates"
   );
-  console.log("Puede ejecutar los siguentes comandos:");
+  console.info("Puede ejecutar los siguentes comandos:");
   Object.keys(helpers).forEach((comando) => {
-    console.log(`yarn doc:create ${comando}`);
+    console.info(`yarn doc:create ${comando}`);
   });
 }
 
