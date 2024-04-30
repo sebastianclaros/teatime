@@ -8,6 +8,7 @@
     <targetConfigs>
         <targetConfig targets="lightning__AppPage">
             <property name="title" type="String"/>
+            <property name="filter" type="String"/>
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>
