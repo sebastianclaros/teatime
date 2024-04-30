@@ -1,18 +1,23 @@
 public with sharing class ProductController {
   @AuraEnabled(cacheable=true)
-  public static List<Product> getProducts(String catalogId, String categoryId) {
+  public static List<Product> getProducts(List<Term> terms) {
     List<Product> products = new List<Product>();
+    
+    
+    String query = 'SELECT Product.Id, Product.Name FROM ProductCategoryProduct';
 
-    if (String.isNotBlank(catalogId) && String.isNotBlank(categoryId)) {
-      for (ProductCategoryProduct productCategory : [
-        SELECT Product.Id, Product.Name
-        FROM ProductCategoryProduct
-        WHERE ProductCategoryId = :categoryId AND CatalogId = :catalogId
-        WITH USER_MODE
-      ]) {
-        products.add(new Product(productCategory.Product));
-      }
+    String whereCondition = FilterHelper.getWhereCondition(terms);
+
+    if (whereCondition != '') {
+      query += ' WHERE ' + whereCondition;
     }
+
+    query += 'WITH USER_MODE LIMIT 10 ';   
+  
+      for (ProductCategoryProduct productCategory : Database.query(query)) {
+        products.add(new Product(productCategory.Product));
+      }   
+
     return products;
   }
 

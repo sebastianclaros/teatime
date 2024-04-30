@@ -12,10 +12,12 @@ public with sharing class FilterHelper {
         return String.join(whereList,' AND ');
     }
 
+    
     public class Term {
-        public String field;
-        public Object value;
-        public String operator = '=';
+        
+          @AuraEnabled public String field;
+          @AuraEnabled public Object value;
+          @AuraEnabled public String operator = '=';
 
         private String valueWithSeparator() {
             if ( this.value == null ) {
