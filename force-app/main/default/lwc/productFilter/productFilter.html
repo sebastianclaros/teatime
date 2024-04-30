@@ -7,7 +7,7 @@
 				<lightning-input type="search" label="Search" placeholder="Search product here"></lightning-input>
 				<lightning-button class="slds-var-m-left_x-small" variant="brand" label="Search" title="Primary action" onclick={handleClick}></lightning-button>
 			</div>
-
+			<c-product-show-filter filter={filter} onchange={changeFilter}></c-product-show-filter>
 			<!-- Select Catalogo, tipo de producto (Auto, Moto, etc.) -->
 			<div class="slds-var-p-around_medium lgc-bg">
 				<lightning-combobox options={catalogos} placeholder="Selecciona un catalogo" label="Catalogos"
