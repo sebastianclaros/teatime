@@ -1,11 +1,11 @@
 <!-- sldsValidatorIgnore -->
 <template>
 	<lightning-card title={title}>
-		<div class="sslds-var-p-around_medium_large">
-			<div class="slds-var-p-around_medium lgc-bg">
+		<div class="slds-var-p-around_medium_large">
+			<div class="slds-var-p-around_medium lgc-bg slds-grid">
 				<!-- Busca como Producto o Marca. -->
-				<lightning-input type="search" label="Search" placeholder="Search product here"></lightning-input>
-				<lightning-button class="slds-var-m-left_x-small" variant="brand" label="Search" title="Primary action" onclick={handleClick}></lightning-button>
+				<lightning-input class="slds-col" onchange={handleChangeSearch} type="search" label="Search" placeholder="Search product here"></lightning-input>
+				<lightning-button class="slds-col  slds-align-bottom slds-var-m-left_x-small" variant="brand" label="Search" title="Primary action" onclick={handleSearch}></lightning-button>
 			</div>
 
 			<!-- Select Catalogo, tipo de producto (Auto, Moto, etc.) -->
@@ -27,26 +27,26 @@
 						<b>Precio Desde:</b>
 					</div>
 					<div>
-						<lightning-slider type="range" min="50000" max="410000" step="10000" value={minRange}
-						class="slider" id="minRange" name="minRange"
-						onchange={handleInput}
-					></lightning-slider><span>${minRange}</span>
+						<lightning-slider type="range" min="0" max="10000" step="10" value={minRange}
+						class="slider"
+						onchange={handleMinRange}
+					></lightning-slider>
 					</div>
 					<div>
 						<b>Precio Hasta:</b>
 					</div>
 					<div>
-						<lightning-slider type="range" min="50000" max="410000" step="10000" value={maxRange}
-						class="slider" id="maxRange" name="maxRange" 
-						onchange={handleInput}
-						></lightning-slider><span>${maxRange}</span>  
+						<lightning-slider type="range" min="0" max="10000" step="10" value={maxRange}
+						class="slider" 
+						onchange={handleMaxRange}
+						></lightning-slider>  
 					</div>
 			</div>
 			
 			<!-- Toggle check Stock -->
 			<div class="slds-p-around_medium lgc-bg slds-align_absolute-center" >
-				<lightning-input type="toggle" label="In Stock" name="switchStock"></lightning-input>
-				<lightning-input type="toggle" label="Out of stock" name="switchStock"></lightning-input>
+				<lightning-input type="toggle" label="In Stock" onchange={handleInStock} name="switchStock"></lightning-input>
+				<lightning-input type="toggle" label="Available" onchange={handleAvailable} name="available"></lightning-input>
 			</div>
 		</div>
 	</lightning-card>

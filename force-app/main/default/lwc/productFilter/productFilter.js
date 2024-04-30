@@ -13,19 +13,44 @@ export default class ProductFilter extends LightningElement {
 
   @wire(MessageContext) messageContext;
 
-  @track catalogo;
-  @track categoria;
-  @track minRange = 50000;
-  @track maxRange = 410000;
+  @track filter = {};
+  @track minRange = 0;
+  @track maxRange = 10000;
+  name = '';
 
-    handleInput(event) {
-        this[event.target.name] = event.target.value;
-        if (event.target.name === 'minRange' && Number(this.minRange) >= Number(this.maxRange)) { 
-            this.minRange = this.maxRange;   
-        } else if (event.target.name === 'maxRange' && Number(this.minRange) >= Number(this.maxRange)) {
-            this.maxRange = this.minRange;     
-        } 
+  get catalogo() {
+    return this.filter.catalogo;
+  }
+
+  handleMinRange(event) {
+    const newValue = Number(event.target.value);
+    if ( newValue  >= this.maxRange) { 
+      this.maxRange = newValue;
+    } 
+    this.minRange = newValue;
+    this.filter.price = {
+      from: this.minRange, 
+      to: this.maxRange
     }
+    this.publishEvent();
+  }
+
+  handleMaxRange(event) {
+    const newValue = Number(event.target.value);
+    if ( newValue < this.minRange) {
+      this.minRange = newValue;
+
+      // return false;
+    }
+    this.maxRange = newValue;
+    this.filter.price = {
+      from: this.minRange, 
+      to: this.maxRange
+    }
+    this.publishEvent();
+  }
+
+
 
   @wire(getCategorias, { catalogId: "$catalogo" }) categoriasCallback({
     data
@@ -46,20 +71,37 @@ export default class ProductFilter extends LightningElement {
   }
 
   publishEvent() {
-    const payload = {
-      catalogo: this.catalogo,
-      categoria: this.categoria
-    };
-    publish(this.messageContext, channelProductFilter, payload);
+    console.log(this.filter);
+    publish(this.messageContext, channelProductFilter, this.filter);
+  }
+
+  handleInStock(e) {
+    console.log(e.detail);
+    this.filter.inStock = e.detail.checked;
+    this.publishEvent();
+  }
+  
+  handleAvailable(e) {
+    this.filter.isAvailable = e.detail.checked;
+    this.publishEvent();
+  }
+
+  handleChangeSearch(e) {
+    this.name = e.detail.value;
+  }
+
+  handleSearch(e) {
+    this.filter.name = this.name;
+    this.publishEvent();
   }
 
   handleChangeCategoria(e) {
-    this.categoria = e.detail.value;
+    this.filter.categoria = e.detail.value;
     this.publishEvent();
   }
 
   handleChangeCatalogo(e) {
-    this.catalogo = e.detail.value;
+    this.filter.catalogo = e.detail.value;
     this.publishEvent();
   }
 }
