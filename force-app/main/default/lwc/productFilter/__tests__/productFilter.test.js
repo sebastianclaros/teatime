@@ -14,6 +14,7 @@ describe("c-filtro-autos", () => {
     const element = createElement("c-filtro-autos", {
       is: FiltroAutos
     });
+    
 
     // Act
     document.body.appendChild(element);
