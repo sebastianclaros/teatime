@@ -1,5 +1,5 @@
 public with sharing class FilterHelper {
-    public static String getWhereCondition( List<Term> terms ){
+    public static String getWhereCondition( List<FilterHelper.Term> terms ){
         List<String> whereList = new List<String>();
         if ( terms.size() == 0 ) {
             return '';

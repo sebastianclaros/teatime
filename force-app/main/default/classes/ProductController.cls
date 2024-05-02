@@ -1,6 +1,6 @@
 public with sharing class ProductController {
   @AuraEnabled(cacheable=true)
-  public static List<Product> getProducts(List<Term> terms) {
+  public static List<Product> getProducts(List<FilterHelper.Term> terms) {
     List<Product> products = new List<Product>();
     
     
