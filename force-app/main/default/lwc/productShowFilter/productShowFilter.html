@@ -1,7 +1,12 @@
 <template>
 	<div class="slds-var-p-around_medium lgc-bg">
-        <lightning-pill label="Pill Label">
-            <lightning-avatar src="https://www.lightningdesignsystem.com/assets/images/avatar2.jpg" fallback-icon-name="standard:user" variant="circle"  alternative-text="User avatar"></lightning-avatar>
-        </lightning-pill>
+
+        <template for:each={filtervalues} for:item="filterPill">
+            <lightning-pill key={filterPill.label} onremove={handleRemove} label={filterPill.label}>
+                <lightning-avatar src="https://www.lightningdesignsystem.com/assets/images/avatar2.jpg" fallback-icon-name="standard:user" variant="circle"  alternative-text="User avatar"></lightning-avatar>
+            </lightning-pill>
+        </template>
+
+
     </div>		
 </template>

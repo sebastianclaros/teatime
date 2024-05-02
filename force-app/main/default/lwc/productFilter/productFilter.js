@@ -8,7 +8,13 @@ import channelProductFilter from "@salesforce/messageChannel/ProductFilter__c";
 export default class ProductFilter extends LightningElement {
 
   @api title = 'Product Filter';
-  @api filter = 'filter';
+  @api filter = [
+    {
+        "label":"pepito",
+        "field":"123",
+        "value":"123" 
+    }
+];
   @track catalogos = [];
   @track categorias = [];
 
