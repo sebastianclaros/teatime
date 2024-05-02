@@ -1,5 +1,4 @@
 public with sharing class FilterHelper {
-
     public static String getWhereCondition( List<Term> terms ){
         List<String> whereList = new List<String>();
         if ( terms.size() == 0 ) {
@@ -12,12 +11,11 @@ public with sharing class FilterHelper {
         return String.join(whereList,' AND ');
     }
 
-    
     public class Term {
         
-          @AuraEnabled public String field;
-          @AuraEnabled public Object value;
-          @AuraEnabled public String operator = '=';
+        @AuraEnabled public String field;
+        @AuraEnabled public Object value;
+        @AuraEnabled public String operator = '=';
 
         private String valueWithSeparator() {
             if ( this.value == null ) {

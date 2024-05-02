@@ -12,8 +12,8 @@ public with sharing class ProductController {
       query += ' WHERE ' + whereCondition;
     }
 
-    query += 'WITH USER_MODE LIMIT 10 ';   
-  
+    query += 'WITH USER_MODE LIMIT 10 ';   //Agregar criterio de ordenamiento  + cantidad dinamica de items por pagina- Nueva tarea
+      
       for (ProductCategoryProduct productCategory : Database.query(query)) {
         products.add(new Product(productCategory.Product));
       }   
