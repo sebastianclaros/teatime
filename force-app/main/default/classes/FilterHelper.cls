@@ -1,7 +1,7 @@
 public with sharing class FilterHelper {
     public static String getWhereCondition( List<FilterHelper.Term> terms ){
         List<String> whereList = new List<String>();
-        if ( terms.size() == 0 ) {
+        if ( terms.size() == 0 || terms == null) {
             return '';
         }
 
@@ -48,6 +48,12 @@ public with sharing class FilterHelper {
         public Term(String field, Object value) {
             this.field = field;
             this.value = value;
+        }
+
+        public Term() {
+            this.field = '';
+            this.value = '';    
+            this.operator = '';
         }
         
         public Term(String field, Object value, String operator) {
