@@ -21,8 +21,8 @@ export default class ProductGrid extends LightningElement {
 
   @wire(getProducts, { catalogId: "$catalogo", categoryId: "$categoria" })
   autoCallback({ data, error }) {
-    console.log(data, error);
     this.isLoading = false;
+    console.log(data, error);
     if (data) {
       this.productos = data.map((producto, index) => {
         return { key: `auto-key-${index}`, ...producto };

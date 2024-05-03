@@ -6,9 +6,7 @@
   <template lwc:elseif={isError}> Se produjo un error </template>
   <template lwc:else>
     <template for:each={productos} for:item="producto">
-      <c-product-card key={producto.key} record={producto}>
-      </c-product-card>   
+      <c-product-card key={producto.key} product={producto}> </c-product-card>
     </template>
   </template>
 </template>
-
