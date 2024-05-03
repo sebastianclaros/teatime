@@ -2,8 +2,7 @@ public with sharing class ProductController {
   @AuraEnabled(cacheable=true)
   public static List<Product> getProducts(List<FilterHelper.Term> terms) {
     List<Product> products = new List<Product>();
-    
-    
+
     String query = 'SELECT Product.Id, Product.Name FROM ProductCategoryProduct';
 
     String whereCondition = FilterHelper.getWhereCondition(terms);
@@ -11,12 +10,12 @@ public with sharing class ProductController {
     if (whereCondition != '') {
       query += ' WHERE ' + whereCondition;
     }
-    
-    query += 'WITH USER_MODE LIMIT 10 ';   //Agregar criterio de ordenamiento  + cantidad dinamica de items por pagina- Nueva tarea
-      
-      for (ProductCategoryProduct productCategory : Database.query(query)) {
-        products.add(new Product(productCategory.Product));
-      }   
+
+    query += ' WITH USER_MODE LIMIT 10 '; //Agregar criterio de ordenamiento  + cantidad dinamica de items por pagina- Nueva tarea
+
+    for (ProductCategoryProduct productCategory : Database.query(query)) {
+      products.add(new Product(productCategory.Product));
+    }
 
     return products;
   }
@@ -50,7 +49,7 @@ public with sharing class ProductController {
     return catalogos;
   }
 
-  class Product {
+  public class Product {
     public String id;
     @AuraEnabled
     public String name;
