@@ -11,15 +11,14 @@ import channelProductFilter from "@salesforce/messageChannel/ProductFilter__c";
 
 export default class ProductGrid extends LightningElement {
   @track productos = [];
-  catalogo;
-  categoria;
+  filter;
   isError = false;
   isLoading = true;
   subscription;
 
   @wire(MessageContext) messageContext;
 
-  @wire(getProducts, { catalogId: "$catalogo", categoryId: "$categoria" })
+  @wire(getProducts, { filter: "$filter" })
   autoCallback({ data, error }) {
     this.isLoading = false;
     console.log(data, error);
@@ -50,9 +49,7 @@ export default class ProductGrid extends LightningElement {
   }
 
   handleMessage(payload) {
-    console.log(payload);
-    this.catalogo = payload.catalogo;
-    this.categoria = payload.categoria;
+    this.filter = payload;
   }
 
   disconnectedCallback() {
