@@ -1,13 +1,9 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api } from "lwc";
 
+export default class ProductCard extends LightningElement {
+  @api record;
 
-export default class CardItem extends LightningElement {
-
-
-@api record;
-
-connectedCallback() {
-console.log("esto es record----->", this.record);
-}
-
+  connectedCallback() {
+    console.log("esto es record----->", this.record);
+  }
 }
