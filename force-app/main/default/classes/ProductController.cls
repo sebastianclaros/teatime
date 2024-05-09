@@ -1,20 +1,20 @@
 public with sharing class ProductController {
   @AuraEnabled(cacheable=true)
   public static List<Product> getProducts(List<FilterHelper.Term> terms) {
-    List<Product> products = new List<Product>();
+    FilterHelper filterHelper = new FilterHelper(terms, 'Product2');
 
-    String query = 'SELECT Product.Id, Product.Name FROM ProductCategoryProduct';
+    String whereCondition = filterHelper.getWhereCondition();
 
-    String whereCondition = FilterHelper.getWhereCondition(terms);
-
+    String query = 'SELECT Id, Name FROM Product2';
     if (whereCondition != '') {
       query += ' WHERE ' + whereCondition;
     }
+    query += ' WITH USER_MODE LIMIT 10 ';
+    // TODO: Agregar criterio de ordenamiento  + cantidad dinamica de items por pagina- Nueva tarea
 
-    query += ' WITH USER_MODE LIMIT 10 '; //Agregar criterio de ordenamiento  + cantidad dinamica de items por pagina- Nueva tarea
-
-    for (ProductCategoryProduct productCategory : Database.query(query)) {
-      products.add(new Product(productCategory.Product));
+    List<Product> products = new List<Product>();
+    for (Product2 producto : Database.query(query)) {
+      products.add(new Product(producto));
     }
 
     return products;
