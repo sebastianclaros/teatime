@@ -3,8 +3,8 @@ public with sharing class FilterHelper {
   private Boolean hasTerms;
   private Map<String, List<FilterHelper.Term>> childTerms = new Map<String, List<FilterHelper.Term>>();
   private List<FilterHelper.Term> terms = new List<Term>();
+  private Map<String, Schema.ChildRelationship> relations =  new Map<String, Schema.ChildRelationship>();
   private Schema.DescribeSObjectResult describe;
-  private Map<String, Schema.ChildRelationship> relations;
 
   private void splitTerms(List<FilterHelper.Term> allTerms) {
     // Primero separa los childs  del resto
@@ -29,10 +29,15 @@ public with sharing class FilterHelper {
       }
     }
   }
-
-  public FilterHelper(List<Term> terms, String filterObject) {
+  public FilterHelper(FilterHelper.Termino terms, String filterObject) {
+    List<FilterHelper.Term> terms2 = new List<FilterHelper.Term>();
+    terms2.add( new FilterHelper.Term(terms.field, terms.value, terms.operator) ); 
     this.filterObject = filterObject;
-    this.hasTerms = terms.size() == 0;
+    this.splitTerms(terms2);
+  }
+  public FilterHelper(List<FilterHelper.Term> terms, String filterObject) {
+    this.filterObject = filterObject;
+    this.hasTerms = terms.size() > 0;
 
     if (this.hasTerms) {
       this.splitTerms(terms);
@@ -54,7 +59,7 @@ public with sharing class FilterHelper {
 
   private Map<String, Schema.ChildRelationship> getRelations() {
     if (this.relations == null) {
-      for (Schema.ChildRelationship r : describe.getChildRelationships()) {
+      for (Schema.ChildRelationship r : this.getDescribe().getChildRelationships()) {
         relations.put(r.getRelationshipName(), r);
       }
     }
@@ -96,11 +101,32 @@ public with sharing class FilterHelper {
     return String.join(whereList, ' AND ');
   }
 
+  public class Termino {
+    @AuraEnabled
+    public String field;
+    @AuraEnabled
+    public String value;
+    @AuraEnabled
+    public String operator;
+
+    public Termino() {
+      this.field = 'name';
+      this.value = 'no paso';
+      this.operator = '=';
+    }
+
+    public Termino(String field, String value, String operator) {
+      this.field = field;
+      this.value = value;
+      this.operator = operator;
+    }
+  }
+
   public class Term {
     @AuraEnabled
     public String field;
     @AuraEnabled
-    public Object value;
+    public String value;
     @AuraEnabled
     public String operator = '=';
 
@@ -108,34 +134,36 @@ public with sharing class FilterHelper {
       if (this.value == null) {
         return 'NULL';
       }
+      return '\'' + this.value + '\'';
 
-      if (this.value instanceof Boolean) {
-        return (Boolean) this.value ? 'TRUE' : 'FALSE';
-      }
 
-      if (
-        this.value instanceof String ||
-        this.value instanceof Blob ||
-        this.value instanceof Id
-      ) {
-        return '\'' + this.value + '\'';
-      }
+      // if (this.value instanceof Boolean) {
+      //   return (Boolean) this.value ? 'TRUE' : 'FALSE';
+      // }
 
-      if (this.value instanceof List<String>) {
-        return '( "' + String.join((List<String>) this.value, '" , "') + '" )';
-      }
+      // if (
+      //   this.value instanceof String ||
+      //   this.value instanceof Blob ||
+      //   this.value instanceof Id
+      // ) {
+      //   return '\'' + this.value + '\'';
+      // }
+
+      // if (this.value instanceof List<String>) {
+      //   return '( "' + String.join((List<String>) this.value, '" , "') + '" )';
+      // }
 
       // TODO: Check this types SObject, Date, Datetime, Time, List
 
       // treat Numbers like other types // if(this.value instanceof Integer || this.value instanceof Long || this.value instanceof Decimal || this.value instanceof Double )
-      return this.value.toString();
+      // return this.value.toString();
     }
 
     override public String toString() {
       return this.field + ' ' + this.operator + ' ' + this.valueWithSeparator();
     }
 
-    public Term(String field, Object value) {
+    public Term(String field, String value) {
       this.field = field;
       this.value = value;
     }
@@ -146,7 +174,7 @@ public with sharing class FilterHelper {
       this.operator = '';
     }
 
-    public Term(String field, Object value, String operator) {
+    public Term(String field, String value, String operator) {
       this.field = field;
       this.value = value;
 

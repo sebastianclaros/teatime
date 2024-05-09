@@ -1,8 +1,31 @@
 <template>
-  <div>
-    <h2>Name: {product.name}</h2>
-    <h2>Description: {product.description}</h2>
-    <h2>Categories: {product.categories}</h2>
-    <h2>Price: {product.price}</h2>
-  </div>
+  <lightning-card icon-name="standard:apex_plugin">
+      <template lwc:if={hasProduct}>
+          <span slot="title">{product.name}</span>
+          <lightning-button-icon
+              icon-name="utility:expand_alt"
+              slot="actions"
+              onclick={handleNavigateToRecord}
+              ><label>Open Record</label></lightning-button-icon
+          >
+          <div class="slds-var-m-horizontal_medium">
+              <img
+                  lwc:if={product.image}
+                  src={product.image}
+                  class="product"
+                  alt="Product picture"
+              />
+              <section>Description</section>
+              {product.description}
+              <section>Categories</section>
+              {product.categories}
+              <section>Price</section>
+              {product.price}
+          </div>
+      </template>
+
+      <template lwc:else>
+        Select a product to see details
+      </template>
+  </lightning-card>
 </template>

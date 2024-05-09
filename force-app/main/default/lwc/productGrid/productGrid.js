@@ -11,17 +11,22 @@ import channelProductFilter from "@salesforce/messageChannel/ProductFilter__c";
 
 export default class ProductGrid extends LightningElement {
   @track productos = [];
-  filter;
+  filter = { "field": "name", "value": "sur", "operator": "="};
   isError = false;
   isLoading = true;
   subscription;
 
+  get filterString() {
+    return JSON.stringify(this.filter);
+  }
+
   @wire(MessageContext) messageContext;
 
-  @wire(getProducts, { filter: "$filter" })
-  autoCallback({ data, error }) {
+  @wire(getProducts, { terms: "$filter", termString: "$filterString" })
+  autoCallback({ data, error }) {    
     this.isLoading = false;
-    console.log(data, error);
+    this.isError = false;
+    console.log(this.filter, data, error);
     if (data) {
       this.productos = data.map((producto, index) => {
         return { key: `auto-key-${index}`, ...producto };

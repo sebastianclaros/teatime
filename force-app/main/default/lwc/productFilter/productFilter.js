@@ -91,7 +91,7 @@ export default class ProductFilter extends LightningElement {
   }
 
   handleSearch(e) {
-    this.filter.name = this.name;
+    this.filter = [ {"field": "name", "value": '%' + this.name + '%', "operator": "like" }];
     this.publishEvent();
   }
 
