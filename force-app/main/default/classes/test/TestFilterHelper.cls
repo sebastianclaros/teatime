@@ -3,9 +3,12 @@ public with sharing class TestFilterHelper {
   @isTest
   static public void testSimple() {
     List<FilterHelper.Term> terms = new List<FilterHelper.Term>();
+
     terms.add(new FilterHelper.Term('Field', 'Value'));
 
-    String whereString = FilterHelper.getWhereCondition(terms);
+    FilterHelper filter = new FilterHelper(terms, 'Object');
+
+    String whereString = filter.getWhereCondition();
 
     System.assertEquals(
       whereString,
@@ -21,7 +24,8 @@ public with sharing class TestFilterHelper {
     terms.add(new FilterHelper.Term('FieldB', 10, '>='));
     terms.add(new FilterHelper.Term('FieldB', 20, '<='));
 
-    String whereString = FilterHelper.getWhereCondition(terms);
+    FilterHelper filter = new FilterHelper(terms, 'Object');
+    String whereString = filter.getWhereCondition();
 
     System.assertEquals(
       whereString,
