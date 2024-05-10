@@ -3,7 +3,7 @@ public with sharing class TestFilterHelper {
 
   @isTest
   static public void testVacio() {
-    List<FilterHelper.Termino> terms = new List<FilterHelper.Termino>();
+    List<Termino> terms = new List<Termino>();
 
     FilterHelper filter = new FilterHelper(terms, 'Account');
 
@@ -17,9 +17,9 @@ public with sharing class TestFilterHelper {
   }
   @isTest
   static public void testSimple() {
-    List<FilterHelper.Termino> terms = new List<FilterHelper.Termino>();
+    List<Termino> terms = new List<Termino>();
 
-    terms.add(new FilterHelper.Term('Name', 'Test'));
+    terms.add(new Termino('Name', 'Test'));
 
     FilterHelper filter = new FilterHelper(terms, 'Account');
 
@@ -34,10 +34,10 @@ public with sharing class TestFilterHelper {
 
   // @isTest
   // static public void testComplex() {
-  //   List<FilterHelper.Term> terms = new List<FilterHelper.Term>();
-  //   terms.add(new FilterHelper.Term('FieldA', 'Value'));
-  //   terms.add(new FilterHelper.Term('FieldB', 10, '>='));
-  //   terms.add(new FilterHelper.Term('FieldB', 20, '<='));
+  //   List<Termino> terms = new List<Termino>();
+  //   terms.add(new Termino('FieldA', 'Value'));
+  //   terms.add(new Termino('FieldB', 10, '>='));
+  //   terms.add(new Termino('FieldB', 20, '<='));
 
   //   FilterHelper filter = new FilterHelper(terms, 'Product2');
   //   String whereString = filter.getWhereCondition();

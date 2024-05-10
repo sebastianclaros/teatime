@@ -1,14 +1,14 @@
 public with sharing class FilterHelper {
   private String filterObject;
   private Boolean hasTerms;
-  private Map<String, List<FilterHelper.Term>> childTerms = new Map<String, List<FilterHelper.Term>>();
-  private List<FilterHelper.Term> terms = new List<Term>();
+  private Map<String, List<Termino>> childTerms = new Map<String, List<Termino>>();
+  private List<Termino> terms = new List<Termino>();
   private Map<String, Schema.ChildRelationship> relations =  new Map<String, Schema.ChildRelationship>();
   private Schema.DescribeSObjectResult describe;
 
-  private void splitTerms(List<FilterHelper.Term> allTerms) {
+  private void splitTerms(List<Termino> allTerms) {
     // Primero separa los childs  del resto
-    for (FilterHelper.Term t : allTerms) {
+    for (Termino t : allTerms) {
       List<String> splitName = t.field.split('.', 2);
       // Es field del filterObject
       if (splitName.size() == 1 || splitName.get(0) == this.filterObject) {
@@ -20,7 +20,7 @@ public with sharing class FilterHelper {
           if (childTerms.containsKey(relactionName)) {
             childTerms.get(relactionName).add(t);
           } else {
-            childTerms.put(relactionName, new List<Term>{ t });
+            childTerms.put(relactionName, new List<Termino>{ t });
           }
         } else {
           // Todo: Verificar que la relacion exista
@@ -29,13 +29,7 @@ public with sharing class FilterHelper {
       }
     }
   }
-  public FilterHelper(FilterHelper.Termino terms, String filterObject) {
-    List<FilterHelper.Term> terms2 = new List<FilterHelper.Term>();
-    terms2.add( new FilterHelper.Term(terms.field, terms.value, terms.operator) ); 
-    this.filterObject = filterObject;
-    this.splitTerms(terms2);
-  }
-  public FilterHelper(List<FilterHelper.Term> terms, String filterObject) {
+  public FilterHelper(List<Termino> terms, String filterObject) {
     this.filterObject = filterObject;
     this.hasTerms = terms.size() > 0;
 
@@ -80,7 +74,7 @@ public with sharing class FilterHelper {
         String objectName = relation.getChildSObject().toString();
         String fielName = relation.getField().toString();
 
-        for (Term term : childTerms.get(objectName)) {
+        for (Termino term : childTerms.get(objectName)) {
           subWhere.add(term.toString());
         }
         whereList.add(
@@ -94,93 +88,10 @@ public with sharing class FilterHelper {
         );
       }
     }
-    for (FilterHelper.Term t : this.terms) {
+    for (Termino t : this.terms) {
       whereList.add(t.toString());
     }
 
     return String.join(whereList, ' AND ');
-  }
-
-  public class Termino {
-    @AuraEnabled
-    public String field;
-    @AuraEnabled
-    public String value;
-    @AuraEnabled
-    public String operator;
-
-    public Termino() {
-      this.field = 'name';
-      this.value = 'no paso';
-      this.operator = '=';
-    }
-
-    public Termino(String field, String value, String operator) {
-      this.field = field;
-      this.value = value;
-      this.operator = operator;
-    }
-  }
-
-  public class Term {
-    @AuraEnabled
-    public String field;
-    @AuraEnabled
-    public String value;
-    @AuraEnabled
-    public String operator = '=';
-
-    private String valueWithSeparator() {
-      if (this.value == null) {
-        return 'NULL';
-      }
-      return '\'' + this.value + '\'';
-
-
-      // if (this.value instanceof Boolean) {
-      //   return (Boolean) this.value ? 'TRUE' : 'FALSE';
-      // }
-
-      // if (
-      //   this.value instanceof String ||
-      //   this.value instanceof Blob ||
-      //   this.value instanceof Id
-      // ) {
-      //   return '\'' + this.value + '\'';
-      // }
-
-      // if (this.value instanceof List<String>) {
-      //   return '( "' + String.join((List<String>) this.value, '" , "') + '" )';
-      // }
-
-      // TODO: Check this types SObject, Date, Datetime, Time, List
-
-      // treat Numbers like other types // if(this.value instanceof Integer || this.value instanceof Long || this.value instanceof Decimal || this.value instanceof Double )
-      // return this.value.toString();
-    }
-
-    override public String toString() {
-      return this.field + ' ' + this.operator + ' ' + this.valueWithSeparator();
-    }
-
-    public Term(String field, String value) {
-      this.field = field;
-      this.value = value;
-    }
-
-    public Term() {
-      this.field = '';
-      this.value = '';
-      this.operator = '';
-    }
-
-    public Term(String field, String value, String operator) {
-      this.field = field;
-      this.value = value;
-
-      if (operator != null && operator != '') {
-        this.operator = operator;
-      }
-    }
   }
 }

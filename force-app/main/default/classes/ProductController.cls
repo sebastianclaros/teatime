@@ -1,10 +1,9 @@
 public with sharing class ProductController {
-  @AuraEnabled(cacheable=true)
-  public static List<Product> getProducts(FilterHelper.Termino terms, String termString) {
-System.debug(termString);
+  @AuraEnabled(cacheable=false)
+  public static List<Product> getProducts(Terminos terms) {
 System.debug(terms);
   //FilterHelper filterHelper = new FilterHelper( (List<FilterHelper.Term>)JSON.deserialize(termString, List<FilterHelper.Term>.class ), 'Product2');
-  FilterHelper filterHelper = new FilterHelper(terms, 'Product2');  
+  FilterHelper filterHelper = new FilterHelper(terms.terms, 'Product2');  
   String whereCondition = filterHelper.getWhereCondition();
 System.debug(whereCondition);
     String query = 'SELECT Id, Name FROM Product2';

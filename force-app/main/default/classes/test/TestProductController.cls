@@ -76,9 +76,9 @@ private class TestProductController {
 
   @isTest
   static void testProducts() {
-    List<FilterHelper.Term> terms = new List<FilterHelper.Term>();
+    List<Termino> terms = new List<Termino>();
 
-    terms.add(new FilterHelper.Term('ProductCategory.Name', 'VW'));
+    terms.add(new Termino('ProductCategory.Name', 'VW'));
     List<ProductController.Product> productos = ProductController.getProducts(
       terms
     );
