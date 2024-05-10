@@ -1,0 +1,14 @@
+<template>
+    <!-- Select Catalogo, tipo de producto (Auto, Moto, etc.) -->
+    <div class="slds-var-p-around_medium lgc-bg">
+        <lightning-combobox options={catalogos} placeholder="Selecciona un catalogo" label="Catalogos"
+            onchange={handleChangeCatalogo} name="Catalogo">
+        </lightning-combobox>
+    </div>
+    <!-- Select Categorias, marcas de auto, moto (Ford, VW, etc.) -->
+    <div class="slds-var-p-around_medium lgc-bg">
+        <lightning-combobox options={categorias} placeholder="Selecciona una categoria" label="Categorias"
+            onchange={handleChangeCategoria} name="Categoria">
+        </lightning-combobox>
+    </div>    
+</template>

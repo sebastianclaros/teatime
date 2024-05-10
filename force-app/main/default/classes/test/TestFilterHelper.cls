@@ -18,8 +18,10 @@ public with sharing class TestFilterHelper {
   @isTest
   static public void testSimple() {
     List<Termino> terms = new List<Termino>();
-
-    terms.add(new Termino('Name', 'Test'));
+    Termino t = new Termino();
+    t.field = 'Name';
+    t.value = 'Test';
+    terms.add(t);
 
     FilterHelper filter = new FilterHelper(terms, 'Account');
 
