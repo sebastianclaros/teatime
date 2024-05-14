@@ -1,17 +1,27 @@
-import { LightningElement } from 'lwc';
+import { LightningElement } from "lwc";
 
 export default class FilterSearch extends LightningElement {
-    name;
+  name;
 
-    handleChangeSearch(e) {
-        this.name = e.detail.value;
-    }
+  handleChangeSearch(e) {
+    this.name = e.detail.value;
+  }
 
-    get filter() {
-        return [ {"label": "nombre","field": "name", "value": '%' + this.name + '%', "operator": "like" }] ;
+  get filter() {
+    if (!this.name || this.name === "") {
+      return [];
     }
+    return [
+      {
+        label: "nombre",
+        field: "name",
+        value: "%" + this.name + "%",
+        operator: "like"
+      }
+    ];
+  }
 
-    handleSearch() {
-        this.dispatchEvent(new CustomEvent('filter', { detail: this.filter }));
-    }
-}    
+  handleSearch() {
+    this.dispatchEvent(new CustomEvent("filter", { detail: this.filter }));
+  }
+}
