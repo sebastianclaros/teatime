@@ -2,6 +2,12 @@
 <template>
   <lightning-card title={title}>
     <div class="slds-var-p-around_medium_large">
+      <c-product-show-filter
+        filter={terms}
+        onremove={handleRemoveFilter}
+      ></c-product-show-filter>
+    </div>
+    <div class="slds-var-p-around_medium_large">
       <c-filter-search onfilter={handleSearchFilter}></c-filter-search>
     </div>
     <div class="slds-var-p-around_medium_large">

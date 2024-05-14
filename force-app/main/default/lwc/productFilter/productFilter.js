@@ -7,41 +7,44 @@ export default class ProductFilter extends LightningElement {
 
   @wire(MessageContext) messageContext;
   @track data = {};
+  @track terms;
 
-  get terms() {
-    const payload = [];
+  updateTerms() {
+    this.terms = [];
     for (const terms of Object.values(this.data)) {
-      payload.push(...terms);
+      this.terms.push(...terms);
     }
-    return payload;
-  }
-
-  publishEvent() {
     publish(this.messageContext, channelProductFilter, this.terms);
   }
 
   handleIsAvailableFilter(e) {
     this.data.isAvailable = e.detail;
-    this.publishEvent();
+    this.updateTerms();
   }
 
   handleInStockFilter(e) {
     this.data.InStock = e.detail;
-    this.publishEvent();
+    this.updateTerms();
   }
 
   handlePriceFilter(e) {
     this.data.price = e.detail;
-    this.publishEvent();
+    this.updateTerms();
   }
 
   handleCategoryFilter(e) {
-    this.data.category = e.detail;
-    this.publishEvent();
+    this.data.categoria = e.detail;
+    this.updateTerms();
+  }
+
+  handleRemoveFilter(e) {
+    const labelToRemove = e.detail;
+    this.data[labelToRemove] = undefined;
+    this.updateTerms();
   }
 
   handleSearchFilter(e) {
-    this.data.name = e.detail;
-    this.publishEvent();
+    this.data.nombre = e.detail;
+    this.updateTerms();
   }
 }
