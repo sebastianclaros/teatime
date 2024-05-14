@@ -31,12 +31,22 @@ export default class FilterCategory extends LightningElement {
   }
 
   get filter() {
-    if (this.data.category) {
+    if (this.data.categoria) {
       return [
         {
           label: "categoria",
-          field: "category",
-          value: this.data.category,
+          field: "ProductCategoryProducts.ProductCategoryId",
+          value: this.data.categoria,
+          operator: "="
+        }
+      ];
+    }
+    if (this.data.catalogo) {
+      return [
+        {
+          label: "categoria",
+          field: "ProductCategoryProducts.ProductCategory.CatalogId",
+          value: this.data.catalogo,
           operator: "="
         }
       ];
