@@ -21,8 +21,76 @@
  */
 @isTest
 private class TestProductController {
+  @TestSetup
+  static void makeData() {
+    Map<String, ProductCatalog> catalogos = new Map<String, ProductCatalog>();
+    catalogos.put('Autos', new ProductCatalog(Name = 'Autos'));
+    catalogos.put('Motos', new ProductCatalog(Name = 'Motos'));
+    insert catalogos.values();
+
+    Map<String, ProductCategory> categorias = new Map<String, ProductCategory>();
+    categorias.put(
+      'VW',
+      new ProductCategory(Name = 'VW', CatalogId = catalogos.get('Autos').Id)
+    );
+    categorias.put(
+      'Ford',
+      new ProductCategory(Name = 'Ford', CatalogId = catalogos.get('Autos').Id)
+    );
+    categorias.put(
+      'Ducati',
+      new ProductCategory(
+        Name = 'Ducati',
+        CatalogId = catalogos.get('Motos').Id
+      )
+    );
+    insert categorias.values();
+
+    Map<String, Product2> productos = new Map<String, Product2>();
+    productos.put('VW-Suran', new Product2(Name = 'VW Suran'));
+    productos.put('Ford-Fiesta', new Product2(Name = 'Ford Fiesta'));
+    productos.put('Ducati-212', new Product2(Name = 'Ducati 212'));
+    insert productos.values();
+
+    List<ProductCategoryProduct> productCategory = new List<ProductCategoryProduct>();
+    productCategory.add(
+      new ProductCategoryProduct(
+        ProductCategoryId = categorias.get('VW').Id,
+        ProductId = productos.get('VW-Suran').Id
+      )
+    );
+    productCategory.add(
+      new ProductCategoryProduct(
+        ProductCategoryId = categorias.get('Ford').Id,
+        ProductId = productos.get('Ford-Fiesta').Id
+      )
+    );
+    productCategory.add(
+      new ProductCategoryProduct(
+        ProductCategoryId = categorias.get('Ducati').Id,
+        ProductId = productos.get('Ducati-212').Id
+      )
+    );
+    insert productCategory;
+  }
+
   @isTest
-  static void myUnitTest() {
-    // TO DO: implement unit test
+  static void testProducts() {
+    List<Termino> terms = new List<Termino>();
+    Termino t = new Termino();
+    t.field = 'ProductCategories.Name';
+    t.value = 'VW';
+    terms.add(t);
+
+    terms.add(t);
+    List<ProductController.Product> productos = ProductController.getProducts(
+      terms
+    );
+
+    System.assertEquals(
+      productos.size(),
+      1,
+      'Deberia venir un solo producto con VW'
+    );
   }
 }

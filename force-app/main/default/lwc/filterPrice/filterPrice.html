@@ -1,0 +1,40 @@
+<template>
+  <!-- Rango Precios -->
+  <div class="slds-var-p-around_medium lgc-bg">
+    <div>
+      <b>Precio Desde:</b>
+    </div>
+    <div>
+      <lightning-slider
+        type="range"
+        min="0"
+        max="10000"
+        step="10"
+        value={minRange}
+        class="slider"
+        onchange={handleMinRange}
+      ></lightning-slider>
+    </div>
+    <div>
+      <b>Precio Hasta:</b>
+    </div>
+    <div>
+      <lightning-slider
+        type="range"
+        min="0"
+        max="10000"
+        step="10"
+        value={maxRange}
+        class="slider"
+        onchange={handleMaxRange}
+      ></lightning-slider>
+    </div>
+  </div>
+  <lightning-button
+    class="slds-col slds-align-bottom slds-var-m-left_x-small"
+    variant="brand"
+    label="Apply"
+    title="Primary action"
+    onclick={handleApply}
+  ></lightning-button>
+</template>

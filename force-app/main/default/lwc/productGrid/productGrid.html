@@ -1,15 +1,10 @@
 <template>
-  Productos
   <template lwc:if={isLoading}>
     <div style="color: red; font-size: 3rem">cargando...</div>
   </template>
-  <template lwc:elseif={isError}> Se produjo un error </template>
   <template lwc:else>
     <template for:each={productos} for:item="producto">
-      <div key={producto.key}>
-        {producto.name} {producto.categories} {producto.price}
-        {producto.description} {producto.image} {producto.isStock}
-      </div>
+      <c-product-card key={producto.key} product={producto}> </c-product-card>
     </template>
   </template>
 </template>

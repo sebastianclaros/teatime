@@ -1,5 +1,5 @@
 import { LightningElement, wire, track } from "lwc";
-import getProducts from "@salesforce/apex/ProductController.getProducts";
+//import getProducts from "@salesforce/apex/ProductController.getProducts";
 import {
   subscribe,
   unsubscribe,
@@ -8,13 +8,30 @@ import {
 } from "lightning/messageService";
 import channelProductFilter from "@salesforce/messageChannel/ProductFilter__c";
 
-export default class ProductGrid extends LightningElement {
+export default class ShowFilter extends LightningElement {
   @track productos = [];
+  catalogo;
+  categoria;
   isError = false;
-  isLoading = false;
+  isLoading = true;
   subscription;
 
   @wire(MessageContext) messageContext;
+
+  //   @wire(getProducts, { catalogId: "$catalogo", categoryId: "$categoria" })
+  //   autoCallback({ data, error }) {
+  //     console.log(data, error);
+  //     this.isLoading = false;
+  //     if (data) {
+  //       this.productos = data.map((producto, index) => {
+  //         return { key: `auto-key-${index}`, ...producto };
+  //       });
+  //     }
+  //     if (error) {
+  //       console.log(error);
+  //       this.isError = true;
+  //     }
+  //   }
 
   connectedCallback() {
     this.subscribeToMessageChannel();
@@ -31,17 +48,10 @@ export default class ProductGrid extends LightningElement {
     }
   }
 
-  async handleMessage(payload) {
-    try {
-      const data = await getProducts({ terms: payload });
-      this.isLoading = false;
-      this.productos = data.map((producto, index) => {
-        return { key: `auto-key-${index}`, ...producto };
-      });
-    } catch (error) {
-      console.log(error);
-      this.isError = true;
-    }
+  handleMessage(payload) {
+    console.log(payload);
+    this.catalogo = payload.catalogo;
+    this.categoria = payload.categoria;
   }
 
   disconnectedCallback() {

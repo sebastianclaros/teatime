@@ -1,18 +1,20 @@
 public with sharing class ProductController {
-  @AuraEnabled(cacheable=true)
-  public static List<Product> getProducts(String catalogId, String categoryId) {
-    List<Product> products = new List<Product>();
-
-    if (String.isNotBlank(catalogId) && String.isNotBlank(categoryId)) {
-      for (ProductCategoryProduct productCategory : [
-        SELECT Product.Id, Product.Name
-        FROM ProductCategoryProduct
-        WHERE ProductCategoryId = :categoryId AND CatalogId = :catalogId
-        WITH USER_MODE
-      ]) {
-        products.add(new Product(productCategory.Product));
-      }
+  @AuraEnabled(cacheable=false)
+  public static List<Product> getProducts(List<Termino> terms) {
+    FilterHelper filterHelper = new FilterHelper(terms, 'Product2');
+    String whereCondition = filterHelper.getWhereCondition();
+    String query = 'SELECT Id, Name FROM Product2';
+    if (whereCondition != '') {
+      query += ' WHERE ' + whereCondition;
     }
+    query += ' WITH USER_MODE LIMIT 10 ';
+    // TODO: Agregar criterio de ordenamiento  + cantidad dinamica de items por pagina- Nueva tarea
+
+    List<Product> products = new List<Product>();
+    for (Product2 producto : Database.query(query)) {
+      products.add(new Product(producto));
+    }
+
     return products;
   }
 
@@ -45,7 +47,7 @@ public with sharing class ProductController {
     return catalogos;
   }
 
-  class Product {
+  public class Product {
     public String id;
     @AuraEnabled
     public String name;
