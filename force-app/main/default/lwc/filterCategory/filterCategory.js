@@ -5,7 +5,7 @@ import getCategorias from "@salesforce/apex/ProductController.getCategorias";
 export default class FilterCategory extends LightningElement {
   @track catalogos = [];
   @track categorias = [];
-  data = {};
+  @track data = {};
 
   get catalogo() {
     return this.data.catalogo;
@@ -24,13 +24,14 @@ export default class FilterCategory extends LightningElement {
 
   @wire(getCatalogos) catalogosCallback({ data }) {
     if (data) {
+      console.log(data);
       const noneItem = { value: "", label: "None" };
       this.catalogos = [noneItem, ...data];
     }
   }
 
   get filter() {
-    if (this.data.categoria) {
+    if (this.data.category) {
       return [
         {
           label: "categoria",
