@@ -1,64 +1,75 @@
 public with sharing class FilterHelper {
   private String filterObject;
   private Boolean hasTerms;
-  private Map<String, List<FilterHelper.Term>> childTerms = new Map<String, List<FilterHelper.Term>>();
-  private List<FilterHelper.Term> terms = new List<Term>();
-  private Schema.DescribeSObjectResult describe;
-  private Map<String, Schema.ChildRelationship> relations;
+  private Map<String, List<Termino>> childTerms = new Map<String, List<Termino>>();
+  private List<Termino> terms = new List<Termino>();
 
-  private void splitTerms(List<FilterHelper.Term> allTerms) {
+  private Map<String, Schema.ChildRelationship> relations {
+    get {
+      if (relations == null) {
+        relations = new Map<String, Schema.ChildRelationship>();
+        for (
+          Schema.ChildRelationship r : this.describe.getChildRelationships()
+        ) {
+          relations.put(r.getRelationshipName(), r);
+        }
+      }
+      return relations;
+    }
+    set;
+  }
+
+  private Schema.DescribeSObjectResult describe {
+    get {
+      if (describe == null) {
+        Schema.SObjectType sObjectType = ((SObject) Type.forName(
+              this.filterObject
+            )
+            .newInstance())
+          .getSObjectType();
+        describe = sObjectType.getDescribe();
+      }
+      return describe;
+    }
+    set {
+      describe = value;
+    }
+  }
+
+  private void splitTerms(List<Termino> allTerms) {
     // Primero separa los childs  del resto
-    for (FilterHelper.Term t : allTerms) {
-      List<String> splitName = t.field.split('.', 2);
+    for (Termino t : allTerms) {
+      List<String> splitName = t.field.split('\\.', 2);
       // Es field del filterObject
       if (splitName.size() == 1 || splitName.get(0) == this.filterObject) {
         // TODO: Validar que el campo exista (describe)
         this.terms.add(t);
       } else {
         String relactionName = splitName.get(0);
-        if (getRelations().containsKey(relactionName)) {
+        System.debug(relactionName);
+        if (relations.containsKey(relactionName)) {
+          Termino newTerm = t.clone();
+          newTerm.field = splitName.get(1);
           if (childTerms.containsKey(relactionName)) {
-            childTerms.get(relactionName).add(t);
+            childTerms.get(relactionName).add(newTerm);
           } else {
-            childTerms.put(relactionName, new List<Term>{ t });
+            childTerms.put(relactionName, new List<Termino>{ newTerm });
           }
         } else {
+          System.debug(relations.keySet());
           // Todo: Verificar que la relacion exista
           this.terms.add(t);
         }
       }
     }
   }
-
-  public FilterHelper(List<Term> terms, String filterObject) {
+  public FilterHelper(List<Termino> terms, String filterObject) {
     this.filterObject = filterObject;
-    this.hasTerms = terms.size() == 0;
+    this.hasTerms = terms.size() > 0;
 
     if (this.hasTerms) {
       this.splitTerms(terms);
     }
-  }
-
-  private Schema.DescribeSObjectResult getDescribe() {
-    if (this.describe == null) {
-      //this.sObjectType = Schema.describeSObjects(new List<String>{objectName})[0].getSObjectType();
-      Schema.SObjectType sObjectType = ((SObject) Type.forName(
-            this.filterObject
-          )
-          .newInstance())
-        .getSObjectType();
-      this.describe = sObjectType.getDescribe();
-    }
-    return this.describe;
-  }
-
-  private Map<String, Schema.ChildRelationship> getRelations() {
-    if (this.relations == null) {
-      for (Schema.ChildRelationship r : describe.getChildRelationships()) {
-        relations.put(r.getRelationshipName(), r);
-      }
-    }
-    return this.relations;
   }
 
   public String getWhereCondition() {
@@ -67,15 +78,17 @@ public with sharing class FilterHelper {
     if (!hasTerms) {
       return '';
     }
+
     // Primero separa los childs  del resto
-    if (childTerms.size() > 0) {
+    Boolean hasChildTerms = childTerms.size() > 0;
+    if (hasChildTerms) {
       for (String relationName : childTerms.keySet()) {
         List<String> subWhere = new List<String>();
-        Schema.ChildRelationship relation = getRelations().get(relationName);
+        Schema.ChildRelationship relation = relations.get(relationName);
         String objectName = relation.getChildSObject().toString();
         String fielName = relation.getField().toString();
 
-        for (Term term : childTerms.get(objectName)) {
+        for (Termino term : childTerms.get(relationName)) {
           subWhere.add(term.toString());
         }
         whereList.add(
@@ -89,70 +102,10 @@ public with sharing class FilterHelper {
         );
       }
     }
-    for (FilterHelper.Term t : this.terms) {
+    for (Termino t : this.terms) {
       whereList.add(t.toString());
     }
 
     return String.join(whereList, ' AND ');
-  }
-
-  public class Term {
-    @AuraEnabled
-    public String field;
-    @AuraEnabled
-    public Object value;
-    @AuraEnabled
-    public String operator = '=';
-
-    private String valueWithSeparator() {
-      if (this.value == null) {
-        return 'NULL';
-      }
-
-      if (this.value instanceof Boolean) {
-        return (Boolean) this.value ? 'TRUE' : 'FALSE';
-      }
-
-      if (
-        this.value instanceof String ||
-        this.value instanceof Blob ||
-        this.value instanceof Id
-      ) {
-        return '\'' + this.value + '\'';
-      }
-
-      if (this.value instanceof List<String>) {
-        return '( "' + String.join((List<String>) this.value, '" , "') + '" )';
-      }
-
-      // TODO: Check this types SObject, Date, Datetime, Time, List
-
-      // treat Numbers like other types // if(this.value instanceof Integer || this.value instanceof Long || this.value instanceof Decimal || this.value instanceof Double )
-      return this.value.toString();
-    }
-
-    override public String toString() {
-      return this.field + ' ' + this.operator + ' ' + this.valueWithSeparator();
-    }
-
-    public Term(String field, Object value) {
-      this.field = field;
-      this.value = value;
-    }
-
-    public Term() {
-      this.field = '';
-      this.value = '';
-      this.operator = '';
-    }
-
-    public Term(String field, Object value, String operator) {
-      this.field = field;
-      this.value = value;
-
-      if (operator != null && operator != '') {
-        this.operator = operator;
-      }
-    }
   }
 }

@@ -1,10 +1,8 @@
 public with sharing class ProductController {
-  @AuraEnabled(cacheable=true)
-  public static List<Product> getProducts(List<FilterHelper.Term> terms) {
+  @AuraEnabled(cacheable=false)
+  public static List<Product> getProducts(List<Termino> terms) {
     FilterHelper filterHelper = new FilterHelper(terms, 'Product2');
-
     String whereCondition = filterHelper.getWhereCondition();
-
     String query = 'SELECT Id, Name FROM Product2';
     if (whereCondition != '') {
       query += ' WHERE ' + whereCondition;

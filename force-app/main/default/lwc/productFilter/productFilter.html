@@ -1,53 +1,28 @@
 <!-- sldsValidatorIgnore -->
 <template>
-	<lightning-card title={title}>
-		<div class="slds-var-p-around_medium_large">
-			<div class="slds-var-p-around_medium lgc-bg slds-grid">
-				<!-- Busca como Producto o Marca. -->
-				<lightning-input class="slds-col" onchange={handleChangeSearch} type="search" label="Search" placeholder="Search product here"></lightning-input>
-				<lightning-button class="slds-col  slds-align-bottom slds-var-m-left_x-small" variant="brand" label="Search" title="Primary action" onclick={handleSearch}></lightning-button>
-			</div>
-
-			<!-- Select Catalogo, tipo de producto (Auto, Moto, etc.) -->
-			<div class="slds-var-p-around_medium lgc-bg">
-				<lightning-combobox options={catalogos} placeholder="Selecciona un catalogo" label="Catalogos"
-					onchange={handleChangeCatalogo} name="Catalogo">
-				</lightning-combobox>
-			</div>
-			<!-- Select Categorias, marcas de auto, moto (Ford, VW, etc.) -->
-			<div class="slds-var-p-around_medium lgc-bg">
-				<lightning-combobox options={categorias} placeholder="Selecciona una categoria" label="Categorias"
-					onchange={handleChangeCategoria} name="Categoria">
-				</lightning-combobox>
-			</div>
-			<!-- Rango Precios -->
-			<div class="slds-var-p-around_medium lgc-bg">
-
-					<div>
-						<b>Precio Desde:</b>
-					</div>
-					<div>
-						<lightning-slider type="range" min="0" max="10000" step="10" value={minRange}
-						class="slider"
-						onchange={handleMinRange}
-					></lightning-slider>
-					</div>
-					<div>
-						<b>Precio Hasta:</b>
-					</div>
-					<div>
-						<lightning-slider type="range" min="0" max="10000" step="10" value={maxRange}
-						class="slider" 
-						onchange={handleMaxRange}
-						></lightning-slider>  
-					</div>
-			</div>
-			
-			<!-- Toggle check Stock -->
-			<div class="slds-p-around_medium lgc-bg slds-align_absolute-center" >
-				<lightning-input type="toggle" label="In Stock" onchange={handleInStock} name="switchStock"></lightning-input>
-				<lightning-input type="toggle" label="Available" onchange={handleAvailable} name="available"></lightning-input>
-			</div>
-		</div>
-	</lightning-card>
+  <lightning-card title={title}>
+    <div class="slds-var-p-around_medium_large">
+      <c-filter-search onfilter={handleSearchFilter}></c-filter-search>
+    </div>
+    <div class="slds-var-p-around_medium_large">
+      <c-filter-category onfilter={handleCategoryFilter}></c-filter-category>
+    </div>
+    <div class="slds-var-p-around_medium_large">
+      <c-filter-price onfilter={handlePriceFilter}></c-filter-price>
+    </div>
+    <div class="slds-var-p-around_medium_large">
+      <c-filter-toogle
+        label="Hay stock?"
+        field="inStock"
+        onfilter={handleInStockFilter}
+      ></c-filter-toogle>
+    </div>
+    <div class="slds-var-p-around_medium_large">
+      <c-filter-toogle
+        label="Esta disponible?"
+        field="isAvailable"
+        onfilter={handleIsAvailableFilter}
+      ></c-filter-toogle>
+    </div>
+  </lightning-card>
 </template>
