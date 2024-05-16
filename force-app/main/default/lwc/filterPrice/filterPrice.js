@@ -1,27 +1,35 @@
-import { LightningElement, track, api } from "lwc";
+import { LightningElement, track, api, wire } from "lwc";
+import { publish, MessageContext } from "lightning/messageService";
+import channelFilters from "@salesforce/messageChannel/Filters__c";
 
 export default class FilterPrice extends LightningElement {
   @track minRange = 0;
   @track maxRange = 10000;
   @api pricebookId;
+  @api field;
+  @wire(MessageContext) messageContext;
 
   triggerEvent() {
-    this.dispatchEvent(new CustomEvent("filter", { detail: this.filter }));
+    publish(this.messageContext, channelFilters, this.filter);
   }
 
   get filter() {
-    return [
-      {
-        field: "PricebookEntries.UnitPrice",
-        value: this.minRange,
-        operator: ">="
-      },
-      {
-        field: "PricebookEntries.UnitPrice",
-        value: this.maxRange,
-        operator: "<="
-      }
-    ];
+    return {
+      label: "Precio",
+      name: "precio",
+      terms: [
+        {
+          field: this.field,
+          value: this.minRange,
+          operator: ">="
+        },
+        {
+          field: this.field,
+          value: this.maxRange,
+          operator: "<="
+        }
+      ]
+    };
   }
 
   handleApply() {

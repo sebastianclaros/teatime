@@ -1,10 +1,13 @@
-import { LightningElement, api } from "lwc";
+import { LightningElement, api, wire } from "lwc";
+import { publish, MessageContext } from "lightning/messageService";
+import channelFilters from "@salesforce/messageChannel/Filters__c";
 
 export default class FilterToogle extends LightningElement {
   @api field;
   @api label;
-
+  @api name;
   isChecked;
+  @wire(MessageContext) messageContext;
 
   handleToogle(e) {
     this.isChecked = e.detail.checked;
@@ -14,14 +17,19 @@ export default class FilterToogle extends LightningElement {
     return [
       {
         label: this.label,
-        field: this.field,
-        value: this.isChecked,
-        operator: "="
+        name: this.name,
+        terms: [
+          {
+            field: this.field,
+            value: this.isChecked,
+            operator: "="
+          }
+        ]
       }
     ];
   }
 
   handleSearch() {
-    this.dispatchEvent(new CustomEvent("filter", { detail: this.filter }));
+    publish(this.messageContext, channelFilters, this.filter);
   }
 }
