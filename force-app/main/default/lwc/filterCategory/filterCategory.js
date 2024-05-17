@@ -29,6 +29,7 @@ export default class FilterCategory extends LightningElement {
 
   @wire(getCatalogos) catalogosCallback({ data }) {
     if (data) {
+      console.log(data);
       const noneItem = { value: "", label: "None" };
       this.catalogos = [noneItem, ...data];
     }
