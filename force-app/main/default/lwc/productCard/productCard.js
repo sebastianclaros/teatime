@@ -6,7 +6,5 @@ export default class ProductCard extends LightningElement {
   hasProduct() {
     return this.product;
   }
-  handleNavigateToRecord() {
-    
-  }
+  handleNavigateToRecord() {}
 }

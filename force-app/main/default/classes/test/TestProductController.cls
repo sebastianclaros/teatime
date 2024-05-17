@@ -82,7 +82,6 @@ private class TestProductController {
     t.value = 'VW';
     terms.add(t);
 
-
     terms.add(t);
     List<ProductController.Product> productos = ProductController.getProducts(
       terms

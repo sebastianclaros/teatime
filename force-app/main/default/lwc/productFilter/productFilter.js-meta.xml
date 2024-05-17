@@ -7,7 +7,7 @@
     </targets>
     <targetConfigs>
         <targetConfig targets="lightning__AppPage">
-            <property name="title" type="String"/>
+            <property name="title" type="String" />
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>

@@ -1,5 +1,5 @@
-import { LightningElement, wire, track  } from 'lwc';
-import getProducts from "@salesforce/apex/ProductController.getProducts";
+import { LightningElement, wire, track } from "lwc";
+//import getProducts from "@salesforce/apex/ProductController.getProducts";
 import {
   subscribe,
   unsubscribe,
@@ -9,7 +9,6 @@ import {
 import channelProductFilter from "@salesforce/messageChannel/ProductFilter__c";
 
 export default class ShowFilter extends LightningElement {
-
   @track productos = [];
   catalogo;
   categoria;
@@ -19,20 +18,20 @@ export default class ShowFilter extends LightningElement {
 
   @wire(MessageContext) messageContext;
 
-//   @wire(getProducts, { catalogId: "$catalogo", categoryId: "$categoria" })
-//   autoCallback({ data, error }) {
-//     console.log(data, error);
-//     this.isLoading = false;
-//     if (data) {
-//       this.productos = data.map((producto, index) => {
-//         return { key: `auto-key-${index}`, ...producto };
-//       });
-//     }
-//     if (error) {
-//       console.log(error);
-//       this.isError = true;
-//     }
-//   }
+  //   @wire(getProducts, { catalogId: "$catalogo", categoryId: "$categoria" })
+  //   autoCallback({ data, error }) {
+  //     console.log(data, error);
+  //     this.isLoading = false;
+  //     if (data) {
+  //       this.productos = data.map((producto, index) => {
+  //         return { key: `auto-key-${index}`, ...producto };
+  //       });
+  //     }
+  //     if (error) {
+  //       console.log(error);
+  //       this.isError = true;
+  //     }
+  //   }
 
   connectedCallback() {
     this.subscribeToMessageChannel();

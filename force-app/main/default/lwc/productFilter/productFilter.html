@@ -1,28 +1,16 @@
 <!-- sldsValidatorIgnore -->
 <template>
   <lightning-card title={title}>
-    <div class="slds-var-p-around_medium_large">
-      <c-filter-search onfilter={handleSearchFilter}></c-filter-search>
-    </div>
-    <div class="slds-var-p-around_medium_large">
-      <c-filter-category onfilter={handleCategoryFilter}></c-filter-category>
-    </div>
-    <div class="slds-var-p-around_medium_large">
-      <c-filter-price onfilter={handlePriceFilter}></c-filter-price>
-    </div>
-    <div class="slds-var-p-around_medium_large">
-      <c-filter-toogle
-        label="Hay stock?"
-        field="inStock"
-        onfilter={handleInStockFilter}
-      ></c-filter-toogle>
-    </div>
-    <div class="slds-var-p-around_medium_large">
-      <c-filter-toogle
-        label="Esta disponible?"
-        field="isAvailable"
-        onfilter={handleIsAvailableFilter}
-      ></c-filter-toogle>
+    <div class="slds-var-p-around_medium lgc-bg">
+      <template for:each={dataValues} for:item="filter">
+        <lightning-pill
+          key={filter.name}
+          data-name={filter.name}
+          onremove={handleRemove}
+          label={filter.label}
+        >
+        </lightning-pill>
+      </template>
     </div>
   </lightning-card>
 </template>

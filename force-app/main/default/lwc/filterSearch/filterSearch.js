@@ -1,27 +1,35 @@
-import { LightningElement } from "lwc";
+import { LightningElement, api, wire } from "lwc";
+import { publish, MessageContext } from "lightning/messageService";
+import channelFilters from "@salesforce/messageChannel/Filters__c";
 
 export default class FilterSearch extends LightningElement {
   name;
+  @wire(MessageContext) messageContext;
+  @api field;
 
   handleChangeSearch(e) {
     this.name = e.detail.value;
   }
 
   get filter() {
-    if (!this.name || this.name === "") {
-      return [];
-    }
-    return [
-      {
-        label: "nombre",
-        field: "name",
-        value: "%" + this.name + "%",
-        operator: "like"
-      }
-    ];
+    const terms =
+      !this.name || this.name === ""
+        ? []
+        : [
+            {
+              field: this.field,
+              value: "%" + this.name + "%",
+              operator: "like"
+            }
+          ];
+    return {
+      label: "Nombre: " + this.name,
+      name: "nombre",
+      terms
+    };
   }
 
   handleSearch() {
-    this.dispatchEvent(new CustomEvent("filter", { detail: this.filter }));
+    publish(this.messageContext, channelFilters, this.filter);
   }
 }

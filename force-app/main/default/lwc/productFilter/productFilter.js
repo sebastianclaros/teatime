@@ -1,47 +1,77 @@
 import { LightningElement, track, wire, api } from "lwc";
-import { publish, MessageContext } from "lightning/messageService";
+import {
+  publish,
+  subscribe,
+  unsubscribe,
+  APPLICATION_SCOPE,
+  MessageContext
+} from "lightning/messageService";
 import channelProductFilter from "@salesforce/messageChannel/ProductFilter__c";
+import channelFilters from "@salesforce/messageChannel/Filters__c";
 
 export default class ProductFilter extends LightningElement {
   @api title = "Product Filter";
 
   @wire(MessageContext) messageContext;
   @track data = {};
+  subscription;
+  @track dataValues;
 
-  get terms() {
-    const payload = [];
-    for (const terms of Object.values(this.data)) {
-      payload.push(...terms);
+  updateTerms() {
+    this.dataValues = Object.values(this.data);
+    const terms = [];
+    for (const filter of this.dataValues) {
+      terms.push(...filter.terms);
     }
-    return payload;
+    publish(this.messageContext, channelProductFilter, terms);
   }
 
-  publishEvent() {
-    publish(this.messageContext, channelProductFilter, this.terms);
+  handleFilter(filter) {
+    const addRemoveFilter = (f) => {
+      const name = f.name;
+      if (f.terms.length > 0) {
+        this.data[name] = f;
+      } else {
+        delete this.data[name];
+      }
+    };
+
+    if (Array.isArray(filter)) {
+      filter.forEach(addRemoveFilter);
+    } else {
+      addRemoveFilter(filter);
+    }
+    this.updateTerms();
   }
 
-  handleIsAvailableFilter(e) {
-    this.data.isAvailable = e.detail;
-    this.publishEvent();
+  handleRemove(e) {
+    const name = e.target.dataset.name;
+    delete this.data[name];
+    // TODO: Dispara para que el componente se limpie
+    this.updateTerms();
   }
 
-  handleInStockFilter(e) {
-    this.data.InStock = e.detail;
-    this.publishEvent();
+  connectedCallback() {
+    this.subscribeToMessageChannel();
   }
 
-  handlePriceFilter(e) {
-    this.data.price = e.detail;
-    this.publishEvent();
+  subscribeToMessageChannel() {
+    if (!this.subscription) {
+      this.subscription = subscribe(
+        this.messageContext,
+        channelFilters,
+        (terms) => this.handleFilter(terms),
+        { scope: APPLICATION_SCOPE }
+      );
+    }
   }
 
-  handleCategoryFilter(e) {
-    this.data.category = e.detail;
-    this.publishEvent();
+  disconnectedCallback() {
+    this.unsubscribeToMessageChannel();
   }
 
-  handleSearchFilter(e) {
-    this.data.name = e.detail;
-    this.publishEvent();
+  unsubscribeToMessageChannel() {
+    unsubscribe(this.subscription);
+    this.subscription = null;
   }
 }

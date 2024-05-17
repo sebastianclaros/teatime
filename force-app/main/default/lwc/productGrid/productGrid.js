@@ -33,7 +33,7 @@ export default class ProductGrid extends LightningElement {
 
   async handleMessage(payload) {
     try {
-      const data = await getProducts({ terms: payload} );
+      const data = await getProducts({ terms: payload });
       this.isLoading = false;
       this.productos = data.map((producto, index) => {
         return { key: `auto-key-${index}`, ...producto };

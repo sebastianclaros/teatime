@@ -1,4 +1,4 @@
-import { createElement } from "lwc";
+import { createElement } from "lwc@";
 import OrderSummary from "c/orderSummary";
 
 describe("c-order-summary", () => {
