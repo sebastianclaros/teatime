@@ -23,7 +23,7 @@ export default class FilterSearch extends LightningElement {
             }
           ];
     return {
-      label: "Nombre",
+      label: "Nombre: " + this.name,
       name: "nombre",
       terms
     };

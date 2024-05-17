@@ -15,7 +15,7 @@ export default class FilterPrice extends LightningElement {
 
   get filter() {
     return {
-      label: "Precio",
+      label: `Precio: ${this.minRange} ~ ${this.maxRange}`,
       name: "precio",
       terms: [
         {

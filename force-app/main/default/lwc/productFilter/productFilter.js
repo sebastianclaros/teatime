@@ -33,8 +33,8 @@ export default class ProductFilter extends LightningElement {
   }
 
   handleRemove(e) {
-    const name = e.target.key;
-    this.data[name] = undefined;
+    const name = e.target.dataset.name;
+    delete this.data[name];
     // TODO: Dispara para que el componente se limpie
     this.updateTerms();
   }

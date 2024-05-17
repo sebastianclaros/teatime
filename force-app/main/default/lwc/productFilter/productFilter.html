@@ -4,16 +4,11 @@
     <div class="slds-var-p-around_medium lgc-bg">
       <template for:each={dataValues} for:item="filter">
         <lightning-pill
-          key={filter.label}
+          key={filter.name}
+          data-name={filter.name}
           onremove={handleRemove}
           label={filter.label}
         >
-          <lightning-avatar
-            src="https://www.lightningdesignsystem.com/assets/images/avatar2.jpg"
-            fallback-icon-name="standard:user"
-            variant="circle"
-            alternative-text="User avatar"
-          ></lightning-avatar>
         </lightning-pill>
       </template>
     </div>
