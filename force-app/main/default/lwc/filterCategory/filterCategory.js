@@ -38,6 +38,7 @@ export default class FilterCategory extends LightningElement {
     if (this.data.categoria) {
       return [
         {
+          label: "categoria: " + this.data.categoriaLabel,
           name: "categoria",
           terms: [
             {
@@ -52,6 +53,7 @@ export default class FilterCategory extends LightningElement {
     if (this.data.catalogo) {
       return [
         {
+          label: "catalogo: " + this.data.catalogoLabel,
           name: "catalogo",
           terms: [
             {
@@ -60,10 +62,24 @@ export default class FilterCategory extends LightningElement {
               operator: "="
             }
           ]
+        },
+        {
+          name: "categoria",
+          terms: []
         }
       ];
     }
-    return [];
+
+    return [
+      {
+        name: "catalogo",
+        terms: []
+      },
+      {
+        name: "categoria",
+        terms: []
+      }
+    ];
   }
 
   triggerEvent() {
@@ -72,11 +88,19 @@ export default class FilterCategory extends LightningElement {
 
   handleChangeCategoria(e) {
     this.data.categoria = e.detail.value;
+    const item = this.categorias.filter((i) => i.value === this.data.categoria);
+    if (item.length === 1) {
+      this.data.categoriaLabel = item[0].label;
+    }
     this.triggerEvent();
   }
 
   handleChangeCatalogo(e) {
     this.data.catalogo = e.detail.value;
+    const item = this.catalogos.filter((i) => i.value === this.data.catalogo);
+    if (item.length === 1) {
+      this.data.catalogoLabel = item[0].label;
+    }
     this.triggerEvent();
   }
 }

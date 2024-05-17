@@ -27,8 +27,20 @@ export default class ProductFilter extends LightningElement {
   }
 
   handleFilter(filter) {
-    const name = filter.name || filter.label;
-    this.data[name] = filter;
+    const addRemoveFilter = (f) => {
+      const name = f.name;
+      if (f.terms.length > 0) {
+        this.data[name] = f;
+      } else {
+        delete this.data[name];
+      }
+    };
+
+    if (Array.isArray(filter)) {
+      filter.forEach(addRemoveFilter);
+    } else {
+      addRemoveFilter(filter);
+    }
     this.updateTerms();
   }
 
