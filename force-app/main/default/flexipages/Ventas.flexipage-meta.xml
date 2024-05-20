@@ -13,8 +13,47 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Filtros</value>
+                </componentInstanceProperties>
                 <componentName>productFilter</componentName>
                 <identifier>c_productFilter</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>field</name>
+                    <value>name</value>
+                </componentInstanceProperties>
+                <componentName>filterSearch</componentName>
+                <identifier>c_filterSearch</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>field</name>
+                    <value>PricebookEntries.UnitPrice</value>
+                </componentInstanceProperties>
+                <componentName>filterPrice</componentName>
+                <identifier>c_filterPrice</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>fieldCatalog</name>
+                    <value
+          >ProductCategoryProducts.ProductCategory.CatalogId</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>fieldCategory</name>
+                    <value>ProductCategoryProducts.ProductCategoryId</value>
+                </componentInstanceProperties>
+                <componentName>filterCategory</componentName>
+                <identifier>c_filterCategory</identifier>
             </componentInstance>
         </itemInstances>
         <name>region2</name>
