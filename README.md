@@ -61,9 +61,12 @@ git clone https://github.com/sebastianclaros/teatime.git
 
 cd teatime
 
-### Crear una scract org
+### Crear una scratch org
 
-Vayan al directorio de teatime, y ahi con la linea de comandos va a ser crear la scracth desde nuestro DevHub
+En la carpeta scripts/automation hay una serie de scripts que automatizan las tareas antes de empezar a desarrollar un requerimiento.
+[Ver mas sobre scripts de automatizacion](./scripts/automation/index.md)
+
+Sino pueden hacerlo paso a paso manualmente. Vayan al directorio de teatime, y ahi con la linea de comandos va a ser crear la scracth desde nuestro DevHub
 
 ```
 sf org create scratch --set-default --definition-file=config/project-scratch-def.json --duration-days=7 --alias=prueba
