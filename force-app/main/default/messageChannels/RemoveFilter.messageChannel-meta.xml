@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>RemoveFilter</masterLabel>
+    <isExposed>true</isExposed>
+    <description
+  >Cuando se Elimina una categoria en el componente productFilter, se va a disparar un evento con la Info del filtro borrado. Por otro lado se va a suscribir al channel cada componente filter</description>
+</LightningMessageChannel>

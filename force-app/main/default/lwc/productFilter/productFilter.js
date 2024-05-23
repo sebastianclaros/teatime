@@ -8,6 +8,7 @@ import {
 } from "lightning/messageService";
 import channelProductFilter from "@salesforce/messageChannel/ProductFilter__c";
 import channelFilters from "@salesforce/messageChannel/Filters__c";
+import channelRemoveFilter from "@salesforce/messageChannel/RemoveFilter__c";
 
 export default class ProductFilter extends LightningElement {
   @api title = "Product Filter";
@@ -46,9 +47,16 @@ export default class ProductFilter extends LightningElement {
 
   handleRemove(e) {
     const name = e.target.dataset.name;
+    const ternRemove = {
+      filterName: name    
+    };
     delete this.data[name];
+
+    console.log('se ejecuto la handle remove');
+    console.log('ternRemove ==> ' + ternRemove);
     // TODO: Dispara para que el componente se limpie
     this.updateTerms();
+    publish(this.messageContext, channelRemoveFilter, ternRemove);
   }
 
   connectedCallback() {
