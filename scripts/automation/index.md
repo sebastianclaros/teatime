@@ -13,10 +13,13 @@ Desde se puede ir a la carpeta scripts/automation o bien ejecutar desde la raiz 
 
 Si arrancamos de cero cuando llamamos a start, quien va a crear la branch y la scratch
 
+````
 start.sh (issueNumber, nombreDelRequerimiento, dias=7)
 ├── create-branch.sh ( issueNumber, nombreDelRequerimiento)
 └── create-scracth.sh ( issueNumber, nombreDelRequerimiento, dias)
-    
+````
+
+
 Por ejemplo
 
 ````
@@ -34,10 +37,12 @@ create-scracth.sh
 
 ## Al Finalizar un Requerimiento
 
+````
 end.sh
 ├── update-doc.sh
 ├── validate-scratch.sh
 ├── validate-code.sh
 ├── publish-branch.sh
 └── drop-scracth.sh
+````
 
