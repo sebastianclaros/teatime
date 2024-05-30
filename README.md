@@ -64,7 +64,7 @@ cd teatime
 ### Crear una scratch org
 
 En la carpeta scripts/automation hay una serie de scripts que automatizan las tareas antes de empezar a desarrollar un requerimiento.
-[Ver mas sobre scripts de automatizacion](./scripts/automation/index.md)
+[Ver mas sobre scripts de automatizacion](./automation)
 
 Sino pueden hacerlo paso a paso manualmente. Vayan al directorio de teatime, y ahi con la linea de comandos va a ser crear la scracth desde nuestro DevHub
 

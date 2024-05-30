@@ -8,7 +8,7 @@ import intro from '!!raw-loader!./intro.drawio';
 
 ## Intro
 
-Antes de empezar lea el [Readme](./readme) del proyecto, donde explica el como bajar el codigo y desarrollar en el proyecto.
+Antes de empezar lea el **[Readme](./readme)** del proyecto, donde explica el como bajar el codigo y desarrollar en el proyecto.
 
 
 
