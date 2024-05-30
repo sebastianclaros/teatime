@@ -1,4 +1,5 @@
 #!/bin/bash
+<<<<<<< HEAD
 # Script para automatizar las acciones cuando se termina el desarrollo de un requerimiento
 
 script_full_path=$(dirname "$0")
@@ -63,3 +64,10 @@ echo -e "${green} * [ELIMINA LA SCRATCH] ${nocolor}"
 $script_full_path/subtask/drop-scratch.sh 
 
 echo -e "${green} * [FIN] del script de finalizacion del requerimiento $branchName ${nocolor}"
+=======
+# Script para automatizar las acciones cuando se finaliza un requerimiento
+# Recibe:
+# 1) El issue Number del Repositorio
+
+source "$(dirname "$0")/subtask/library.sh"
+>>>>>>> ef9984b (crear libreria)

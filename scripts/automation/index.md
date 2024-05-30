@@ -15,16 +15,26 @@ En la carpeta automation nos encontramos con scripts de acciones, que serian las
 
 Asi identificamos las siguientes:
 
+<<<<<<< HEAD
 * [start](#start-iniciar-un-requerimiento-nuevo)
 * [stop](#stop-poner-un-requerimiento-en-pausa-para-mas-tarde-o-bien-para-que-lo-tome-otro): 
 * [finish](#finish-al-terminar-el-desarrollo-de-un-requerimiento):
 * [deploy](#deploy):
 * [cancel](#cancel):
 * [rollback](#rollback):
+=======
+* start:
+* stop: 
+* continue:
+* done:
+* finish:
+* cancel:
+>>>>>>> ef9984b (crear libreria)
 
 
 ````mermaid 
 stateDiagram-v2 
+<<<<<<< HEAD
 [*] --> Ready
 Ready --> InProgress : start
 InProgress --> Ready :stop
@@ -59,16 +69,39 @@ Archive --> [*]
 
 
 ## Start: Iniciar un Requerimiento Nuevo
+=======
+[*] --> InProgress : start
+InProgress --> Paused :pause
+Paused --> InProgress : resume
+InProgress --> Done : done
+Done --> Approved :approve
+Done --> Paused :reject
+Approved --> Deployed : finish
+InProgress --> Cancelled : cancel
+Done --> Cancelled: cancel
+Cancelled --> [*]
+Deployed --> [*]
+````
+
+## Start: Al Inicial un Requerimiento
+>>>>>>> ef9984b (crear libreria)
 
 Si arrancamos de cero cuando llamamos a start, quien va a crear la branch y la scratch
 
 ````
+<<<<<<< HEAD
 start.sh (issueNumber, issueType, dias=7)
 ├── validate-issue.sh ( issueNumber, 'Ready')
 ├── create-branch.sh ( issueNumber, nombreDelRequerimiento)
 ├── move-issue.sh ( issueNumber, 'In Progress')
 ├── assign-user-issue.sh ( issueNumber, me )
 ├── assign-branch-issue.sh ( issueNumber, branch )
+=======
+start.sh (issueNumber, nombreDelRequerimiento, dias=7)
+├── validate-issue.sh ( issueNumber, 'Ready')
+├── create-branch.sh ( issueNumber, nombreDelRequerimiento)
+├── move-issue.sh ( issueNumber, 'In Progress')
+>>>>>>> ef9984b (crear libreria)
 └── create-scracth.sh ( issueNumber, nombreDelRequerimiento, dias)
 ````
 
@@ -77,6 +110,7 @@ Por ejemplo:
 ````
 ./scripts/automation/start.sh 32  bugfix-productDetail
 ````
+<<<<<<< HEAD
 ## stop: Poner un requerimiento en pausa para mas tarde o bien para que lo tome otro
 
 ````
@@ -93,11 +127,41 @@ stop.sh
 
 ````
 finish.sh
+=======
+
+## Pause: 
+
+````
+pause.sh
+├── validate-scratch.sh ()
+├── move-issue.sh ( issueNumber, 'Paused')
+└── publish-branch.sh
+````
+
+## Finish: 
+
+````
+finish.sh
+├── validate-issue.sh ('Approved')  
+├── deploy-code.sh( 'prod')
+├── sanity-test.sh( 'prod')
+├── merge-pull-request.sh( )
+├── close-pull-request.sh
+├── move-issue.sh ('deployed')
+└── drop-branch.sh
+````
+
+## Done: Al terminar el desarrollo de un Requerimiento
+
+````
+done.sh
+>>>>>>> ef9984b (crear libreria)
 ├── validate-scratch.sh 
 ├── validate-code.sh
 ├── update-doc.sh
 ├── publish-branch.sh
 ├── create-pull-request.sh ('main')
+<<<<<<< HEAD
 ├── move-issue.sh ( issueNumber, 'Completed' )
 ├── deploy-code.sh ( issueNumber, 'qa')
 ├── sanity-test.sh( 'qa')
@@ -129,12 +193,32 @@ deploy.sh
 ├── close-pull-request.sh
 ├── move-issue.sh ('deployed')
 └── drop-branch.sh
+=======
+├── move-issue.sh ( issueNumber, 'Done' )
+├── deploy-code.sh ( issueNumber, 'qa')
+└── drop-scracth.sh 
+````
+
+## Approve: 
+
+````
+approved.sh (issueNumber)
+└── move-issue.sh ( issueNumber, 'QA')
+````
+
+## Reject: 
+
+````
+rejected.sh (issueNumber)
+└── move-issue.sh ( issueNumber, 'Paused')
+>>>>>>> ef9984b (crear libreria)
 ````
 
 ## Cancel:
 
 ````
 cancelled.sh (issueNumber)
+<<<<<<< HEAD
 ├── validate-issue.sh ('Approved', 'Completed', 'Finished'  )  
 ├── drop-branch.sh
 ├── close-pull-request.sh
@@ -147,5 +231,9 @@ cancelled.sh (issueNumber)
 rollback.sh (issueNumber)
 ├── reopen-pull-request.sh
 ├── revert-commit.sh
+=======
+├── drop-branch.sh
+├── close-pull-request.sh
+>>>>>>> ef9984b (crear libreria)
 └── move-issue.sh ( issueNumber, 'Cancelled')
 ````

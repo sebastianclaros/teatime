@@ -2,6 +2,7 @@
 # Script para automatizar las acciones cuando se arranca un requerimiento nuevo
 # Recibe:
 # 1) El issue Number del Repositorio. Obligatorio
+<<<<<<< HEAD
 # 2) El issue Type (feature, fix, docs, release). Opcional por omision toma feature
 
 #start.sh (issueNumber, issueType, dias=7)
@@ -18,6 +19,15 @@ source "$script_full_path/subtask/library.sh"
 # Guardian de Argumentos
 if [ -z "$1" ]; then  
     doExit "Falta el Issue Number" ;
+=======
+# 2) El Nombre del Requerimiento. Opcional
+
+source "$(dirname "$0")/subtastk/library.sh"
+
+# Guardian de Argumentos
+if [ -z "$1" ]; then  
+    doExit( "Falta el Issue Number" );
+>>>>>>> ef9984b (crear libreria)
 else 
     issueNumber="$1"
 fi
@@ -28,6 +38,11 @@ else
     issueType="$2"
 fi
 
+<<<<<<< HEAD
+=======
+# Variables 
+script_full_path=$(dirname "$0")
+>>>>>>> ef9984b (crear libreria)
 
 ##
 # CUERPO DEL COMANDO
@@ -35,13 +50,20 @@ fi
 
 doInfo "[INICIO] del script de comienzo del requerimiento $issueNumber"
 
+<<<<<<< HEAD
 # Step 1) Valida que Issue este en la Columna Ready
 doInfo "[VALIDA ISSUE ESTE EN Ready]"
 $script_full_path/subtask/validate-issue.sh $issueNumber Ready
+=======
+# Step 1) Crea la Branch
+echo -e "${green} * [CREA LA BRANCH] ${nocolor}"
+$script_full_path/subtask/create-branch.sh $issueNumber $requerimiento
+>>>>>>> ef9984b (crear libreria)
 if [ $? -ne 0 ]; then
     doExit "Por favor verifique que el issue $issueNumber este en la columna Ready $?"
 fi
 
+<<<<<<< HEAD
 branchName="$issueType/$issueNumber"
 
 # Step 2) Crea la Branch
@@ -89,3 +111,9 @@ if [ $? -ne 0 ]; then
 fi
 
 doInfo "[FIN] del script de comienzo del requerimiento $issueType"
+=======
+# Step 2) Crea la Scracth Org
+echo -e "${green} * [CREA LA SCRATCH] ${nocolor}"
+$script_full_path/subtask/create-scratch.sh $issueNumber $requerimiento 
+echo -e "${green} * [FIN] del script de comienzo del requerimiento $branchName ${nocolor}"
+>>>>>>> ef9984b (crear libreria)

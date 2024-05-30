@@ -21,8 +21,11 @@ function doWarning() {
     message="$1"
     echo -e "$yellow $message $nocolor"
 }
+<<<<<<< HEAD
 
 function doError() {
     message="$1"
     echo -e "* [ERROR] $red $message $nocolor"
 }
+=======
+>>>>>>> ef9984b (crear libreria)
