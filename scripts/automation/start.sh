@@ -4,7 +4,8 @@
 # 1) El issue Number del Repositorio. Obligatorio
 # 2) El Nombre del Requerimiento. Opcional
 
-source "$(dirname "$0")/subtastk/library.sh"
+script_full_path=$(dirname "$0")
+source "$script_full_path/subtastk/library.sh"
 
 # Guardian de Argumentos
 if [ -z "$1" ]; then  
@@ -20,7 +21,6 @@ else
 fi
 
 # Variables 
-script_full_path=$(dirname "$0")
 
 ##
 # CUERPO DEL COMANDO
