@@ -15,7 +15,7 @@ else
 fi
 
 # Si no esta en la branch intenta crear la branch nueva
-doInfo "[INICIO] de creacion de la branch $branchName"
+doInfo "[INICIO] de Checkout de la branch $branchName"
 current_branch=$(git branch --show-current)
 if [ $current_branch != $branchName ]; then
     doInfo  "[STEP 1] Chequea si hay algo sin commitear"
@@ -24,23 +24,25 @@ if [ $current_branch != $branchName ]; then
         doExit  "Tiene modificaciones pendientes ($cambios)"
     fi
 
-    exists= $(git show-ref refs/heads/$branchName)
-    if [ -n "$exists" ]; then
-        doInfo "[STEP 2] Si la branch existe la actualiza $exists"
-        git branch $branchName
-        git pull --set-upstream-to=origin/$branchName
-    else
-        doInfo "[STEP 2] Si no existe creamos la Branch $branchName"
-
-        git checkout -b $branchName origin/main
-        #git push -u origin $branchName
-
-        if [ $? -ne 0 ]; then
-            doExit "No se pudo crear la branch"
-        fi
+    doInfo  "[STEP 2] Nos movemos a branch $branchName"
+    git checkout $branchName
+    if [ $? -ne 0 ]; then
+        doExit "No se pudo hacer el cambio de rama, verifique el mensaje de error, generalmente es porque:
+            * - Tiene cosas sin comitear, haga el commit o descarte los cambios y vuelva a intentar
+            * - Pruebe hacer un git fetch para ver si baja el remote localmente"
     fi
+
+    doInfo "* [STEP 3] Hacemos un pull para bajar lo ultimo"
+    git pull
+    if [ $? -ne 0 ]; then
+        doExit "Verifique que no tenga cosas sin comitear"
+    fi
+
+    #doInfo "* [STEP 4] Hacemos un rebase de main"
+    
 else 
     doWarning "* Ya esta sobre la branch $branchName"
+    git pull
 fi
 
 doInfo "[FIN] de creacion de la branch $branchName"

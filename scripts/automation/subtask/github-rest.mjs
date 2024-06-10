@@ -7,6 +7,44 @@ const octokit = new Octokit({
     auth: GITHUB_TOKEN
 });
 
+async function getUserName() {
+    const user = await octokit.request('GET /user', {
+        headers: {
+          'X-GitHub-Api-Version': '2022-11-28'
+        }
+      });
+    return user.data.login;
+}
+
+export async function assignBranchToIssue(issueNumber, branch) {
+    const result = await octokit.request(`POST /repos/${owner}/${repo}/issues/${issueNumber}/assignees`, {
+        assignees: [branch],
+        headers: {
+            'X-GitHub-Api-Version': '2022-11-28'
+        }
+    });
+    if ( result.status === 201 ) {
+        return true;
+    }
+    return false;
+}
+
+
+export async function assignUsernameToIssue(issueNumber, username) {
+    if ( !username ){
+        username = await getUserName();
+    }
+    const result = await octokit.request(`POST /repos/${owner}/${repo}/issues/${issueNumber}/assignees`, {
+        assignees: [username],
+        headers: {
+            'X-GitHub-Api-Version': '2022-11-28'
+        }
+    });
+    if ( result.status === 201 ) {
+        return true;
+    }
+    return false;
+}
 
 export async function getValidateIssueColumn(issueNumber, columnName) {
     const issue = await getIssue(issueNumber);
@@ -17,8 +55,8 @@ export async function getValidateIssueColumn(issueNumber, columnName) {
 export async function getIssue(issueNumber){
     const result = await octokit.request(`GET /repos/${owner}/${repo}/issues/${issueNumber}`, {
         headers: {
-        'X-GitHub-Api-Version': '2022-11-28'
-    }
+            'X-GitHub-Api-Version': '2022-11-28'
+        }
     });
     if ( result.status === 200 ) {
         return result.data;

@@ -3,7 +3,8 @@
 # Recibe:
 # 1) El Alias de la Scratch 
 
-source "./library.sh"
+script_full_path=$(dirname "$0")
+source "$script_full_path/library.sh"
 
 # Step 1) Guardian de argumentos
 if [ -z "$1" ]; then  
