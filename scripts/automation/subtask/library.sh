@@ -21,3 +21,8 @@ function doWarning() {
     message="$1"
     echo -e "$yellow $message $nocolor"
 }
+
+function doError() {
+    message="$1"
+    echo -e "* [ERROR] $red $message $nocolor"
+}
