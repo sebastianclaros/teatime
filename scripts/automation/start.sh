@@ -3,6 +3,9 @@
 # Recibe:
 # 1) El issue Number del Repositorio. Obligatorio
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 1198e4a (automation)
 # 2) El issue Type (feature, fix, docs, release). Opcional por omision toma feature
 
 #start.sh (issueNumber, issueType, dias=7)
@@ -15,6 +18,7 @@
 
 script_full_path=$(dirname "$0")
 source "$script_full_path/subtask/library.sh"
+<<<<<<< HEAD
 
 # Guardian de Argumentos
 if [ -z "$1" ]; then  
@@ -28,6 +32,12 @@ source "$(dirname "$0")/subtastk/library.sh"
 if [ -z "$1" ]; then  
     doExit( "Falta el Issue Number" );
 >>>>>>> ef9984b (crear libreria)
+=======
+
+# Guardian de Argumentos
+if [ -z "$1" ]; then  
+    doExit "Falta el Issue Number" ;
+>>>>>>> 1198e4a (automation)
 else 
     issueNumber="$1"
 fi
@@ -39,10 +49,13 @@ else
 fi
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 # Variables 
 script_full_path=$(dirname "$0")
 >>>>>>> ef9984b (crear libreria)
+=======
+>>>>>>> 1198e4a (automation)
 
 ##
 # CUERPO DEL COMANDO
@@ -50,6 +63,7 @@ script_full_path=$(dirname "$0")
 
 doInfo "[INICIO] del script de comienzo del requerimiento $issueNumber"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 # Step 1) Valida que Issue este en la Columna Ready
 doInfo "[VALIDA ISSUE ESTE EN Ready]"
@@ -59,11 +73,19 @@ $script_full_path/subtask/validate-issue.sh $issueNumber Ready
 echo -e "${green} * [CREA LA BRANCH] ${nocolor}"
 $script_full_path/subtask/create-branch.sh $issueNumber $requerimiento
 >>>>>>> ef9984b (crear libreria)
+=======
+# Step 1) Valida que Issue este en la Columna Ready
+doInfo "[VALIDA ISSUE ESTE EN Ready]"
+$script_full_path/subtask/validate-issue.sh $issueNumber Ready
+>>>>>>> 1198e4a (automation)
 if [ $? -ne 0 ]; then
     doExit "Por favor verifique que el issue $issueNumber este en la columna Ready $?"
 fi
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 1198e4a (automation)
 branchName="$issueType/$issueNumber"
 
 # Step 2) Crea la Branch
@@ -111,9 +133,12 @@ if [ $? -ne 0 ]; then
 fi
 
 doInfo "[FIN] del script de comienzo del requerimiento $issueType"
+<<<<<<< HEAD
 =======
 # Step 2) Crea la Scracth Org
 echo -e "${green} * [CREA LA SCRATCH] ${nocolor}"
 $script_full_path/subtask/create-scratch.sh $issueNumber $requerimiento 
 echo -e "${green} * [FIN] del script de comienzo del requerimiento $branchName ${nocolor}"
 >>>>>>> ef9984b (crear libreria)
+=======
+>>>>>>> 1198e4a (automation)

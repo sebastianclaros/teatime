@@ -22,10 +22,16 @@ function doWarning() {
     echo -e "$yellow $message $nocolor"
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 1198e4a (automation)
 
 function doError() {
     message="$1"
     echo -e "* [ERROR] $red $message $nocolor"
 }
+<<<<<<< HEAD
 =======
 >>>>>>> ef9984b (crear libreria)
+=======
+>>>>>>> 1198e4a (automation)

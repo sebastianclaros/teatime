@@ -2,6 +2,7 @@
 # Script crea una branch nueva para un requerimiento
 # Recibe:
 <<<<<<< HEAD
+<<<<<<< HEAD
 # 1) El nombre de la Branch
 
 script_full_path=$(dirname "$0")
@@ -12,10 +13,17 @@ source "$script_full_path/library.sh"
 
 source "./library.sh"
 >>>>>>> ef9984b (crear libreria)
+=======
+# 1) El nombre de la Branch
+
+script_full_path=$(dirname "$0")
+source "$script_full_path/library.sh"
+>>>>>>> 1198e4a (automation)
 
 # Step 1) Guardian de argumentos
 
 if [ -z "$1" ]; then  
+<<<<<<< HEAD
 <<<<<<< HEAD
     doExit "Falta el nombre de la Branch"
 else 
@@ -24,10 +32,14 @@ fi
 
 =======
     doExit "Falta el Issue Number"
+=======
+    doExit "Falta el nombre de la Branch"
+>>>>>>> 1198e4a (automation)
 else 
-    issueNumber="$1"
+    branchName="$1"
 fi
 
+<<<<<<< HEAD
 if [ -z "$2" ]; then  
     requerimiento="issue"
 else 
@@ -38,6 +50,8 @@ fi
 branchName="$issueNumber-$requerimiento"
 
 >>>>>>> ef9984b (crear libreria)
+=======
+>>>>>>> 1198e4a (automation)
 # Si no esta en la branch intenta crear la branch nueva
 doInfo "[INICIO] de creacion de la branch $branchName"
 current_branch=$(git branch --show-current)
@@ -49,6 +63,9 @@ if [ $current_branch != $branchName ]; then
     fi
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 1198e4a (automation)
     exists= $(git show-ref refs/heads/$branchName)
     if [ -n "$exists" ]; then
         doInfo "[STEP 2] Si la branch existe la actualiza $exists"
@@ -56,6 +73,7 @@ if [ $current_branch != $branchName ]; then
         git pull --set-upstream-to=origin/$branchName
     else
         doInfo "[STEP 2] Si no existe creamos la Branch $branchName"
+<<<<<<< HEAD
 
         git checkout -b $branchName origin/main
         #git push -u origin $branchName
@@ -74,21 +92,23 @@ else
             * - Tiene cosas sin comitear, haga el commit o descarte los cambios y vuelva a intentar
             * - Pruebe hacer un git fetch para ver si baja el remote localmente"
     fi
+=======
+>>>>>>> 1198e4a (automation)
 
-    doInfo "* [STEP 3] Hacemos un pull para bajar lo ultimo del remote"
-    git pull
-    if [ $? -ne 0 ]; then
-        doExit "Verifique que no tenga cosas sin comitear"
-    fi
+        git checkout -b $branchName origin/main
+        #git push -u origin $branchName
 
-    doInfo "* [STEP 4] Creamos la Branch $branchName"
-    git checkout -b $branchName
-    if [ $? -ne 0 ]; then
-        doExit "Verifique si la branch no existe ya"
+        if [ $? -ne 0 ]; then
+            doExit "No se pudo crear la branch"
+        fi
     fi
 else 
+<<<<<<< HEAD
     doWarning "* Ya existia la branch $branchName, asi que no se hizo nada"
 >>>>>>> ef9984b (crear libreria)
+=======
+    doWarning "* Ya esta sobre la branch $branchName"
+>>>>>>> 1198e4a (automation)
 fi
 
 doInfo "[FIN] de creacion de la branch $branchName"
